@@ -1,1 +1,1 @@
-# now-play-admin
+Repository for now-play admin panel
