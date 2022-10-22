@@ -1,31 +1,48 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
 
 
 function Batches(){
     const[Batches,setBatches] = useState([]);
+    const weekdays = ["Mon","Tues","Wed","Thurs","Fri","Sat","Sun"]
     useEffect(()=>{
         getBatchDetails();
     },[])
     const getBatchDetails=async()=>{
         let batches = await fetch('http://localhost:3000/batches/search?lat=28.21&&lng=78.12');
         batches = await batches.json();
+        console.log("length"+batches.batchList.length)
+        for(var i = 0 ;i < batches.batchList.length;i++){
+            var batch_days_in_week = [];
+            if(batches.batchList[i]["days"]){
+                var batch_days ="";
+                var resp_batch_days = batches.batchList[i]["days"].replace(/[\[\]']+/g,'').split(',')
+                for(var day = 0; day< resp_batch_days.length;day++){
+                    if (resp_batch_days[day] == 1){
+                        batch_days = batch_days+","+weekdays[day]
+                    }
+                }
+                batch_days_in_week.push(batch_days.substring(1,batch_days.length))
+
+            }
+            batches.batchList[i]["days"]=batch_days_in_week
+            
+        }
         setBatches(batches.batchList);
-    }
-    const getDays = async()=>{
-        console.log("days"+Batches.batchList["days"])
     }
     console.log("Batches",Batches)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Batch List</h3>
+            <h3 className="batch-heading">Batches  <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Sport</th>
+                            <th>Price</th>
                             <th>Start time</th>
                             <th>End time</th>
                             <th>Days</th>
@@ -40,10 +57,11 @@ function Batches(){
                                 <tr>
                                     <th>{index+1}</th>
                                     <td>{item.sport_name}</td>
+                                    <td>{item.price}</td>
                                     <td>{item.start_time}</td>
                                     <td>{item.end_time}</td>
                                     <td>{item.days}</td>
-                                    <td ><button onClick={()=>{alert("Edit Batch")}}>{<FaEdit/>}</button></td>
+                                    <td><button onClick={()=>{alert("Edit Batch")}}>{<FaEdit/>}</button></td>
 
                                 </tr>
                         )
