@@ -35,7 +35,7 @@ function Batches(){
     console.log("Batches",Batches)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Batches  <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Batches</h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
