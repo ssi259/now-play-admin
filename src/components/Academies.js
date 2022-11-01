@@ -24,7 +24,6 @@ function Academies(){
                             <th>#</th>
                             <th>Academy Name</th>
                             <th>Sport</th>
-                            <th>Experience</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -37,7 +36,6 @@ function Academies(){
                                     <th>{index+1}</th>
                                     <td>{"Ravi"}</td>
                                     <td>{"Cricket"}</td>
-                                    <td>{5}</td>
                                     <td ><button onClick={()=>{alert("Edit Academy")}}>{<FaEdit/>}</button></td>
 
                                 </tr>

@@ -1,10 +1,14 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
+import { MdAdd } from "react-icons/md";
+
+import SportModal from "./modals/SportModal";
 
 function Sports(){
     const[Sports,setSports] = useState([]);
+    const[openModal,setOpenModal] = useState(false);
+
     useEffect(()=>{
         getSportsDetails();
     },[])
@@ -16,7 +20,7 @@ function Sports(){
     console.log("Sports",Sports)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Coach List  <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Sports<button i onClick={()=>{setOpenModal(true)}}>{<MdAdd/>}</button>{openModal && <SportModal closeModal= {setOpenModal}/>}</h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
@@ -35,9 +39,12 @@ function Sports(){
                                 <tr>
                                     <th>{index+1}</th>
                                     <td>{item.name}</td>
-                                    <td>{"Cricket"}</td>
-                                    <td>{5}</td>
-                                    <td ><button onClick={()=>{alert("Edit Coach")}}>{<FaEdit/>}</button></td>
+                                    <td>{item.type}</td>
+                                    <td>{item.about}</td>
+                                    <td >
+                                        <button onClick={()=>{alert("Edit Coach")}}>{<FaEdit/>}</button>
+                                        
+                                    </td>
 
                                 </tr>
                         )

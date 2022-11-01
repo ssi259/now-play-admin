@@ -3,20 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 
-function Coaches(){
-    const[coaches,setCoaches] = useState([]);
+function Arenas(){
+    const[arenas,setArenas] = useState([]);
     useEffect(()=>{
         getBatchDetails();
     },[])
     const getBatchDetails=async()=>{
-        let coaches = await fetch('http://localhost:3000/coach');
-        coaches = await coaches.json();
-        setCoaches(coaches.data);
+        let Arenas = await fetch('http://localhost:3000/arenas');
+        Arenas = await Arenas.json();
+        setArenas(Arenas.data);
     }
-    console.log("coaches",coaches)
+    console.log("Arenas",arenas)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Coach List  <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Arenas <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
@@ -31,7 +31,7 @@ function Coaches(){
                     <tbody>
                     
                     {
-                        coaches.map((item, index) => {
+                        arenas.map((item, index) => {
                         return (
                                 <tr>
                                     <th>{index+1}</th>
@@ -49,4 +49,4 @@ function Coaches(){
         </div>  
     )
 }
-export default Coaches
+export default Arenas
