@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
+
 
 
 function Batches(){
@@ -61,7 +60,7 @@ function Batches(){
                                     <td>{item.start_time}</td>
                                     <td>{item.end_time}</td>
                                     <td>{item.days}</td>
-                                    <td><button onClick={()=>{alert("Edit Batch")}}>{<FaEdit/>}</button></td>
+                                    <td><button onClick={()=>{alert("Edit Batch")}}>{}</button></td>
 
                                 </tr>
                         )

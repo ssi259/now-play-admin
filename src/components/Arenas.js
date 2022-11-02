@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
+
 
 function Arenas(){
     const[arenas,setArenas] = useState([]);
@@ -16,7 +15,7 @@ function Arenas(){
     console.log("Arenas",arenas)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Arenas <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Arenas <button onClick={()=>{alert("Edit Batch")}}>{}</button></h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
@@ -38,7 +37,7 @@ function Arenas(){
                                     <td>{item.name}</td>
                                     <td>{item.sports_id}</td>
                                     <td>{item.experience}</td>
-                                    <td ><button  onClick={()=>{alert("Edit Coach")}}>{<FaEdit/>}</button></td>
+                                    <td ><button  onClick={()=>{alert("Edit Coach")}}>{}</button></td>
 
                                 </tr>
                         )

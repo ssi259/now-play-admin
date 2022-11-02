@@ -1,7 +1,5 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEdit } from "react-icons/fa";
-import { MdAdd } from "react-icons/md";
 
 import SportModal from "./modals/SportModal";
 
@@ -20,7 +18,7 @@ function Sports(){
     console.log("Sports",Sports)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Sports<button i onClick={()=>{setOpenModal(true)}}>{<MdAdd/>}</button>{openModal && <SportModal closeModal= {setOpenModal}/>}</h3>
+            <h3 className="batch-heading">Sports<button i onClick={()=>{setOpenModal(true)}}>{}</button>{openModal && <SportModal closeModal= {setOpenModal}/>}</h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
@@ -42,7 +40,7 @@ function Sports(){
                                     <td>{item.type}</td>
                                     <td>{item.about}</td>
                                     <td >
-                                        <button onClick={()=>{alert("Edit Coach")}}>{<FaEdit/>}</button>
+                                        <button onClick={()=>{alert("Edit Coach")}}>{}</button>
                                         
                                     </td>
 

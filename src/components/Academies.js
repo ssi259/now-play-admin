@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
+
 
 function Academies(){
     const[Academies,setAcademies] = useState([]);
@@ -16,7 +15,7 @@ function Academies(){
     console.log("Academies",Academies)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Academy List  <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Academy List  <button onClick={()=>{alert("Edit Batch")}}>{}</button></h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
@@ -36,7 +35,7 @@ function Academies(){
                                     <th>{index+1}</th>
                                     <td>{"Ravi"}</td>
                                     <td>{"Cricket"}</td>
-                                    <td ><button onClick={()=>{alert("Edit Academy")}}>{<FaEdit/>}</button></td>
+                                    <td ><button onClick={()=>{alert("Edit Academy")}}>{}</button></td>
 
                                 </tr>
                         )
