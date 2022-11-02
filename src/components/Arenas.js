@@ -9,7 +9,7 @@ function Arenas(){
         getBatchDetails();
     },[])
     const getBatchDetails=async()=>{
-        let Arenas = await fetch('http://localhost:3000/arenas');
+        let Arenas = await fetch('http://3.111.147.217:3000/arenas');
         Arenas = await Arenas.json();
         setArenas(Arenas.data);
     }

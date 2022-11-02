@@ -11,7 +11,7 @@ function Batches(){
         getBatchDetails();
     },[])
     const getBatchDetails=async()=>{
-        let batches = await fetch('http://localhost:3000/batches/search?lat=28.21&&lng=78.12');
+        let batches = await fetch('http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12');
         batches = await batches.json();
         console.log("length"+batches.batchList.length)
         for(var i = 0 ;i < batches.batchList.length;i++){
