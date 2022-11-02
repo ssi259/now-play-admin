@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from 'axios';
 function SportModal({closeModal}){
-    const url = "http://localhost:3000/coach";
+    const url = "http://3.111.147.217:3000/coach";
     const [data,setData] = useState({
         name: "",
         type:"",
