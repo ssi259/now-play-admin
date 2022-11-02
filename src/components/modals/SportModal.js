@@ -37,28 +37,28 @@ function SportModal({closeModal}){
                     
                 <form>
                     <div class="form-group row">
-                        <label for="sportName" class="col-sm-2 col-form-label">Sport Name</label>
+                        <label for="sportName" class="col-sm-2 label">Name</label>
                         <div class="col-sm-10">
                         <input onChange={(e)=>handle(e)} id = "name" class="form-control" value= {data.name} name = "name" placeholder="sport Name"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="sportType" class="col-sm-2 col-form-label">Sport Type</label>
+                        <label for="sportType" class="col-sm-2 label">Type</label>
                         <div class="col-sm-10">
                         <input onChange={(e)=>handle(e)} name="type" class="form-control" id="type" placeholder="sport Type"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="aboutSport" class="col-sm-2 col-form-label">About Sport</label>
+                        <label for="aboutSport" class="col-sm-2 label">About</label>
                         <div class="col-sm-10">
                         <textarea onChange={(e)=>handle(e)} name="about" class="form-control" id="sportType" placeholder="About Sport"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary"  onClick={ (e)=> submit(e)}>Submit</button>
+                            <button type="submit" class="btn btn-primary"  onClick={ (e)=> submit(e)}>Submit</button>
                         </div>
-                    </div>
+                    </div>     
                 </form>
             </div>
         </div>

@@ -1,10 +1,14 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
+import { MdAdd } from "react-icons/md";
+
+import CoachModal from "./modals/CoachModal";
 
 function Coaches(){
     const[coaches,setCoaches] = useState([]);
+    const[openModal,setOpenModal] = useState(false);
+
     useEffect(()=>{
         getBatchDetails();
     },[])
@@ -16,7 +20,7 @@ function Coaches(){
     console.log("coaches",coaches)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Coach List  <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Coach<button i onClick={()=>{setOpenModal(true)}}>{<MdAdd/>}</button>{openModal && <CoachModal closeModal= {setOpenModal}/>}</h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
