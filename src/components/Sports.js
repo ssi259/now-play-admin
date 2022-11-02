@@ -13,7 +13,7 @@ function Sports(){
         getSportsDetails();
     },[])
     const getSportsDetails=async()=>{
-        let sports = await fetch('http://localhost:3000/sports');
+        let sports = await fetch('http://3.111.147.217:3000/sports');
         sports = await sports.json();
         setSports(sports);
     }
