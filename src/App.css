@@ -111,7 +111,8 @@ background-color: skyblue;
   display: flex;
   flex-direction: column;
   padding: 25px;
-  position: relative;top:-150px;
+  position: relative;
+  top:-150px;
 }
 
 .modalContainer .title {
@@ -198,9 +199,9 @@ background-color: skyblue;
 }
 .btn{
   position: relative;
-  bottom: -200%;
+  bottom: -150%;
   right: -10%;
 }
 .overlay{
-  margin-top: -10%;
+  margin-top: 5%;
 }
