@@ -27,8 +27,9 @@ function Coaches(){
                         <tr>
                             <th>#</th>
                             <th>Coach Name</th>
+                            <th>Phone</th>
                             <th>Sport</th>
-                            <th>Experience</th>
+                            <th>Experience(months)</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -40,6 +41,7 @@ function Coaches(){
                                 <tr>
                                     <th>{index+1}</th>
                                     <td>{item.name}</td>
+                                    <th>{item.phone_number}</th>
                                     <td>{item.sports_id}</td>
                                     <td>{item.experience}</td>
                                     <td ><button  onClick={()=>{alert("Edit Coach")}}>{<FaEdit/>}</button></td>
