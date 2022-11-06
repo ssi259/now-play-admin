@@ -11,11 +11,13 @@ function Sports(){
 
     useEffect(()=>{
         getSportsDetails();
-    },[])
+    },[openModal])
     const getSportsDetails=async()=>{
-        let sports = await fetch('http://3.111.147.217:3000/sports');
-        sports = await sports.json();
-        setSports(sports);
+        if(!openModal){
+            let sports = await fetch('http://3.111.147.217:3000/sports');
+            sports = await sports.json();
+            setSports(sports);
+        }
     }
     console.log("Sports",Sports)
     return(
