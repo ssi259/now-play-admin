@@ -6,9 +6,9 @@ import { IoMdAdd } from "react-icons/io";
 function Academies(){
     const[Academies,setAcademies] = useState([]);
     useEffect(()=>{
-        getBatchDetails();
+        getAcademyDetails();
     },[])
-    const getBatchDetails=async()=>{
+    const getAcademyDetails=async()=>{
         let batches = await fetch('http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12');
         batches = await batches.json();
         setAcademies(batches.batchList);

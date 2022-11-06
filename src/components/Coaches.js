@@ -10,12 +10,14 @@ function Coaches(){
     const[openModal,setOpenModal] = useState(false);
 
     useEffect(()=>{
-        getBatchDetails();
-    },[])
-    const getBatchDetails=async()=>{
-        let coaches = await fetch('http://3.111.147.217:3000/coach');
-        coaches = await coaches.json();
-        setCoaches(coaches.data);
+        getCoachDetails();
+    },[openModal])
+    const getCoachDetails=async()=>{
+        if(!openModal){
+            let coaches = await fetch('http://3.111.147.217:3000/coach');
+            coaches = await coaches.json();
+            setCoaches(coaches.data);
+        }
     }
     console.log("coaches",coaches)
     return(
