@@ -11,7 +11,7 @@ function Arenas(){
     const getBatchDetails=async()=>{
         let Arenas = await fetch('http://3.111.147.217:3000/arenas');
         Arenas = await Arenas.json();
-        setArenas(Arenas.data);
+        setArenas(Arenas);
     }
     console.log("Arenas",arenas)
     return(
