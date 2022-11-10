@@ -2,14 +2,18 @@ import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
+import BatchesModal from "./modals/BatchesModal";
+
 
 
 function Batches(){
     const[Batches,setBatches] = useState([]);
+    const[openModal,setOpenModal] = useState(false);
+
     const weekdays = ["Mon","Tues","Wed","Thurs","Fri","Sat","Sun"]
     useEffect(()=>{
         getBatchDetails();
-    },[])
+    },[openModal])
     const getBatchDetails=async()=>{
         let batches = await fetch('http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12');
         batches = await batches.json();
@@ -35,8 +39,8 @@ function Batches(){
     console.log("Batches",Batches)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Batches</h3>
-            <div class = "table-batch-list">
+            <h3 className="batch-heading">Batches<button i onClick={()=>{setOpenModal(true)}}>{<IoMdAdd/>}</button>{openModal && <BatchesModal closeModal= {setOpenModal}/>} </h3>
+            <div className = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
                         <tr>
