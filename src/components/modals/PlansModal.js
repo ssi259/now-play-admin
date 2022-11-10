@@ -46,15 +46,14 @@ const PlansModal = ({ closeModal }) => {
         e.preventDefault();
 
         await Axios.post('http://3.111.147.217:3000/plans', {
-            name: data.name,
-            phone_number: data.phone,
-            email: data.email,
-            lat: data.lat,
-            long: data.long,
-            city: data.city,
-            locality: data.locality,
-            state: data.state,
-
+            batch_id: data.batch_id,
+            plan_name: data.plan_name,
+            description: data.description,
+            price: data.price,
+            status: data.status,
+            tag: data.tag,
+            type: data.type,
+            duration: data.duration
         }).then(res => {
             console.log(res.data)
         })
@@ -89,7 +88,7 @@ const PlansModal = ({ closeModal }) => {
                                 row">
                             <label for="Plan-name" class="col-sm-2 label">Plan Name</label>
                             <div class="col-sm-10">
-                                <input onChange={(e) => handle(e)} id="name" class="form-control" value={data.name} name="name" placeholder="Plan Name" />
+                                <input onChange={(e) => handle(e)} id="name" class="form-control" value={data.name} name="plan_name" placeholder="Plan Name" />
                             </div>
                         </div>
                         <div class="form-group
