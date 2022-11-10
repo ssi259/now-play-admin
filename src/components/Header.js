@@ -18,7 +18,7 @@ function Header(){
                 <li><Link to = "/Batches">Batches</Link></li>
                 <li><Link to = "/sports">sports</Link></li>
                 <li><Link to = "/academies">Academies</Link></li>
-
+                <li><Link to = "/plans">Plans</Link></li>
                 <li><Link to = "/profile">Profile</Link></li>
                 <li style= {{bgcolor:bgcolor}}><Link to = "/logout" onClick={handleHighlightTab}>Logout</Link></li>
 
