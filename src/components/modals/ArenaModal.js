@@ -19,7 +19,7 @@ const ArenaModal = ({ closeModal }) => {
             phone_number: data.phone,
             email: data.email,
             lat: data.lat,
-            long: data.long,
+            lng: data.long,
             city: data.city,
             locality: data.locality,
             state: data.state,
