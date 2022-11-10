@@ -12,7 +12,7 @@ function Academies(){
 
     useEffect(()=>{
         getAcademyDetails();
-    },[])
+    },[openModal])
     const getAcademyDetails=async()=>{
         let batches = await fetch('http://3.111.147.217:3000/academies');
         batches = await batches.json();
