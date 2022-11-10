@@ -1,22 +1,29 @@
 import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
+import { MdAdd } from "react-icons/md";
+import ArenaModal from "./modals/ArenaModal";
 
 function Arenas(){
     const[arenas,setArenas] = useState([]);
+    const[openModal,setOpenModal] = useState(false);
+
+
+
     useEffect(()=>{
         getBatchDetails();
     },[])
     const getBatchDetails=async()=>{
-        let Arenas = await fetch('http://3.111.147.217:3000/arenas');
-        Arenas = await Arenas.json();
-        setArenas(Arenas);
+        if(!openModal){
+            let Arenas = await fetch('http://3.111.147.217:3000/arenas');
+            Arenas = await Arenas.json();
+            setArenas(Arenas);
+        }
     }
     console.log("Arenas",arenas)
     return(
         <div className="batch-list">
-            <h3 className="batch-heading">Arenas <button onClick={()=>{alert("Edit Batch")}}>{<IoMdAdd/>}</button></h3>
+            <h3 className="batch-heading">Arenas <button onClick={() => { setOpenModal(true) }}>{<MdAdd />}</button>{openModal && <ArenaModal closeModal={setOpenModal} />}</h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
