@@ -3,10 +3,11 @@ import Axios from 'axios';
 
 const BatchesModal = ({closeModal}) => {
     useEffect(()=>{
+        getAcademyDetails();
         getSportsDetails();
         getArenaDetails();
         getCoachDetails();
-        getAcademyDetails();
+        
     },[])
 
 
@@ -16,6 +17,7 @@ const BatchesModal = ({closeModal}) => {
     const[Academies,setAcademies] = useState([]); //state to bring in FK academies_id
  
     const [data,setData] = useState([]) // state to store form data
+    const [days,setDays] = useState([])
 
 // Get all sports Details
     const getSportsDetails=async()=>{ 
@@ -33,18 +35,19 @@ const BatchesModal = ({closeModal}) => {
         }
 // Get all arena details
     const getArenaDetails=async()=>{
-        let Arenas = await fetch('http://3.111.147.217:3000/arenas');
-        Arenas = await Arenas.json();
-        setArenas(Arenas);
+        let arenas = await fetch('http://3.111.147.217:3000/arenas');
+        arenas = await arenas.json();
+        setArenas(arenas);
     }
 
     //get academy Details
     const getAcademyDetails=async()=>{
-        let Academies = await fetch('http://3.111.147.217:3000/academies');
-        Academies = await Academies.json();
-        setAcademies(Academies);
+        let academies = await fetch('http://3.111.147.217:3000/academies');
+        academies = await academies.json();
+        console.log("academies -> ", academies)
+        setAcademies(academies);
     }
-
+console.log("Academies", Academies)
     // update the data object
     function handle(e){
         const newData = {...data}
@@ -52,9 +55,13 @@ const BatchesModal = ({closeModal}) => {
         setData(newData)
     }
 
+
+
     // post request for batchest to create new batch
     async function submit(e){
         e.preventDefault();
+
+        weekdays = onChangeCheckbox()
     
 
         await Axios.post('http://3.111.147.217:3000/batches',{
@@ -64,13 +71,41 @@ const BatchesModal = ({closeModal}) => {
             coach_id:data.coach_id,
             start_time: data.start_time,
             end_time: data.end_time,
-            price: data.price
+            price: data.price,
+            days: weekdays
 
         }).then(res =>{
             console.log(res.data)
         })
         {closeModal(false)}
     }
+
+    function onChangeCheckbox() {
+        var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+        let array = [0,0,0,0,0,0,0]
+        for (var i = 0; i < checkboxes.length; i++) {
+          if(array.includes('mon')){
+            array[0] = 1
+          } else if(array.includes('tue')){
+            array[1] = 1
+          }else if(array.includes('wed')){
+            array[2] = 1
+          }else if(array.includes('thu')){
+            array[3] = 1
+          }else if(array.includes('fri')){
+            array[4] = 1
+          }else if(array.includes('sat')){
+            array[5] = 1
+          }else if(array.includes('sun')){
+            array[6] = 1
+          }
+        }
+        return array
+    }
+
+    
+
+    
     return(
         
         <div  className = "modalBackground">
@@ -112,14 +147,16 @@ const BatchesModal = ({closeModal}) => {
                         </div>
 
                         <div className="form-group row">
-                            <label for="coach-name" className="col-sm-2 label">Academy</label>
+                            <label for="academy-name" className="col-sm-2 label">Academy</label>
                             <div className="col-sm-10">
-                                <select className="form-control" name= "academy_id" onChange={(e)=>handle(e)}>
+                                {/* <select className="form-control" name= "academy_id" onChange={(e)=>handle(e)}>
                                     <option className="form-control" name= "academy_id"> -- Select a Academy -- </option>
-                                    {Academies.map((academy) => <option className="form-control" value={academy.id} name= "academy_id">{academy.name}</option>)}
-                                </select>
+                                    {Academies.map((academy) => <option className="form-control" value={academy.id} name= "coach_id">{academy.name}</option>)}
+                                </select> */}
                             </div>
                         </div>
+
+                        
 
                         <div className="form-group row">
                             <label for="coach-name" className="col-sm-2 label">Price</label>
@@ -137,10 +174,44 @@ const BatchesModal = ({closeModal}) => {
                         </div>
 
                         <div className="form-group row">
+                            <label for="coach-name" className="col-sm-2 label">Batch Start</label>
+                            <div className="col-sm-10">
+                            <input type="date" id="start_date" className="form-control" name="start_time" required />
+                            </div>
+                            <label for="coach-name" className="col-sm-2 label">Batch End</label>
+                            <div className="col-sm-10">
+                            <input type="date" id="end_date" className="form-control" name="end_date" required />
+                            </div>
+                            
+                        </div>
+
+                        <div className="form-group row">
+                        <label for="coach-name" className="col-sm-2 ">Days</label>
+                            <div className="sm" id="week-selection">
+                            <input type="checkbox" id="mon" name="mon" value="mon" />
+                            <label for="mon"> Mon &nbsp;</label>
+                            <input type="checkbox" id="tue" name="tue" value="tue" />
+                            <label for="tue"> Tue &nbsp;</label>
+                            <input type="checkbox" id="wed" name="wed" value="wed" />
+                            <label for="wed"> Wed &nbsp;</label>
+                            <input type="checkbox" id="thu" name="thu" value="thu" />
+                            <label for="thu"> Thu &nbsp;</label>
+                            <input type="checkbox" id="fri" name="fri" value="fri" />
+                            <label for="fri"> Fri &nbsp;</label>
+                            <input type="checkbox" id="sat" name="sat" value="sat" />
+                            <label for="sat"> Sat &nbsp;</label>
+                            <input type="checkbox" id="sun" name="sun" value="sun" />
+                            <label for="sun"> Sun &nbsp;</label>
+                            </div>
+                            
+                        </div>
+
+                        <div className="form-group row">
                             <div className="col-sm-10">
                                 <button type="submit" className="btn btn-primary"  onClick={ (e)=> submit(e)}>Submit</button>
                             </div>
                         </div>
+                        
                         
                     </div>
                 </form>
