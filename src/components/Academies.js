@@ -14,9 +14,9 @@ function Academies(){
         getAcademyDetails();
     },[])
     const getAcademyDetails=async()=>{
-        let batches = await fetch('http://3.111.147.217:3000/academies');
-        batches = await batches.json();
-        setAcademies(batches);
+        let academies = await fetch('http://3.111.147.217:3000/academies');
+        academies = await batches.json();
+        setAcademies(academies);
     }
     console.log("Academies",Academies)
     return(
