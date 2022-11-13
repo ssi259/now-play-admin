@@ -23,9 +23,7 @@ function Arenas(){
                         <tr>
                             <th>#</th>
                             <th>id</th>
-                            <th>Coach Name</th>
-                            <th>Sport</th>
-                            <th>Experience</th>
+                            <th>Arena Name</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -38,8 +36,6 @@ function Arenas(){
                                     <th>{index+1}</th>
                                     <th>{item.id}</th>
                                     <td>{item.name}</td>
-                                    <td>{item.sports_id}</td>
-                                    <td>{item.experience}</td>
                                     <td ><button  onClick={()=>{alert("Edit Coach")}}>{<FaEdit/>}</button></td>
 
                                 </tr>
