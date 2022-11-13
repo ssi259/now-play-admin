@@ -28,6 +28,7 @@ function Sports(){
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>id</th>
                             <th>Sport Name</th>
                             <th>Type</th>
                             <th>About</th>
@@ -40,6 +41,7 @@ function Sports(){
                         return (
                                 <tr>
                                     <th>{index+1}</th>
+                                    <th>{item.id}</th>
                                     <td>{item.name}</td>
                                     <td>{item.type}</td>
                                     <td>{item.about}</td>

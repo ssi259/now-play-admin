@@ -28,6 +28,7 @@ function Coaches(){
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>id</th>
                             <th>Coach Name</th>
                             <th>Phone</th>
                             <th>Sport</th>
@@ -42,6 +43,7 @@ function Coaches(){
                         return (
                                 <tr>
                                     <th>{index+1}</th>
+                                    <th>{item.id}</th>
                                     <td>{item.name}</td>
                                     <th>{item.phone_number}</th>
                                     <td>{item.sports_id}</td>

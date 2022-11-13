@@ -29,6 +29,7 @@ function Arenas(){
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>id</th>
                             <th>Coach Name</th>
                             <th>Sport</th>
                             <th>Experience</th>
@@ -42,6 +43,7 @@ function Arenas(){
                         return (
                                 <tr>
                                     <th>{index+1}</th>
+                                    <th>{item.id}</th>
                                     <td>{item.name}</td>
                                     <td>{item.sports_id}</td>
                                     <td>{item.experience}</td>
