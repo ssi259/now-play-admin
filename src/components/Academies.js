@@ -27,6 +27,7 @@ function Academies(){
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>id</th>
                             <th>Academy Name</th>
                             <th>Sport</th>
                             <th>Actions</th>
@@ -39,6 +40,7 @@ function Academies(){
                         return (
                                 <tr>
                                     <th>{index+1}</th>
+                                    <th>{item.id}</th>
                                     <td>{item.name}</td>
                                     <td>{item.sports_name}</td>
                                     <td ><button onClick={()=>{alert("Edit Academy")}}>{<FaEdit/>}</button></td>
