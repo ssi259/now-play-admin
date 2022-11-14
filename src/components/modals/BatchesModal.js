@@ -2,13 +2,6 @@ import React, { useState,useEffect } from "react";
 import Axios from 'axios';
 
 const BatchesModal = ({closeModal}) => {
-    useEffect(()=>{
-        getAcademyDetails();
-        getSportsDetails();
-        getArenaDetails();
-        getCoachDetails();
-        
-    },[])
 
 
     const[Sports,setSports] = useState([]); //state to bring in FK sports_id
@@ -16,14 +9,30 @@ const BatchesModal = ({closeModal}) => {
     const[Coaches,setCoaches] = useState([]); //state to bring in FK coach_id
     const[Academies,setAcademies] = useState([]); //state to bring in FK academies_id
  
-    const [data,setData] = useState([]) // state to store form data
-    const [days,setDays] = useState([])
+    const [data,setData] = useState({}) // state to store form data
+    const [weekdays,setWeekdays] = useState([])
+
+    useEffect(()=>{
+        getAcademyDetails();
+        getSportsDetails();
+        getArenaDetails();
+        getCoachDetails();
+    },[])
+
+    useEffect(()=>{
+        let daysOfWeek = onChangeCheckbox()
+        setWeekdays(daysOfWeek);
+
+    }, [weekdays])
+
+
+
 
 // Get all sports Details
     const getSportsDetails=async()=>{ 
         let sports = await fetch('http://3.111.147.217:3000/sports');
         sports = await sports.json();
-        console.log("sports"+sports[0])
+        console.log("sports", sports)
         setSports(sports);
     }
 
@@ -47,7 +56,7 @@ const BatchesModal = ({closeModal}) => {
         console.log("academies -> ", academies)
         setAcademies(academies);
     }
-console.log("Academies", Academies)
+// console.log("Academies", Academies)
     // update the data object
     function handle(e){
         const newData = {...data}
@@ -60,9 +69,12 @@ console.log("Academies", Academies)
     // post request for batchest to create new batch
     async function submit(e){
         e.preventDefault();
-
-        weekdays = onChangeCheckbox()
     
+        let daysOfWeek = onChangeCheckbox();
+
+        setWeekdays(daysOfWeek)
+
+  
 
         await Axios.post('http://3.111.147.217:3000/batches',{
             sports_id:data.sport_id,
@@ -71,6 +83,8 @@ console.log("Academies", Academies)
             coach_id:data.coach_id,
             start_time: data.start_time,
             end_time: data.end_time,
+            start_date: data.start_date,
+            end_date: data.end_date,
             price: data.price,
             days: weekdays
 
@@ -84,22 +98,23 @@ console.log("Academies", Academies)
         var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
         let array = [0,0,0,0,0,0,0]
         for (var i = 0; i < checkboxes.length; i++) {
-          if(array.includes('mon')){
+          if(checkboxes[i].value === 'mon'){
             array[0] = 1
-          } else if(array.includes('tue')){
+          } else if(checkboxes[i].value === 'tue'){
             array[1] = 1
-          }else if(array.includes('wed')){
+          }else if(checkboxes[i].value === 'wed'){
             array[2] = 1
-          }else if(array.includes('thu')){
+          }else if(checkboxes[i].value === 'thu'){
             array[3] = 1
-          }else if(array.includes('fri')){
+          }else if(checkboxes[i].value === 'fri'){
             array[4] = 1
-          }else if(array.includes('sat')){
+          }else if(checkboxes[i].value === 'sat'){
             array[5] = 1
-          }else if(array.includes('sun')){
+          }else if(checkboxes[i].value === 'sun'){
             array[6] = 1
           }
         }
+        // return `[${array.toString()}]`
         return array
     }
 
@@ -149,10 +164,10 @@ console.log("Academies", Academies)
                         <div className="form-group row">
                             <label for="academy-name" className="col-sm-2 label">Academy</label>
                             <div className="col-sm-10">
-                                {/* <select className="form-control" name= "academy_id" onChange={(e)=>handle(e)}>
+                                <select className="form-control" name= "academy_id" onChange={(e)=>handle(e)}>
                                     <option className="form-control" name= "academy_id"> -- Select a Academy -- </option>
-                                    {Academies.map((academy) => <option className="form-control" value={academy.id} name= "coach_id">{academy.name}</option>)}
-                                </select> */}
+                                    {Academies.map((academy) => <option className="form-control" value={academy.id} name= "academy_id">{academy.name}</option>)}
+                                </select>
                             </div>
                         </div>
 
@@ -161,26 +176,26 @@ console.log("Academies", Academies)
                         <div className="form-group row">
                             <label for="coach-name" className="col-sm-2 label">Price</label>
                             <div className="col-sm-6">
-                            <input type="number" className="form-control" name="price"/>
+                            <input type="number" className="form-control" name="price"onChange={(e)=>handle(e)}/>
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label for="coach-name" className="col-sm-2 label">Timings</label>
                             <div className="col-sm-10">
-                            <input type="time" id="start_time_id" className="form-control" name="start_time" required /><small> to </small>
-                            <input type="time" id="end_time_id"  className="form-control" name="end_time" required />
+                            <input type="time" id="start_time_id" className="form-control" name="start_time" onChange={(e)=>handle(e)} required /><small> to </small>
+                            <input type="time" id="end_time_id"  className="form-control" name="end_time" onChange={(e)=>handle(e)} required />
                             </div>
                         </div>
 
                         <div className="form-group row">
                             <label for="coach-name" className="col-sm-2 label">Batch Start</label>
                             <div className="col-sm-10">
-                            <input type="date" id="start_date" className="form-control" name="start_time" required />
+                            <input type="date" id="start_date" className="form-control" name="start_date" onChange={(e)=>handle(e)} required />
                             </div>
                             <label for="coach-name" className="col-sm-2 label">Batch End</label>
                             <div className="col-sm-10">
-                            <input type="date" id="end_date" className="form-control" name="end_date" required />
+                            <input type="date" id="end_date" className="form-control" name="end_date" onChange={(e)=>handle(e)} required />
                             </div>
                             
                         </div>
