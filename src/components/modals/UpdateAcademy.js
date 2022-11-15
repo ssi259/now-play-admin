@@ -4,6 +4,7 @@ import { useEffect,useState } from "react";
 
 const UpdateAcademy = ({ closeModal, editData }) => {
   const [data, setData] = useState([]);
+  const [sports, setSports] = useState([]);
   useEffect =
     (() => {
       setData(editData);
@@ -94,8 +95,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   onChange={(e) => handle(e)}
                 >
                   <option class="form-control" name="sport_id">
-                    {" "}
-                    -- Select a sport --{" "}
+                    {" "}-- Select a sport --{" "}
                   </option>
                   {Sports.map((sport) => (
                     <option
