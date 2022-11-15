@@ -93,7 +93,7 @@ const BatchesModal = ({ closeModal }) => {
 
     const formData = new FormData();
 
-    const bodyData = new Blob([JSON.stringify({
+    const bodyData = JSON.stringify({
       sports_id: data.sport_id,
       arena_id: data.arena_id,
       academy_id: data.academy_id,
@@ -104,25 +104,20 @@ const BatchesModal = ({ closeModal }) => {
       end_date: data.end_date,
       price: data.price,
       days: weekdays,
-    })], {
-    type: 'application/json'
-  })
-  
+    });
 
     formData.append("banner_img", bannerImg, bannerImg.name);
     formData.append("thumbnail_img", thumbnailImg, thumbnailImg.name);
 
-    formData.append("data",  bodyData, "data");
+    formData.append("data", bodyData);
 
     console.log(formData);
-    console.log(formData.data);
 
     await Axios.post("http://localhost:5000/batches", formData).then((res) => {
       console.log(res.data);
     });
-    {
-      closeModal(false);
-    }
+
+    closeModal(false);
   }
 
   return (
