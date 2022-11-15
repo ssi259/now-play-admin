@@ -2,17 +2,19 @@ import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
-
 import AcademiesModal from "./modals/AcademiesModal";
+import UpdateAcademy from "./modals/UpdateAcademy";
 
 
 function Academies(){
     const[Academies,setAcademies] = useState([]);
     const[openModal,setOpenModal] = useState(false);
+    const[editModal,setEditModal] = useState(false);
+    const[editData,setEditData] = useState({});
 
     useEffect(()=>{
         getAcademyDetails();
-    },[openModal])
+    },[openModal,editModal])
     const getAcademyDetails=async()=>{
         let academies = await fetch('http://3.111.147.217:3000/academies');
         academies = await academies.json();
@@ -21,7 +23,8 @@ function Academies(){
     console.log("Academies",Academies)
     return(
         <div className="batch-list">
-             <h3 className="batch-heading">Academies<button i onClick={()=>{setOpenModal(true)}}>{<MdAdd/>}</button>{openModal && <AcademiesModal closeModal= {setOpenModal}/>}</h3>
+            <h3 className="batch-heading">Academies<button i onClick={()=>{setOpenModal(true)}}>{<MdAdd/>}</button>{openModal && <AcademiesModal closeModal= {setOpenModal}/>}
+            {editModal && <UpdateAcademy closeModal= {setEditModal} editData={editData}/>}</h3>
             <div class = "table-batch-list">
                 <table className="table batch-list">
                     <thead>
@@ -43,8 +46,7 @@ function Academies(){
                                     <th>{item.id}</th>
                                     <td>{item.name}</td>
                                     <td>{item.sports_name}</td>
-                                    <td ><button onClick={()=>{alert("Edit Academy")}}>{<FaEdit/>}</button></td>
-
+                                    <td ><button onClick={()=>{setEditModal(true),setEditData(item)}}>{<FaEdit/>}</button></td>
                                 </tr>
                         )
                     })}
