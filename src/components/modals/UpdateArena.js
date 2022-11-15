@@ -1,19 +1,21 @@
 import React from "react";
-import { useState } from "react";
-import Axios from "axios";
-const ArenaModal = ({ closeModal }) => {
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const UpdateArena = ({ closeModal, ArenaItem }) => {
   const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(ArenaItem);
+  }, [ArenaItem]);
 
   function handle(e) {
     const newData = { ...data };
     newData[e.target.name] = e.target.value;
     setData(newData);
   }
-
   async function submit(e) {
     e.preventDefault();
-
-    await Axios.post("http://3.111.147.217:3000/arenas", {
+    await axios.put(`http://3.111.147.217:3000/arenas/${ArenaItem.id}`, {
       name: data.name,
       phone_number: data.phone,
       email: data.email,
@@ -23,12 +25,13 @@ const ArenaModal = ({ closeModal }) => {
       locality: data.locality,
       state: data.state,
     }).then((res) => {
-      console.log(res.data);
+      alert("Arena Updated Successfully");
     });
     {
       closeModal(false);
     }
   }
+
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -42,9 +45,8 @@ const ArenaModal = ({ closeModal }) => {
           </button>
         </div>
         <div>
-          <h1>Create Arena</h1>
+          <h1>Update Arena</h1>
         </div>
-
         <form>
           <div className="overlay">
             <div class="form-group row">
@@ -193,4 +195,5 @@ const ArenaModal = ({ closeModal }) => {
     </div>
   );
 };
-export default ArenaModal;
+
+export default UpdateArena;
