@@ -12,7 +12,7 @@ function Arenas() {
   const [selectedArena, setSelectedArena] = useState({});
   useEffect(() => {
     getBatchDetails();
-  }, []);
+  }, [openModal, updateOpenModal]);
   const getBatchDetails = async () => {
     if (!openModal) {
       let Arenas = await fetch("http://3.111.147.217:3000/arenas");
@@ -45,9 +45,14 @@ function Arenas() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Coach Name</th>
-              <th>Sport</th>
-              <th>Experience</th>
+              <th>Arena Name</th>
+              <th>Phone Number</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>Locality</th>
+              <th>State</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -57,8 +62,13 @@ function Arenas() {
                 <tr key={item.id}>
                   <th>{index + 1}</th>
                   <td>{item.name}</td>
-                  <td>{item.sports_id}</td>
-                  <td>{item.experience}</td>
+                  <td>{item.phone_number}</td>
+                  <td>{item.email}</td>
+                  <td>{item.city}</td>
+                  <td>{item.locality}</td>
+                  <td>{item.state}</td>
+                  <td>{item.lat}</td>
+                  <td>{item.lng}</td>
                   <td>
                     <button
                       onClick={() => {
