@@ -6,26 +6,45 @@ import BatchesModal from "./modals/BatchesModal";
 
 function Batches() {
   const [Batches, setBatches] = useState([]);
-  const plans = useRef([]);
-  const [openModal, setOpenModal] = useState(false);
-
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
-    getPlansDetails();
-  }, [openModal]);
+  }, []);
 
   const getPlansDetails = async () => {
     let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
     batchPlans= await batchPlans.json();
     plans.current = batchPlans.data;
   };
+  const [file, setFile] = useState();
 
+  function handleChange(event) {
+    setFile(event.target.files[0]);
+  }
+
+  function handleSubmit(event, id) {
+    event.preventDefault();
+    const url = `http://localhost:3000/batches/upload_file?batch_id=${id}`;
+    var formdata = new FormData();
+    formdata.append("files_name", file, file.name);
+    var requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow",
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .then((result) => alert("File Uploaded Successfully"))
+      .catch((error) => console.log("error", error))
+      .catch((error) => alert("File Upload Failed"));
+  }
   const getBatchDetails = async () => {
     let batches = await fetch(
-      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12"
+      "http://localhost:3000/batches/search?lat=28.21&&lng=78.12"
     );
     batches = await batches.json();
+    console.log("length" + batches.batchList.length);
     for (var i = 0; i < batches.batchList.length; i++) {
       var batch_days_in_week = [];
       if (batches.batchList[i]["days"]) {
@@ -44,25 +63,15 @@ function Batches() {
     }
     setBatches(batches.batchList);
   };
+  console.log("Batches", Batches);
   return (
     <div className="batch-list">
-      <h3 className="batch-heading">
-        Batches
-        <button
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
-          {<IoMdAdd />}
-        </button>
-        {openModal && <BatchesModal closeModal={setOpenModal} />}{" "}
-      </h3>
-      <div className="table-batch-list">
+      <h3 className="batch-heading">Batches</h3>
+      <div class="table-batch-list">
         <table className="table batch-list">
           <thead>
             <tr>
               <th>#</th>
-              <th>Batch ID</th>
               <th>Sport</th>
               <th>Academy</th>
               <th>Arena</th>
@@ -73,14 +82,14 @@ function Batches() {
               <th>End time</th>
               <th>Days</th>
               <th>Actions</th>
+              <th>Upload Image</th>
             </tr>
           </thead>
           <tbody>
             {Batches.map((item, index) => {
               return (
-                <tr key={`${item.id}-${item.price}-${index + 1}`}>
+                <tr>
                   <th>{index + 1}</th>
-                  <th>{item.id}</th>
                   <td>{item.sport_name}</td>
                   <td>{item.academy_name}</td>
                   <td>{item.arena_name}</td>
@@ -103,6 +112,12 @@ function Batches() {
                     >
                       {<FaEdit />}
                     </button>
+                  </td>
+                  <td>
+                    <form onSubmit={(e) => handleSubmit(e, item.id)}>
+                      <input name="" type="file" onChange={handleChange} />
+                      <button type="submit">Upload</button>
+                    </form>
                   </td>
                 </tr>
               );
