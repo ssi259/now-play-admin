@@ -77,9 +77,7 @@ const PlansModal = ({ closeModal }) => {
         <form>
           <div className="overlay">
             <div
-              class="form-group
-                            row"
-            >
+              class="form-group row">
               <label for="batch-id" class="col-sm-2 label">
                 Batch ID
               </label>
@@ -100,9 +98,7 @@ const PlansModal = ({ closeModal }) => {
             </div>
 
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="Plan-name" class="col-sm-2 label">
                 Plan Name
               </label>
@@ -118,9 +114,7 @@ const PlansModal = ({ closeModal }) => {
               </div>
             </div>
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="description" class="col-sm-2 label">
                 Description
               </label>
@@ -136,9 +130,7 @@ const PlansModal = ({ closeModal }) => {
               </div>
             </div>
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="status" class="col-sm-2 label">
                 Status
               </label>
@@ -154,9 +146,7 @@ const PlansModal = ({ closeModal }) => {
               </div>
             </div>
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="price" class="col-sm-2 label">
                 Price
               </label>
@@ -172,9 +162,7 @@ const PlansModal = ({ closeModal }) => {
               </div>
             </div>
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="duration" class="col-sm-2 label">
                 Duration
               </label>
@@ -190,9 +178,7 @@ const PlansModal = ({ closeModal }) => {
               </div>
             </div>
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="tag" class="col-sm-2 label">
                 Tag
               </label>
@@ -208,9 +194,7 @@ const PlansModal = ({ closeModal }) => {
               </div>
             </div>
             <div
-              class="form-group
-                                row"
-            >
+              class="form-group row">
               <label for="type" class="col-sm-2 label">
                 Type
               </label>
@@ -221,8 +205,7 @@ const PlansModal = ({ closeModal }) => {
                   class="form-control"
                   value={data.type}
                   name="type"
-                  placeholder="Type"
-                />
+                  placeholder="Type"/>
               </div>
             </div>
             <div class="form-group row">
@@ -230,8 +213,7 @@ const PlansModal = ({ closeModal }) => {
                 <button
                   type="submit"
                   class="btn btn-primary"
-                  onClick={(e) => submit(e)}
-                >
+                  onClick={(e) => submit(e)}>
                   Submit
                 </button>
               </div>
