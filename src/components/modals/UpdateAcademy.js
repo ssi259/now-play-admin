@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const UpdateAcademy = ({ closeModal, editData }) => {
   const [data, setData] = useState([]);
   const [sports, setSports] = useState([]);
-  useEffect =
+  useEffect 
     (() => {
       setData(editData);
       getSportsDetails();
