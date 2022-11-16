@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Axios from "axios";
 
 const BatchesModal = ({ closeModal }) => {
@@ -8,11 +8,13 @@ const BatchesModal = ({ closeModal }) => {
   const [Academies, setAcademies] = useState([]); //state to bring in FK academies_id
 
   const [data, setData] = useState({}); // state to store form data
-  const [weekdays, setWeekdays] = useState([]);
+
   const [bannerImg, setBannerImg] = useState(null);
   const [thumbnailImg, setThumbnailImg] = useState(null);
 
-  const onChangeCheckbox = useCallback(() => {
+  const daysOfWeek = useRef(null);
+
+  function onChangeCheckbox(e) {
     var checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
     let array = [0, 0, 0, 0, 0, 0, 0];
     for (var i = 0; i < checkboxes.length; i++) {
@@ -33,8 +35,8 @@ const BatchesModal = ({ closeModal }) => {
       }
     }
 
-    return array;
-  });
+    daysOfWeek.current = array;
+  }
 
   useEffect(() => {
     getAcademyDetails();
@@ -42,10 +44,6 @@ const BatchesModal = ({ closeModal }) => {
     getArenaDetails();
     getCoachDetails();
   }, []);
-
-  useEffect(() => {
-    setWeekdays(onChangeCheckbox());
-  }, [weekdays]);
 
   // Get all sports Details
   const getSportsDetails = async () => {
@@ -86,10 +84,7 @@ const BatchesModal = ({ closeModal }) => {
   // post request for batchest to create new batch
   async function submit(e) {
     e.preventDefault();
-
-    console.log("banner:", bannerImg);
-    console.log("thumbnail:", bannerImg);
-    console.log("weekdays:", weekdays);
+    onChangeCheckbox();
 
     const formData = new FormData();
 
@@ -103,19 +98,23 @@ const BatchesModal = ({ closeModal }) => {
       start_date: data.start_date,
       end_date: data.end_date,
       price: data.price,
-      days: weekdays,
+      days: daysOfWeek.current,
     });
+
+  
 
     formData.append("banner_img", bannerImg, bannerImg.name);
     formData.append("thumbnail_img", thumbnailImg, thumbnailImg.name);
 
     formData.append("data", bodyData);
 
-    console.log(formData);
+   
 
-    await Axios.post("http://localhost:5000/batches", formData).then((res) => {
-      console.log(res.data);
-    });
+    await Axios.post("http://3.111.147.217:3000/batches", formData).then(
+      (res) => {
+        console.log(res.data);
+      }
+    );
 
     closeModal(false);
   }
@@ -278,11 +277,11 @@ const BatchesModal = ({ closeModal }) => {
               </div>
             </div>
 
-            <div className="form-group row">
-              <label htmlFor="coach-name" className="col-sm-2 label">
+            <div className="custom-flex">
+              <label htmlFor="coach-name" className="col-sm-2">
                 Timings
               </label>
-              <div className="col-sm-10">
+              <div className="input-group">
                 <input
                   type="time"
                   id="start_time_id"
@@ -291,7 +290,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
-                <small> to </small>
+                <label className="col-sm-2">to</label>
                 <input
                   type="time"
                   id="end_time_id"
@@ -300,14 +299,15 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                
               </div>
             </div>
 
-            <div className="form-group row">
-              <label htmlFor="coach-name" className="col-sm-2 label">
-                Batch Start
+            <div className="custom-flex mt-4">
+              <label htmlFor="coach-name" className="col-sm-2">
+                Start
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-4">
                 <input
                   type="date"
                   id="start_date"
@@ -317,10 +317,10 @@ const BatchesModal = ({ closeModal }) => {
                   required
                 />
               </div>
-              <label htmlFor="coach-name" className="col-sm-2 label">
-                Batch End
+              <label htmlFor="coach-name" className="col-sm-2">
+                End
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-4">
                 <input
                   type="date"
                   id="end_date"
@@ -332,7 +332,7 @@ const BatchesModal = ({ closeModal }) => {
               </div>
             </div>
 
-            <div className="form-group row">
+            <div className="custom-flex mt-4">
               <label htmlFor="coach-name" className="col-sm-2 ">
                 Days
               </label>

@@ -209,3 +209,7 @@ background-color: skyblue;
 .sm {
   font-size: small;
 }
+
+.custom-flex {
+  display: flex;
+}
