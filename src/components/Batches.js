@@ -24,7 +24,7 @@ function Batches() {
 
   function handleSubmit(event, id) {
     event.preventDefault();
-    const url = `http://localhost:3000/batches/upload_file?batch_id=${id}`;
+    const url = `http://3.111.147.217:3000/batches/upload_file?batch_id=${id}`;
     var formdata = new FormData();
     formdata.append("files_name", file, file.name);
     var requestOptions = {
@@ -41,7 +41,7 @@ function Batches() {
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
-      "http://localhost:3000/batches/search?lat=28.21&&lng=78.12"
+      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12"
     );
     batches = await batches.json();
     console.log("length" + batches.batchList.length);
@@ -63,7 +63,6 @@ function Batches() {
     }
     setBatches(batches.batchList);
   };
-  console.log("Batches", Batches);
   return (
     <div className="batch-list">
       <h3 className="batch-heading">Batches</h3>
