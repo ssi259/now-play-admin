@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 
 const UpdateAcademy = ({ closeModal, editData }) => {
   const [data, setData] = useState([]);
@@ -8,18 +8,22 @@ const UpdateAcademy = ({ closeModal, editData }) => {
   useEffect =
     (() => {
       setData(editData);
-      console.log("editData", editData);
+      getSportsDetails();
     },
     [editData]);
-    const handle = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
-        };
-        const submit = async (e) => {
-            e.preventDefault();
-            await axios.put(`http://localhost:3000/academies/${data.id}`, data);
-            closeModal(false);
-            };
-
+  const getSportsDetails = async () => {
+    let sports = await fetch("http://3.111.147.217:3000/sports");
+    sports = await sports.json();
+    setSports(sports);
+  };
+  const handle = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+  const submit = async (e) => {
+    e.preventDefault();
+    await axios.put(`http://localhost:3000/academies/${data.id}`, data);
+    closeModal(false);
+  };
 
   return (
     <div className="modalBackground">
@@ -95,9 +99,10 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   onChange={(e) => handle(e)}
                 >
                   <option class="form-control" name="sport_id">
-                    {" "}-- Select a sport --{" "}
+                    {" "}
+                    -- Select a sport --{" "}
                   </option>
-                  {Sports.map((sport) => (
+                  {sports.map((sport) => (
                     <option
                       class="form-control"
                       value={sport.id}
