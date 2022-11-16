@@ -5,12 +5,10 @@ import { useEffect, useState } from "react";
 const UpdateAcademy = ({ closeModal, editData }) => {
   const [data, setData] = useState([]);
   const [sports, setSports] = useState([]);
-  useEffect 
-    (() => {
-      setData(editData);
-      getSportsDetails();
-    },
-    [editData]);
+  useEffect(() => {
+    setData(editData);
+    getSportsDetails();
+  }, [editData]);
   const getSportsDetails = async () => {
     let sports = await fetch("http://3.111.147.217:3000/sports");
     sports = await sports.json();
