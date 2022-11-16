@@ -43,6 +43,8 @@ function Academies() {
               <th>#</th>
               <th>id</th>
               <th>Academy Name</th>
+              <th>Email</th>
+              <th>Phone</th>
               <th>Sport</th>
               <th>Actions</th>
             </tr>
@@ -54,6 +56,8 @@ function Academies() {
                   <th>{index + 1}</th>
                   <th>{item.id}</th>
                   <td>{item.name}</td>
+                  <td>{item.email}</td>
+                  <td>{item.phone_number}</td>
                   <td>{item.sports_name}</td>
                   <td>
                     <button

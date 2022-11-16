@@ -19,7 +19,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:3000/academies/${data.id}`, data);
+    await axios.put(`http://3.111.147.217:3000/academies/${data.id}`, data);
     closeModal(false);
   };
 
@@ -81,7 +81,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   id="phone"
                   class="form-control"
                   value={data.phone}
-                  name="phone"
+                  name="phone_number"
                   placeholder="Phone Number"
                 />
               </div>
