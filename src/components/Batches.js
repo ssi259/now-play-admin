@@ -17,7 +17,6 @@ function Batches() {
       "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12"
     );
     batches = await batches.json();
-    console.log("length" + batches.batchList.length);
     for (var i = 0; i < batches.batchList.length; i++) {
       var batch_days_in_week = [];
       if (batches.batchList[i]["days"]) {
@@ -36,7 +35,6 @@ function Batches() {
     }
     setBatches(batches.batchList);
   };
-  console.log("Batches", Batches);
   return (
     <div className="batch-list">
       <h3 className="batch-heading">
@@ -55,6 +53,7 @@ function Batches() {
           <thead>
             <tr>
               <th>#</th>
+              <th>Batch ID</th>
               <th>Sport</th>
               <th>Price</th>
               <th>Start time</th>
@@ -68,6 +67,7 @@ function Batches() {
               return (
                 <tr key={`${item.id}-${item.price}-${index + 1}`}>
                   <th>{index + 1}</th>
+                  <th>{item.id}</th>
                   <td>{item.sport_name}</td>
                   <td>{item.price}</td>
                   <td>{item.start_time}</td>
