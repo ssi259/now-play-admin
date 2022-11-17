@@ -95,6 +95,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   class="form-control"
                   name="sport_id"
                   onChange={(e) => handle(e)}
+                  value={data.sports_id}
                 >
                   <option class="form-control" name="sport_id">
                     {" "}
@@ -103,7 +104,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   {sports.map((sport) => (
                     <option
                       class="form-control"
-                      value={data.sport_id}
+                      value={sport.id}
                       name="sport_id"
                     >
                       {sport.name}
