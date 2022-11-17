@@ -80,7 +80,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   onChange={(e) => handle(e)}
                   id="phone"
                   class="form-control"
-                  value={data.phone}
+                  value={data.phone_number}
                   name="phone_number"
                   placeholder="Phone Number"
                 />
@@ -103,7 +103,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   {sports.map((sport) => (
                     <option
                       class="form-control"
-                      value={sport.id}
+                      value={data.sport_id}
                       name="sport_id"
                     >
                       {sport.name}
