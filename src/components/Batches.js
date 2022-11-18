@@ -6,7 +6,7 @@ import BatchesModal from "./modals/BatchesModal";
 
 function Batches() {
   const [Batches, setBatches] = useState([]);
-  const plans = useRef();
+  const plans = useRef([]);
   const [openModal, setOpenModal] = useState(false);
 
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
@@ -15,21 +15,13 @@ function Batches() {
     getPlansDetails();
   }, [openModal]);
 
-  const getPlansDetails = async (batch_id) => {
-    const myInit = {
-      method: 'GET',
-      headers: new Headers({
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0MywiaWF0IjoxNjY3ODM5NDMxfQ.Fbx_BDq6zfDmbqaaaDWEm5-lTwu9dVnH-xRcedQRcDE',
-      }),
-    };
-    const batchPlans = await fetch(
-      "http://localhost:5000/plans",
-      myInit
+  const getPlansDetails = async () => {
+    let batchPlans = await fetch(
+      "http://3.111.147.217:3000/plans"
     )
-    console.log(batchPlans)
     
-    // batchPlans = await batchPlans.json();
-    // plans.current = batchPlans;
+    plans.current = await batchPlans.json();
+    
 
   }
 
@@ -98,7 +90,7 @@ function Batches() {
                   <td>{item.academy_name}</td>
                   <td>{item.arena_name}</td>
                   <td>{item.coach_name}</td>
-                  <td>{plans.current.filter(plan => plan.batch_id === item.id).map((item, index) => item.plan_name)}</td>
+                  <td>{plans.current.filter(plan => plan.batch_id === item.id).map((item, index) => item.plan_name).join(", ")}</td>
                   <td>{item.price}</td>
                   <td>{item.start_time.slice(0, 5)}</td>
                   <td>{item.end_time.slice(0, 5)}</td>
