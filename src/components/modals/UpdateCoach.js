@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 const UpdateCoach = ({ closeEditModal, editData }) => {
   const [data, setData] = useState([]);
   const [sports, setSports] = useState([]);
-<<<<<<< HEAD
   const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
@@ -13,14 +12,6 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
   }, [formErrors, editData]);
   const getSportsDetails = async () => {
     let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
-=======
-  useEffect(() => {
-    setData(editData);
-    getSportsDetails();
-  }, [editData]);
-  const getSportsDetails = async () => {
-    let sports = await fetch("http://3.111.147.217:3000/sports");
->>>>>>> a5e9955 (Implemented Coach update form (#19))
     sports = await sports.json();
     setSports(sports);
   };
@@ -29,23 +20,17 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD
     await setFormErrors(validate(data));
     setIsSubmit(true);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios
       .put(`${process.env.REACT_APP_API_PATH}/coach/${editData.id}`, data)
-=======
-    await axios
-      .put(`http://3.111.147.217:3000/coach/${editData.id}`, data)
->>>>>>> a5e9955 (Implemented Coach update form (#19))
       .then((res) => {
         alert("Coach Updated Successfully");
       });
     {
       closeEditModal(false);
     }
-<<<<<<< HEAD
   }
   };
 
@@ -86,8 +71,6 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
         errors.pincode = "Pincode is required!";
     }
     return errors;
-=======
->>>>>>> a5e9955 (Implemented Coach update form (#19))
   };
 
   return (
@@ -121,10 +104,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="name"
                   placeholder="coach Name"
                 />
-<<<<<<< HEAD
                 <span>{formErrors.name}</span>
-=======
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
             <div class="form-group row">
@@ -140,10 +120,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="email"
                   placeholder="coach Email"
                 />
-<<<<<<< HEAD
                 <span>{formErrors.email}</span>
-=======
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
             <div class="form-group row">
@@ -156,16 +133,10 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   id="phone"
                   class="form-control"
                   value={data.phone_number}
-<<<<<<< HEAD
                   name="phone_number"
                   placeholder="Phone Number"
                 />
                 <span>{formErrors.phone_number}</span>
-=======
-                  name="phone"
-                  placeholder="Phone Number"
-                />
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
             <div class="form-group row">
@@ -193,10 +164,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                     </option>
                   ))}
                 </select>
-<<<<<<< HEAD
                 <span>{formErrors.sports_id}</span>
-=======
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
             <div class="form-group row">
@@ -208,7 +176,6 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   onChange={(e) => handle(e)}
                   name="experience"
                   class="form-control"
-<<<<<<< HEAD
                   value={data.experience}
                   id="experience"
                   placeholder="Experience in months"
@@ -265,31 +232,14 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
             </div> */}
             <div class="form-group row">
               <label for="coach-about" class="col-sm-2 label">
-=======
-                  id="experience"
-                  placeholder="Experience in months"
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="about-coach" class="col-sm-2 label">
->>>>>>> a5e9955 (Implemented Coach update form (#19))
                 About
               </label>
               <div class="col-sm-10">
                 <textarea
-<<<<<<< HEAD
                   class="form-control"
                   name="about"
                   value={data.about}
                   onChange={(e) => handle(e)}
-=======
-                  onChange={(e) => handle(e)}
-                  name="about"
-                  class="form-control"
-                  id="about-coach"
-                  placeholder="About Coach"
->>>>>>> a5e9955 (Implemented Coach update form (#19))
                 />
               </div>
             </div>
@@ -303,15 +253,10 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="locality"
                   class="form-control"
                   id="locality"
-<<<<<<< HEAD
                   value={data.locality}
                   placeholder="Locality"
                 />
                 <span>{formErrors.locality}</span>
-=======
-                  placeholder="Locality"
-                />
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
             <div class="form-group row">
@@ -324,15 +269,10 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="city"
                   class="form-control"
                   id="city"
-<<<<<<< HEAD
                   value={data.city}
                   placeholder="city"
                 />
                 <span>{formErrors.city}</span>
-=======
-                  placeholder="city"
-                />
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
             <div class="form-group row">
@@ -345,15 +285,10 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="pincode"
                   class="form-control"
                   id="pincode"
-<<<<<<< HEAD
                   value={data.pincode}
                   placeholder="pincode"
                 />
                 <span>{formErrors.pincode}</span>
-=======
-                  placeholder="pincode"
-                />
->>>>>>> a5e9955 (Implemented Coach update form (#19))
               </div>
             </div>
 
