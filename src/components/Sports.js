@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import UpdateSport from "./modals/UpdateSport";
 import SportModal from "./modals/SportModal";
+import axios from "axios";
 
 function Sports(){
     const[Sports,setSports] = useState([]);
@@ -19,7 +20,21 @@ function Sports(){
             let sports = await fetch('http://3.111.147.217:3000/sports');
             sports = await sports.json();
             setSports(sports);
+            console.log(sports);
         }
+    }
+    const updateSportStatus = async (id,status)=>{
+        console.log(id,status);
+        axios.put(`http://localhost:3000/sports/${id}`,{
+            status:status
+            })
+            .then(res => {
+                alert(res.data.message);
+                getSportsDetails();
+            })
+            .catch(err => {
+                alert(err);
+            })
     }
     return(
         <div className="batch-list">
@@ -35,12 +50,15 @@ function Sports(){
                             <th>Sport Name</th>
                             <th>Type</th>
                             <th>About</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                     
                     {
                         Sports.map((item, index) => {
+                            {item.status}
                         return (
                                 <tr>
                                     <th>{index+1}</th>
@@ -48,6 +66,10 @@ function Sports(){
                                     <td>{item.name}</td>
                                     <td>{item.type}</td>
                                     <td>{item.about}</td>
+                                    <td>
+                                        {item.status=='Inactive' && <button className="btn btn-success" onClick={()=>{updateSportStatus(item.id,'Active')}}>Inactive</button>}
+                                        {item.status=='Active' && <button className="btn btn-danger" onClick={()=>{updateSportStatus(item.id,'Inactive')}}>Active</button>}
+                                    </td>
                                     <td >
                                         <button onClick={()=>{setEditData(item),setEditModal(true)}}>{<FaEdit/>}</button>
                                         
