@@ -101,14 +101,10 @@ const BatchesModal = ({ closeModal }) => {
       days: daysOfWeek.current,
     });
 
-  
-
     formData.append("banner_img", bannerImg, bannerImg.name);
     formData.append("thumbnail_img", thumbnailImg, thumbnailImg.name);
 
     formData.append("data", bodyData);
-
-   
 
     await Axios.post("http://3.111.147.217:3000/batches", formData).then(
       (res) => {
@@ -138,20 +134,42 @@ const BatchesModal = ({ closeModal }) => {
         <form>
           <div className="overlay">
             <div>
-              <label className="col-sm-2 label">Thumbnail Image</label>
               <input
+                style={{ visibility: "hidden" }}
                 className="col-sm-2 label"
                 type="file"
                 name="thumbnail_img"
+                id="thumbnail_img"
                 onChange={(e) => setThumbnailImg(e.target.files[0])}
               />
-              <label className="col-sm-2 label">Banner Image</label>
+              <label
+                style={{ border: "1px solid" }}
+                htmlFor="thumbnail_img"
+                className="col-sm-2 label"
+              >
+                Select thumbnail
+              </label>
+              <label style={{ color: "green" }} className="col-sm-2 label">
+                {thumbnailImg && thumbnailImg.name}
+              </label>
               <input
+                style={{ visibility: "hidden" }}
                 className="col-sm-2 label"
                 type="file"
                 name="banner_img"
+                id="banner_img"
                 onChange={(e) => setBannerImg(e.target.files[0])}
               />
+              <label
+                style={{ border: "1px solid" }}
+                htmlFor="banner_img"
+                className="col-sm-2 label"
+              >
+                Select Banner
+              </label>
+              <label style={{ color: "green" }} className="col-sm-2 label">
+                {bannerImg && bannerImg.name}
+              </label>
             </div>
             <div className="form-group row">
               <label htmlFor="coach-name" className="col-sm-2 label">
@@ -299,7 +317,6 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
-                
               </div>
             </div>
 
