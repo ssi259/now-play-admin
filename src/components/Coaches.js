@@ -8,11 +8,16 @@ import axios from "axios";
 
 function Coaches() {
   const [coaches, setCoaches] = useState([]);
+<<<<<<< HEAD
   const [openModal, setOpenModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [editData, setEditData] = useState({});
 
   const Sports = useRef([]);
+=======
+  const Sports = useRef([]);
+  const [openModal, setOpenModal] = useState(false);
+>>>>>>> d3d3608 (formatted_coaches)
 
   useEffect(() => {
     getCoachDetails();
