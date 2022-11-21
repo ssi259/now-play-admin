@@ -7,8 +7,8 @@ import CoachModal from "./modals/CoachModal";
 
 function Coaches() {
   const [coaches, setCoaches] = useState([]);
-  const Sports = useRef([])
-    const [openModal, setOpenModal] = useState(false);
+  const Sports = useRef([]);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     getCoachDetails();
@@ -64,7 +64,11 @@ function Coaches() {
                   <td>{item.name}</td>
                   <th>{item.phone_number}</th>
                   <td>
-                  {Sports.current.filter(sport => sport.id === item.sports_id)[0]['name']}
+                    {
+                      Sports.current.filter(
+                        (sport) => sport.id === item.sports_id
+                      )[0]["name"]
+                    }
                   </td>
                   <td>{item.experience}</td>
                   <td>
@@ -86,3 +90,4 @@ function Coaches() {
   );
 }
 export default Coaches;
+
