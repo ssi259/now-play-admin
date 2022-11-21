@@ -14,7 +14,7 @@ function Coaches(){
     },[openModal])
     const getCoachDetails=async()=>{
         if(!openModal){
-            let coaches = await fetch('http://localhost:5000/coach');
+            let coaches = await fetch('http://3.111.147.217:3000/coach');
             coaches = await coaches.json();
             setCoaches(coaches.data);
         }
