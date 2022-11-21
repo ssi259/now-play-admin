@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
@@ -6,12 +6,20 @@ import BatchesModal from "./modals/BatchesModal";
 
 function Batches() {
   const [Batches, setBatches] = useState([]);
+  const plans = useRef([]);
   const [openModal, setOpenModal] = useState(false);
 
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
+    getPlansDetails();
   }, [openModal]);
+
+  const getPlansDetails = async () => {
+    let batchPlans = await fetch("http://3.111.147.217:3000/plans");
+    plans.current = await batchPlans.json();
+  };
+
   const getBatchDetails = async () => {
     let batches = await fetch(
       "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12"
@@ -55,6 +63,10 @@ function Batches() {
               <th>#</th>
               <th>Batch ID</th>
               <th>Sport</th>
+              <th>Academy</th>
+              <th>Arena</th>
+              <th>Coach</th>
+              <th>Plans</th>
               <th>Price</th>
               <th>Start time</th>
               <th>End time</th>
@@ -69,9 +81,18 @@ function Batches() {
                   <th>{index + 1}</th>
                   <th>{item.id}</th>
                   <td>{item.sport_name}</td>
+                  <td>{item.academy_name}</td>
+                  <td>{item.arena_name}</td>
+                  <td>{item.coach_name}</td>
+                  <td>
+                    {plans.current
+                      .filter((plan) => plan.batch_id === item.id)
+                      .map((item, index) => item.plan_name)
+                      .join(", ")}
+                  </td>
                   <td>{item.price}</td>
-                  <td>{item.start_time}</td>
-                  <td>{item.end_time}</td>
+                  <td>{item.start_time.slice(0, 5)}</td>
+                  <td>{item.end_time.slice(0, 5)}</td>
                   <td>{item.days}</td>
                   <td>
                     <button
@@ -92,3 +113,4 @@ function Batches() {
   );
 }
 export default Batches;
+
