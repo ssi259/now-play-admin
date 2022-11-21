@@ -12,7 +12,7 @@ function Plans() {
   }, []);
   const getPlansDetails = async () => {
     if (!openModal) {
-      let plans = await fetch("http://3.111.147.217:3000/plans");
+      let plans = await fetch("http://3.111.147.217:3000/plans/all");
       plans = await plans.json();
       setPlans(plans);
     }
@@ -46,21 +46,21 @@ function Plans() {
           </thead>
           <tbody>
             {
-              // plans?.map((item, index) => {
-              //     return (
-              //         <tr>
-              //             <td>{index + 1}</td>
-              //             <td>{item.name}</td>
-              //             <td>{item.description}</td>
-              //             <td>{item.status}</td>
-              //             <td>{item.price}</td>
-              //             <td>{item.tag}</td>
-              //             <td>{item.type}</td>
-              //             <td>{item.duration}</td>
-              //             <td ><button onClick={() => { alert("Edit Coach") }}>{<FaEdit />}</button></td>
-              //         </tr>
-              //     )
-              // })
+              plans?.map((item, index) => {
+                  return (
+                      <tr>
+                          <td>{index + 1}</td>
+                          <td>{item.name}</td>
+                          <td>{item.description}</td>
+                          <td>{item.status}</td>
+                          <td>{item.price}</td>
+                          <td>{item.tag}</td>
+                          <td>{item.type}</td>
+                          <td>{item.duration}</td>
+                          <td ><button onClick={() => { alert("Edit Coach") }}>{<FaEdit />}</button></td>
+                      </tr>
+                  )
+              })
             }
           </tbody>
         </table>
