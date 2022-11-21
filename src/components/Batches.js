@@ -16,15 +16,9 @@ function Batches() {
   }, [openModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch(
-      "http://3.111.147.217:3000/plans"
-    )
-    
+    let batchPlans = await fetch("http://3.111.147.217:3000/plans");
     plans.current = await batchPlans.json();
-    
-
-  }
-
+  };
 
   const getBatchDetails = async () => {
     let batches = await fetch(
@@ -90,7 +84,12 @@ function Batches() {
                   <td>{item.academy_name}</td>
                   <td>{item.arena_name}</td>
                   <td>{item.coach_name}</td>
-                  <td>{plans.current.filter(plan => plan.batch_id === item.id).map((item, index) => item.plan_name).join(", ")}</td>
+                  <td>
+                    {plans.current
+                      .filter((plan) => plan.batch_id === item.id)
+                      .map((item, index) => item.plan_name)
+                      .join(", ")}
+                  </td>
                   <td>{item.price}</td>
                   <td>{item.start_time.slice(0, 5)}</td>
                   <td>{item.end_time.slice(0, 5)}</td>
@@ -114,3 +113,4 @@ function Batches() {
   );
 }
 export default Batches;
+
