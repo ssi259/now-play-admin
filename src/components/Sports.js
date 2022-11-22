@@ -20,7 +20,6 @@ function Sports(){
             let sports = await fetch('http://3.111.147.217:3000/sports');
             sports = await sports.json();
             setSports(sports);
-            console.log(sports);
         }
     }
     const updateSportStatus = async (id,status)=>{
