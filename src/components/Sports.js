@@ -25,7 +25,7 @@ function Sports(){
     }
     const updateSportStatus = async (id,status)=>{
         console.log(id,status);
-        axios.put(`http://localhost:3000/sports/${id}`,{
+        axios.put(`http://3.111.147.217:3000/sports/${id}`,{
             status:status
             })
             .then(res => {
@@ -58,7 +58,6 @@ function Sports(){
                     
                     {
                         Sports.map((item, index) => {
-                            {item.status}
                         return (
                                 <tr>
                                     <th>{index+1}</th>
@@ -67,14 +66,16 @@ function Sports(){
                                     <td>{item.type}</td>
                                     <td>{item.about}</td>
                                     <td>
-                                        {item.status=='Inactive' && <button className="btn btn-success" onClick={()=>{updateSportStatus(item.id,'Active')}}>Inactive</button>}
-                                        {item.status=='Active' && <button className="btn btn-danger" onClick={()=>{updateSportStatus(item.id,'Inactive')}}>Active</button>}
+                                    <b style={{ fontSize: '40px',verticalAlign:'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>
+                                        <select value={item.status} onChange={(e)=>{updateSportStatus(item.id,e.target.value)}}>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </select>
                                     </td>
                                     <td >
                                         <button onClick={()=>{setEditData(item),setEditModal(true)}}>{<FaEdit/>}</button>
                                         
                                     </td>
-
                                 </tr>
                         )
                     })}
