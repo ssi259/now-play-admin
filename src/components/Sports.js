@@ -73,8 +73,7 @@ function Sports(){
                                         </select>
                                     </td>
                                     <td >
-                                        <button onClick={()=>{setEditData(item),setEditModal(true)}}>{<FaEdit/>}</button>
-                                        
+                                        <button onClick={()=>{setEditData(item),setEditModal(true)}}>{<FaEdit/>}</button> 
                                     </td>
                                 </tr>
                         )
