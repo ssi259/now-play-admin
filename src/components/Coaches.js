@@ -85,10 +85,10 @@ function Coaches() {
                   <td>{item.state}</td>
                   <td>{item.pincode}</td>
                   <td>
-                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
                     <select value={item.status} onChange={(e) => { updateCoachStatus(item.id, e.target.value) }}>
-                      <option value="Active">Active</option>
-                      <option value="Inactive">Inactive</option>
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
                     </select>
                   </td>
                   <td>
