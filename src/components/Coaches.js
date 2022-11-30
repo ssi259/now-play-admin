@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import UpdateCoach from "./modals/UpdateCoach";
 import CoachModal from "./modals/CoachModal";
+import axios from "axios";
 
 function Coaches() {
   const [coaches, setCoaches] = useState([]);
@@ -31,6 +32,20 @@ function Coaches() {
       sports = await sports.json();
       Sports.current = sports;
     };
+
+    const updateCoachStatus = async (id, status) => {
+      console.log(id, status);
+      axios.put(`http://3.111.147.217:3000/coach/${id}`, {
+        status: status
+      })
+        .then(res => {
+          alert(res.data.message);
+          getCoachDetails();
+        })
+        .catch(err => {
+          alert(err);
+        })
+    }
 
     return (
       <div className="batch-list">
@@ -78,6 +93,13 @@ function Coaches() {
                     </td>
                     <td>{item.experience}</td>
                     <td>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>
+                    <select value={item.status} onChange={(e) => { updateCoachStatus(item.id, e.target.value) }}>
+                      <option value="Active">Active</option>
+                      <option value="Inactive">Inactive</option>
+                    </select>
+                  </td>
+                    <td>
                       <button
                         onClick={() => {
                             setEditModal(true);
@@ -98,4 +120,3 @@ function Coaches() {
   };
   
 export default Coaches;
-
