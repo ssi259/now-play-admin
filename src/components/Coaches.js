@@ -8,11 +8,12 @@ import axios from "axios";
 
 function Coaches() {
   const [coaches, setCoaches] = useState([]);
+  const [Sports, setSports] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [editData, setEditData] = useState({});
 
-  const Sports = useRef([]);
+  // const Sports = useRef(null);
 
   useEffect(() => {
     getCoachDetails();
@@ -30,7 +31,7 @@ function Coaches() {
     const getSportsDetails = async () => {
       let sports = await fetch("http://3.111.147.217:3000/sports");
       sports = await sports.json();
-      Sports.current = sports;
+      setSports(sports)
     };
 
     const updateCoachStatus = async (id, status) => {
@@ -85,11 +86,7 @@ function Coaches() {
                     <td>{item.name}</td>
                     <th>{item.phone_number}</th>
                     <td>
-                      {
-                        Sports.current.filter(
-                          (sport) => sport.id === item.sports_id
-                        )[0]["name"]
-                      }
+                      {Sports.filter((sport) => sport.id === item.sports_id)[0]["name"]}
                     </td>
                     <td>{item.experience}</td>
                     <td>
