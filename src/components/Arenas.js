@@ -16,14 +16,14 @@ function Arenas() {
   }, [openModal, updateOpenModal]);
   const getArenaDetails = async () => {
     if (!openModal) {
-      let Arenas = await fetch("http://localhost:3000/arenas");
+      let Arenas = await fetch("http://3.111.147.217:3000/arenas");
       Arenas = await Arenas.json();
       setArenas(Arenas);
     }
   };
   const updateArenaStatus = async (id, status) => {
     console.log(id, status);
-    axios.put(`http://localhost:3000/arenas/${id}`, {
+    axios.put(`http://3.111.147.217:3000/arenas/${id}`, {
       status: status
     })
       .then(res => {
