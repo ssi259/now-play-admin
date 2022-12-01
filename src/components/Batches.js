@@ -16,8 +16,9 @@ function Batches() {
   }, [openModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch("http://3.111.147.217:3000/plans");
-    plans.current = await batchPlans.json();
+    let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
+    batchPlans= await batchPlans.json();
+    plans.current = batchPlans.data;
   };
 
   const getBatchDetails = async () => {
