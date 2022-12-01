@@ -20,11 +20,7 @@ function Batches() {
   }, [openModal, updateModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}
-
-
-
-/plans`);
+    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans`);
     plans.current = await batchPlans.json();
   };
   const [files, setFiles] = useState([]);

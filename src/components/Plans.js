@@ -15,11 +15,7 @@ function Plans() {
   }, [openModal, openEditModal]);
   const getPlansDetails = async () => {
     if (!openModal) {
-      let plans = await fetch(`${process.env.REACT_APP_API_PATH}
-
-
-
-/plans/all`);
+      let plans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all`);
       plans = await plans.json();
       setPlans(plans.data);
     }

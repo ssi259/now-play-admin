@@ -17,11 +17,7 @@ const PlansModal = ({ closeModal }) => {
 
   const getBatchesDetails = async () => {
     let batches = await fetch(
-      `${process.env.REACT_APP_API_PATH}
-
-
-
-/batches/search?lat=28.21&&lng=78.12`
+      `${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12`
     );
     batches = await batches.json();
     for (var i = 0; i < batches.batchList.length; i++) {
@@ -45,11 +41,7 @@ const PlansModal = ({ closeModal }) => {
 
   async function submit(e) {
     e.preventDefault();
-    await Axios.post(`${process.env.REACT_APP_API_PATH}
-
-
-
-/plans`, {
+    await Axios.post(`${process.env.REACT_APP_API_PATH}/plans`, {
       batch_id: data.batch_id,
       plan_name: data.plan_name,
       description: data.description,

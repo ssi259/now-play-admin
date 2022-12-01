@@ -13,11 +13,7 @@ const ArenaModal = ({ closeModal }) => {
   async function submit(e) {
     e.preventDefault();
 
-    await Axios.post(`${process.env.REACT_APP_API_PATH}
-
-
-
-/arenas`, {
+    await Axios.post(`${process.env.REACT_APP_API_PATH}/arenas`, {
       name: data.name,
       phone_number: data.phone_number,
       email: data.email,

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import Axios from 'axios';
 function SportModal({closeModal}){
-    const url = `${process.env.REACT_APP_API_PATH}
-
-
-
-/sports`;
+    const url = `${process.env.REACT_APP_API_PATH}/sports`;
     const [data,setData] = useState({
         name: "",
         type:"",

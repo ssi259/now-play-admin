@@ -15,11 +15,7 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
   }
   async function submit(e) {
     e.preventDefault();
-    await axios.put(`${process.env.REACT_APP_API_PATH}
-
-
-
-/arenas/${ArenaItem.id}`, {
+    await axios.put(`${process.env.REACT_APP_API_PATH}/arenas/${ArenaItem.id}`, {
       name: data.name,
       phone_number: data.phone_number,
       email: data.email,

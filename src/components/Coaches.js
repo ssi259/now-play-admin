@@ -21,22 +21,14 @@ function Coaches() {
 
   const getCoachDetails = async () => {
     if (!openModal) {
-      let coaches = await fetch(`${process.env.REACT_APP_API_PATH}
-
-
-
-/coach`);
+      let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach`);
       coaches = await coaches.json();
       setCoaches(coaches.data);
     }
   };
   const updateCoachStatus = async (id, status) => {
     console.log(id, status);
-    axios.put(`${process.env.REACT_APP_API_PATH}
-
-
-
-/coach/${id}`, {
+    axios.put(`${process.env.REACT_APP_API_PATH}/coach/${id}`, {
       status: status
     })
       .then(res => {

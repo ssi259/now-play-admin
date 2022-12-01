@@ -16,11 +16,7 @@ function Arenas() {
   }, [openModal, updateOpenModal]);
   const getArenaDetails = async () => {
     if (!openModal) {
-      let Arenas = await fetch(`${process.env.REACT_APP_API_PATH}
-
-
-
-/arenas`);
+      let Arenas = await fetch(`${process.env.REACT_APP_API_PATH}/arenas`);
       Arenas = await Arenas.json();
       setArenas(Arenas);
     }
