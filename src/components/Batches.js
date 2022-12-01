@@ -92,8 +92,8 @@ function Batches() {
                       .join(", ")}
                   </td>
                   <td>{item.price}</td>
-                  <td>{item.start_time.slice(0, 5)}</td>
-                  <td>{item.end_time.slice(0, 5)}</td>
+                  <td>{item.start_time}</td>
+                  <td>{item.end_time}</td>
                   <td>{item.days}</td>
                   <td>
                     <button

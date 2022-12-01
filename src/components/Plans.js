@@ -14,7 +14,7 @@ function Plans() {
     if (!openModal) {
       let plans = await fetch("http://3.111.147.217:3000/plans/all");
       plans = await plans.json();
-      setPlans(plans);
+      setPlans(plans.data);
     }
   };
   return (
@@ -30,7 +30,7 @@ function Plans() {
         </button>
         {openModal && <PlansModal closeModal={setOpenModal} />}
       </h3>
-      <div class="table-batch-list">
+      <div className="table-batch-list">
         <table className="table batch-list">
           <thead>
             <tr>
@@ -48,9 +48,9 @@ function Plans() {
             {
               plans?.map((item, index) => {
                   return (
-                      <tr>
+                      <tr key={`${index}`}>
                           <td>{index + 1}</td>
-                          <td>{item.name}</td>
+                          <td>{item.plan_name}</td>
                           <td>{item.description}</td>
                           <td>{item.status}</td>
                           <td>{item.price}</td>
