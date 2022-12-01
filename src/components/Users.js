@@ -9,7 +9,7 @@ const Users = () => {
   }, []);
 
   const getUsers = async () => {
-    await fetch("http://localhost:3000/users/all")
+    await fetch("http://65.0.72.215:3000/users/all")
       .then((res) => res.json())
       .then((res) => {
         setUsers(res.data);
@@ -19,7 +19,7 @@ const Users = () => {
   const updateUserStatus = async (id, status) => {
     console.log(id, status);
     axios
-      .put(`http://localhost:3000/users/${id}`, {
+      .put(`http://65.0.72.215:3000/users/${id}`, {
         status: status,
       })
       .then((res) => {
