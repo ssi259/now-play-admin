@@ -18,7 +18,7 @@ const ArenaModal = ({ closeModal }) => {
       phone_number: data.phone,
       email: data.email,
       lat: data.lat,
-      lng: data.long,
+      lng: data.lng,
       city: data.city,
       locality: data.locality,
       state: data.state,
@@ -119,7 +119,7 @@ const ArenaModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   id="long"
                   class="form-control"
-                  value={data.long}
+                  value={data.lng}
                   name="long"
                   placeholder="Longitude"
                 />
