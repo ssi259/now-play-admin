@@ -110,7 +110,7 @@ function Batches() {
                   <td>{item.arena_name}</td>
                   <td>{item.coach_name}</td>
                   <td>
-                    {plans.current
+                    {plans.current.data
                       .filter((plan) => plan.batch_id === item.id)
                       .map((item, index) => item.plan_name)
                       .join(", ")}
