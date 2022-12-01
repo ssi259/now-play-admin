@@ -67,7 +67,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
     getArenaDetails();
     getCoachDetails();
     onUpdateCheckbox();
-  }, []);
+  }, [closeModal]);
 
   console.log("data", data);
 
