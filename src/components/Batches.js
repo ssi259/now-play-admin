@@ -16,8 +16,9 @@ function Batches() {
   }, [openModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch("http://3.111.147.217:3000/plans");
-    plans.current = await batchPlans.json();
+    let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
+    batchPlans= await batchPlans.json();
+    plans.current = batchPlans.data;
   };
 
   const getBatchDetails = async () => {
@@ -91,8 +92,8 @@ function Batches() {
                       .join(", ")}
                   </td>
                   <td>{item.price}</td>
-                  <td>{item.start_time.slice(0, 5)}</td>
-                  <td>{item.end_time.slice(0, 5)}</td>
+                  <td>{item.start_time}</td>
+                  <td>{item.end_time}</td>
                   <td>{item.days}</td>
                   <td>
                     <button

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
@@ -12,102 +12,112 @@ function Coaches() {
   const [editModal, setEditModal] = useState(false);
   const [editData, setEditData] = useState({});
 
+  const Sports = useRef([]);
+
   useEffect(() => {
     getCoachDetails();
-  }, [openModal,editModal]);
+    getSportsDetails();
+  }, [openModal, editModal]);
+
   const getCoachDetails = async () => {
     if (!openModal) {
       let coaches = await fetch("http://3.111.147.217:3000/coach");
       coaches = await coaches.json();
       setCoaches(coaches.data);
     }
-  };
-  const updateCoachStatus = async (id, status) => {
-    console.log(id, status);
-    axios.put(`http://3.111.147.217:3000/coach/${id}`, {
-      status: status
-    })
-      .then(res => {
-        alert(res.data.message);
-        getCoachDetails();
+}
+
+    const getSportsDetails = async () => {
+      let sports = await fetch("http://3.111.147.217:3000/sports");
+      sports = await sports.json();
+      Sports.current = sports;
+    };
+
+    const updateCoachStatus = async (id, status) => {
+      console.log(id, status);
+      axios.put(`http://3.111.147.217:3000/coach/${id}`, {
+        status: status
       })
-      .catch(err => {
-        alert(err);
-      })
-  }
-  return (
-    <div className="batch-list">
-      <h3 className="batch-heading">
-        Coach
-        <button
-          i
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
-          {<MdAdd />}
-        </button>
-        {openModal && <CoachModal closeModal={setOpenModal} />}
+        .then(res => {
+          alert(res.data.message);
+          getCoachDetails();
+        })
+        .catch(err => {
+          alert(err);
+        })
+    }
+
+    return (
+      <div className="batch-list">
+        <h3 className="batch-heading">
+          Coach
+          <button
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            {<MdAdd />}
+          </button>
+          {openModal && <CoachModal closeModal={setOpenModal} />}
         {editModal && (
           <UpdateCoach closeEditModal={setEditModal} editData={editData} />
         )}
-      </h3>
-      <div class="table-batch-list">
-        <table className="table batch-list">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>id</th>
-              <th>Coach Name</th>
-              <th>Phone</th>
-              <th>Sport</th>
-              <th>Experience(months)</th>
-              <th>Email</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Pincode</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {coaches.map((item, index) => {
-              return (
-                <tr>
-                  <th>{index + 1}</th>
-                  <th>{item.id}</th>
-                  <td>{item.name}</td>
-                  <th>{item.phone_number}</th>
-                  <td>{item.sports_id}</td>
-                  <td>{item.experience}</td>
-                  <td>{item.email}</td>
-                  <td>{item.city}</td>
-                  <td>{item.state}</td>
-                  <td>{item.pincode}</td>
-                  <td>
-                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
+        </h3>
+        <div className="table-batch-list">
+          <table className="table batch-list">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>ID</th>
+                <th>Coach Name</th>
+                <th>Phone</th>
+                <th>Sport</th>
+                <th>Experience(months)</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {coaches.map((item, index) => {
+                return (
+                  <tr key={`coach-${item.id}`}>
+                    <th>{index + 1}</th>
+                    <th>{item.id}</th>
+                    <td>{item.name}</td>
+                    <th>{item.phone_number}</th>
+                    <th>{item.sports_id}</th>
+                    {/* <th>
+                      {
+                        Sports.current.filter(
+                          (sport) => sport.id === item.sports_id
+                        )[0]["name"]
+                      }
+                    </th> */}
+                    <td>{item.experience}</td>
+                    <td>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>
                     <select value={item.status} onChange={(e) => { updateCoachStatus(item.id, e.target.value) }}>
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
                   </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        setEditModal(true);
-                        setEditData(item);
-                      }}
-                    >
-                      {<FaEdit />}
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                    <td>
+                      <button
+                        onClick={() => {
+                            setEditModal(true);
+                            setEditData(item);
+                        }}
+                      >
+                        {<FaEdit />}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  };
+  
 export default Coaches;
