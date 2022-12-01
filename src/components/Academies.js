@@ -16,7 +16,8 @@ function Academies() {
     getAcademyDetails();
   }, [openModal, editModal]);
   const getAcademyDetails = async () => {
-    let batches = await fetch("http://3.111.147.217:3000/academies");
+    let batches = await fetch(`${process.env.REACT_APP_API_PATH}
+/academies`);
     batches = await batches.json();
     setAcademies(batches);
   };

@@ -16,7 +16,11 @@ function Arenas() {
   }, [openModal, updateOpenModal]);
   const getArenaDetails = async () => {
     if (!openModal) {
-      let Arenas = await fetch("http://3.111.147.217:3000/arenas");
+      let Arenas = await fetch(`${process.env.REACT_APP_API_PATH}
+
+
+
+/arenas`);
       Arenas = await Arenas.json();
       setArenas(Arenas);
     }

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Axios from 'axios';
 function SportModal({closeModal}){
-    const url = "http://3.111.147.217:3000/sports";
+    const url = `${process.env.REACT_APP_API_PATH}
+
+
+
+/sports`;
     const [data,setData] = useState({
         name: "",
         type:"",

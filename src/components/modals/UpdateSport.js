@@ -13,7 +13,11 @@ const UpdateSport = ({ closeEditModal, editData }) => {
   const submit = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://3.111.147.217:3000/sports/${data.id}`, data)
+      .put(`${process.env.REACT_APP_API_PATH}
+
+
+
+/sports/${data.id}`, data)
       .then((res) => {
         alert("Sport Updated Successfully");
       })

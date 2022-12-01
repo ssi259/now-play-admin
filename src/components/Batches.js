@@ -20,9 +20,12 @@ function Batches() {
   }, [openModal, updateModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
-    batchPlans= await batchPlans.json();
-    plans.current = batchPlans.data;
+    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}
+
+
+
+/plans`);
+    plans.current = await batchPlans.json();
   };
   const [files, setFiles] = useState([]);
 
@@ -48,7 +51,11 @@ function Batches() {
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
-      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12&&type=admin"
+      `${process.env.REACT_APP_API_PATH}
+
+
+
+/batches/search?lat=28.21&&lng=78.12`
     );
     batches = await batches.json();
     for (var i = 0; i < batches.batchList.length; i++) {
