@@ -9,7 +9,7 @@ const Users = () => {
   }, []);
 
   const getUsers = async () => {
-    await fetch("http://3.111.147.217:3000/users/all")
+    await fetch(`${process.env.REACT_APP_API_PATH}/users/all`)
       .then((res) => res.json())
       .then((res) => {
         setUsers(res.data);
@@ -19,7 +19,7 @@ const Users = () => {
   const updateUserStatus = async (id, status) => {
     console.log(id, status);
     axios
-      .put(`http://3.111.147.217:3000/users/${id}`, {
+      .put(`${process.env.REACT_APP_API_PATH}/users/${id}`, {
         status: status,
       })
       .then((res) => {
