@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import PlansModal from "./modals/PlansModal";
