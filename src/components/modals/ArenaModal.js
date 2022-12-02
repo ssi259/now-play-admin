@@ -87,7 +87,7 @@ const ArenaModal = ({ closeModal }) => {
                   id="phone"
                   class="form-control"
                   value={data.phone_number}
-                  name="phone"
+                  name="phone_number"
                   placeholder="Phone Number"
                 />
               </div>
@@ -120,7 +120,7 @@ const ArenaModal = ({ closeModal }) => {
                   id="long"
                   class="form-control"
                   value={data.lng}
-                  name="long"
+                  name="lng"
                   placeholder="Longitude"
                 />
               </div>
