@@ -48,7 +48,7 @@ function Batches() {
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
-      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12"
+      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12&&type=admin"
     );
     batches = await batches.json();
     for (var i = 0; i < batches.batchList.length; i++) {
