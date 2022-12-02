@@ -87,7 +87,7 @@ const ArenaModal = ({ closeModal }) => {
                   id="phone"
                   class="form-control"
                   value={data.phone_number}
-                  name="phone"
+                  name="phone_number"
                   placeholder="Phone Number"
                 />
               </div>
