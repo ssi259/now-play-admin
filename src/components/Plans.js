@@ -3,13 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import PlansModal from "./modals/PlansModal";
+import UpdatePlan from "./modals/UpdatePlan";
 
 function Plans() {
   const [plans, setPlans] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [editData, setEditData] = useState({});
+  const [openEditModal, setOpenEditModal] = useState(false);
   useEffect(() => {
     getPlansDetails();
-  }, []);
+  }, [openModal, openEditModal]);
   const getPlansDetails = async () => {
     if (!openModal) {
       let plans = await fetch("http://3.111.147.217:3000/plans/all");
@@ -29,6 +32,7 @@ function Plans() {
           {<MdAdd />}
         </button>
         {openModal && <PlansModal closeModal={setOpenModal} />}
+        {openEditModal && <UpdatePlan closeEditModal={setOpenEditModal} editData={editData} />}
       </h3>
       <div className="table-batch-list">
         <table className="table batch-list">
@@ -57,7 +61,7 @@ function Plans() {
                           <td>{item.tag}</td>
                           <td>{item.type}</td>
                           <td>{item.duration}</td>
-                          <td ><button onClick={() => { alert("Edit Coach") }}>{<FaEdit />}</button></td>
+                          <td ><button onClick={() => {setOpenEditModal(true),setEditData(item) }}>{<FaEdit />}</button></td>
                       </tr>
                   )
               })
