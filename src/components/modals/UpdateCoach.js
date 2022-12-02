@@ -127,6 +127,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   onChange={(e) => handle(e)}
                   name="experience"
                   class="form-control"
+                  value={data.experience}
                   id="experience"
                   placeholder="Experience in months"
                 />
