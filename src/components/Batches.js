@@ -9,6 +9,7 @@ function Batches() {
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
+    getPlansDetails();
   }, []);
 
   const getPlansDetails = async () => {
@@ -16,27 +17,26 @@ function Batches() {
     batchPlans= await batchPlans.json();
     plans.current = batchPlans.data;
   };
-  const [file, setFile] = useState();
+  const [files, setFiles] = useState([]);
 
   function handleChange(event) {
-    setFile(event.target.files[0]);
+    setFiles(event.target.files);
   }
 
   function handleSubmit(event, id) {
     event.preventDefault();
     const url = `http://3.111.147.217:3000/batches/upload_file?batch_id=${id}`;
     var formdata = new FormData();
-    formdata.append("files_name", file, file.name);
+    for (var i = 0; i < files.length; i++) {
+      formdata.append("files_name", files[i], files[i].name);
+    }
     var requestOptions = {
       method: "POST",
       body: formdata,
       redirect: "follow",
     };
     fetch(url, requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
       .then((result) => alert("File Uploaded Successfully"))
-      .catch((error) => console.log("error", error))
       .catch((error) => alert("File Upload Failed"));
   }
   const getBatchDetails = async () => {
@@ -114,7 +114,7 @@ function Batches() {
                   </td>
                   <td>
                     <form onSubmit={(e) => handleSubmit(e, item.id)}>
-                      <input name="" type="file" onChange={handleChange} />
+                      <input multiple name="" type="file" onChange={handleChange} />
                       <button type="submit">Upload</button>
                     </form>
                   </td>
