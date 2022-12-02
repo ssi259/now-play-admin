@@ -120,7 +120,7 @@ const ArenaModal = ({ closeModal }) => {
                   id="long"
                   class="form-control"
                   value={data.lng}
-                  name="long"
+                  name="lng"
                   placeholder="Longitude"
                 />
               </div>
