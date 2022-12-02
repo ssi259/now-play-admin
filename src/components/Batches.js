@@ -6,6 +6,8 @@ import BatchesModal from "./modals/BatchesModal";
 
 function Batches() {
   const [Batches, setBatches] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const plans = useRef([]);
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
@@ -44,7 +46,6 @@ function Batches() {
       "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12"
     );
     batches = await batches.json();
-    console.log("length" + batches.batchList.length);
     for (var i = 0; i < batches.batchList.length; i++) {
       var batch_days_in_week = [];
       if (batches.batchList[i]["days"]) {
