@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import ArenaModal from "./modals/ArenaModal";
 import UpdateArena from "./modals/UpdateArena";
+import axios from "axios";
 
 function Arenas() {
   const [arenas, setArenas] = useState([]);
@@ -11,15 +12,28 @@ function Arenas() {
   const [updateOpenModal, setUpdateOpenModal] = useState(false);
   const [selectedArena, setSelectedArena] = useState({});
   useEffect(() => {
-    getBatchDetails();
+    getArenaDetails();
   }, [openModal, updateOpenModal]);
-  const getBatchDetails = async () => {
+  const getArenaDetails = async () => {
     if (!openModal) {
       let Arenas = await fetch("http://3.111.147.217:3000/arenas");
       Arenas = await Arenas.json();
       setArenas(Arenas);
     }
   };
+  const updateArenaStatus = async (id, status) => {
+    console.log(id, status);
+    axios.put(`http://3.111.147.217:3000/arenas/${id}`, {
+      status: status
+    })
+      .then(res => {
+        alert(res.data.message);
+        getArenaDetails();
+      })
+      .catch(err => {
+        alert(err);
+      })
+  }
   return (
     <div className="batch-list">
       <h3 className="batch-heading">
@@ -52,6 +66,7 @@ function Arenas() {
               <th>State</th>
               <th>Latitude</th>
               <th>Longitude</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -68,6 +83,13 @@ function Arenas() {
                   <td>{item.state}</td>
                   <td>{item.lat}</td>
                   <td>{item.lng}</td>
+                  <td>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>
+                      <select value={item.status} onChange={(e) => updateArenaStatus(item.id, e.target.value)}>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                      </select>
+                  </td>
                   <td>
                     <button
                       onClick={() => {
