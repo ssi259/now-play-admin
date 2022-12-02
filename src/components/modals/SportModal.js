@@ -22,6 +22,9 @@ function SportModal({closeModal}){
         }).then(res =>{
             console.log(res.data)
         })
+        .catch(err=>{
+            alert(err.response.data.details)
+        })
         {closeModal(false)}
 
     }
@@ -51,7 +54,7 @@ function SportModal({closeModal}){
                     <div class="form-group row">
                         <label for="aboutSport" class="col-sm-2 label">About</label>
                         <div class="col-sm-10">
-                        <textarea onChange={(e)=>handle(e)} name="about" class="form-control" id="sportType" placeholder="About Sport"/>
+                        <textarea onChange={(e)=>handle(e)} name="about" class="form-control" id="about" placeholder="About Sport"/>
                         </div>
                     </div>
                     <div class="form-group row">
