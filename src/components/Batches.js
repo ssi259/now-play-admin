@@ -17,7 +17,7 @@ function Batches() {
   useEffect(() => {
     getBatchDetails();
     getPlansDetails();
-  }, []);
+  }, [openModal, updateModal]);
 
   const getPlansDetails = async () => {
     let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
@@ -110,7 +110,7 @@ function Batches() {
                   <td>{item.arena_name}</td>
                   <td>{item.coach_name}</td>
                   <td>
-                    {plans.current.data
+                    {plans.current
                       .filter((plan) => plan.batch_id === item.id)
                       .map((item, index) => item.plan_name)
                       .join(", ")}

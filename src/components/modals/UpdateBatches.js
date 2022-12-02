@@ -11,26 +11,36 @@ const UpdateBatches = ({ closeModal, batchData }) => {
 
   const [bannerImg, setBannerImg] = useState(null);
   const [thumbnailImg, setThumbnailImg] = useState(null);
-
   const daysOfWeek = useRef(null);
-  console.log("batchData", batchData);
+  const init_arry = useRef([]);
+  const start_date = useRef([]);
+  const end_date = useRef([]);
 
-  function onUpdateCheckbox() {
-    let array = batchData["days"];
-    for (var i = 0; i < array.length; i++) {
-      if (array[i] === "Mon") {
+  function setISOtotext() {
+    start_date.current = batchData.start_date
+    end_date.current = batchData.end_date
+    start_date.current = start_date.current.substring(0, 10);
+    end_date.current = end_date.current.substring(0, 10);
+  }
+
+  setISOtotext()
+
+  function onUpdateCheckbox(e) {
+    init_arry.current = batchData.days[0].split(",");
+    for (var i = 0; i < init_arry.current .length; i++) {
+      if (init_arry.current [i] === "Mon") {
         document.getElementById("mon").checked = true;
-      } else if (array[i] === "Tues") {
+      } else if (init_arry.current [i] === "Tues") {
         document.getElementById("tue").checked = true;
-      } else if (array[i] === "Wed") {
+      } else if (init_arry.current [i] === "Wed") {
         document.getElementById("wed").checked = true;
-      } else if (array[i] === "Thurs") {
+      } else if (init_arry.current [i] === "Thurs") {
         document.getElementById("thu").checked = true;
-      } else if (array[i] === "Fri") {
+      } else if (init_arry.current [i] === "Fri") {
         document.getElementById("fri").checked = true;
-      } else if (array[i] === "Sat") {
+      } else if (init_arry.current [i] === "Sat") {
         document.getElementById("sat").checked = true;
-      } else if (array[i] === "Sun") {
+      } else if (init_arry.current [i] === "Sun") {
         document.getElementById("sun").checked = true;
       }
     }
@@ -62,14 +72,12 @@ const UpdateBatches = ({ closeModal, batchData }) => {
 
   useEffect(() => {
     setData(batchData);
+    onUpdateCheckbox();
     getAcademyDetails();
     getSportsDetails();
     getArenaDetails();
     getCoachDetails();
-    onUpdateCheckbox();
   }, [closeModal]);
-
-  console.log("data", data);
 
   // Get all sports Details
   const getSportsDetails = async () => {
@@ -108,9 +116,10 @@ const UpdateBatches = ({ closeModal, batchData }) => {
     e.preventDefault();
     onChangeCheckbox();
 
-    const formData = new FormData();
 
-    const bodyData = JSON.stringify({
+    // const formData = new FormData();
+
+    const bodyData = {
       sports_id: data.sport_id,
       arena_id: data.arena_id,
       academy_id: data.academy_id,
@@ -121,14 +130,11 @@ const UpdateBatches = ({ closeModal, batchData }) => {
       end_date: data.end_date,
       price: data.price,
       days: daysOfWeek.current,
-    });
+    };
 
-    formData.append("banner_img", bannerImg, bannerImg.name);
-    formData.append("thumbnail_img", thumbnailImg, thumbnailImg.name);
+    // formData.append("data", bodyData);
 
-    formData.append("data", bodyData);
-
-    await Axios.post("http://3.111.147.217:3000/batches", formData).then(
+    await Axios.put(`http://3.111.147.217:3000/batches/${batchData.id}`, bodyData).then(
       (res) => {
         console.log(res.data);
       }
@@ -155,7 +161,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
 
         <form>
           <div className="overlay">
-            <div>
+            {/* <div>
               <label className="col-sm-2 label">Thumbnail Image</label>
               <input
                 className="col-sm-2 label"
@@ -170,7 +176,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
                 name="banner_img"
                 onChange={(e) => setBannerImg(e.target.files[0])}
               />
-            </div>
+            </div> */}
             <div className="form-group row">
               <label htmlFor="coach-name" className="col-sm-2 label">
                 Sport
@@ -337,7 +343,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
                   id="start_date"
                   className="form-control"
                   name="start_date"
-                  value={data.start_date}
+                  value={start_date.current}
                   onChange={(e) => handle(e)}
                   required
                 />
@@ -351,7 +357,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
                   id="end_date"
                   className="form-control"
                   name="end_date"
-                  value={data.end_date}
+                  value={end_date.current}
                   onChange={(e) => handle(e)}
                   required
                 />
