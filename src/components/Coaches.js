@@ -73,6 +73,15 @@ function Coaches() {
                 <th>Phone</th>
                 <th>Sport</th>
                 <th>Experience(months)</th>
+                {/* <th>Verified</th>
+                <th>Tier</th>
+                <th>Award</th>
+                <th>Team Affiliation</th> */}
+                <th>locality</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Pincode</th>
+                <th>About</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -93,8 +102,17 @@ function Coaches() {
                       }
                     </th> */}
                     <td>{item.experience}</td>
+                    {/* <td>{item.verified}</td>
+                    <td>{item.tier}</td>
+                    <td>{item.award}</td>
+                    <td>{item.team_affiliation}</td> */}
+                    <td>{item.locality}</td>
+                    <td>{item.city}</td>
+                    <td>{item.state}</td>
+                    <td>{item.pincode}</td>
+                    <td>{item.about}</td>
                     <td>
-                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
                     <select value={item.status} onChange={(e) => { updateCoachStatus(item.id, e.target.value) }}>
                       <option value="active">Active</option>
                       <option value="inactive">Inactive</option>

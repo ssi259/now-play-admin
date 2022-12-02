@@ -30,9 +30,13 @@ function SportModal({closeModal}){
             email: data.email,
             city: data.city,
             state: data.state,
+            locality: data.locality,
             pincode: data.pincode
         }).then(res =>{
-            console.log(res.data)
+            alert("Coach Added Successfully")
+        })
+        .catch(err=>{
+            alert(err.response.data.details)
         })
         {closeModal(false)}
     }

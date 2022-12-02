@@ -86,7 +86,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   id="phone"
                   class="form-control"
                   value={data.phone_number}
-                  name="phone"
+                  name="phone_number"
                   placeholder="Phone Number"
                 />
               </div>
@@ -133,17 +133,63 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                 />
               </div>
             </div>
+            {/* <div class="form-group row">
+              <label for="coach-verified" class="col-sm-2 label">
+                Verified
+              </label>
+              <div class="col-sm-10">
+                <input value={data.verified} type="checkbox" name="verified" />
+              </div>
+            </div>
             <div class="form-group row">
-              <label for="about-coach" class="col-sm-2 label">
+              <label for="coach-tier" class="col-sm-2 label">
+                Tier
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  name="tier"
+                  value={data.tier}
+                  onChange={(e) => handle(e)}
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="coach-awards" class="col-sm-2 label">
+                Awards
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  name="awards"
+                  value={data.awards}
+                  onChange={(e) => handle(e)}
+                />
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="coach-team_affiliations" class="col-sm-2 label">
+                Team Affiliations
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control" 
+                  name="team_affiliations"
+                  value={data.team_affiliations}
+                  onChange={(e) => handle(e)}
+                />
+              </div>
+            </div> */}
+            <div class="form-group row">
+              <label for="coach-about" class="col-sm-2 label">
                 About
               </label>
               <div class="col-sm-10">
                 <textarea
-                  onChange={(e) => handle(e)}
-                  name="about"
                   class="form-control"
-                  id="about-coach"
-                  placeholder="About Coach"
+                  name="about"
+                  value={data.about}
+                  onChange={(e) => handle(e)}
                 />
               </div>
             </div>
@@ -157,6 +203,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="locality"
                   class="form-control"
                   id="locality"
+                  value={data.locality}
                   placeholder="Locality"
                 />
               </div>
@@ -171,6 +218,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="city"
                   class="form-control"
                   id="city"
+                  value={data.city}
                   placeholder="city"
                 />
               </div>
@@ -185,6 +233,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="pincode"
                   class="form-control"
                   id="pincode"
+                  value={data.pincode}
                   placeholder="pincode"
                 />
               </div>
