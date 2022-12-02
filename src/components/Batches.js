@@ -3,16 +3,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import BatchesModal from "./modals/BatchesModal";
+import UpdateBatches from "./modals/UpdateBatches";
+
 
 function Batches() {
   const [Batches, setBatches] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const plans = useRef([]);
+  const [updateModal, setUpdateModal] = useState(false);
+  const [batchData,setBatchData] = useState({});
+
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
     getPlansDetails();
-  }, []);
+  }, [openModal, updateModal]);
 
   const getPlansDetails = async () => {
     let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
@@ -66,8 +71,18 @@ function Batches() {
   };
   return (
     <div className="batch-list">
-      <h3 className="batch-heading">Batches</h3>
-      <div class="table-batch-list">
+      <h3 className="batch-heading">
+        Batches
+        <button
+          onClick={() => {
+            setOpenModal(true);
+          }}
+        >
+          {<IoMdAdd />}
+        </button>
+        {openModal && <BatchesModal closeModal={setOpenModal} />}{" "}{updateModal && <UpdateBatches closeModal={setUpdateModal} batchData={batchData}/>}
+      </h3>
+      <div className="table-batch-list">
         <table className="table batch-list">
           <thead>
             <tr>
@@ -107,11 +122,13 @@ function Batches() {
                   <td>
                     <button
                       onClick={() => {
-                        alert("Edit Batch");
+                        setBatchData(item);
+                        setUpdateModal(true);
                       }}
                     >
                       {<FaEdit />}
                     </button>
+                    
                   </td>
                   <td>
                     <form onSubmit={(e) => handleSubmit(e, item.id)}>
