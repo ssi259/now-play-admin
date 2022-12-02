@@ -7,7 +7,7 @@ function SportModal({closeModal}){
     const[Sports,setSports] = useState([]);
     const [data,setData] = useState([])
     const getSportsDetails=async()=>{
-        let sports = await fetch('http://3.111.147.217:3000/sports');
+        let sports = await fetch('http://65.0.72.215:3000/sports');
         sports = await sports.json();
         console.log("sports"+sports[0])
         setSports(sports);
@@ -21,7 +21,7 @@ function SportModal({closeModal}){
         e.preventDefault();
         console.log("data_sport id",data.sport_id)
 
-        await Axios.post('http://3.111.147.217:3000/coach',{
+        await Axios.post('http://65.0.72.215:3000/coach',{
             sports_id:data.sport_id,
             name: data.name,
             phone_number: data.phone,
@@ -30,9 +30,13 @@ function SportModal({closeModal}){
             email: data.email,
             city: data.city,
             state: data.state,
+            locality: data.locality,
             pincode: data.pincode
         }).then(res =>{
-            console.log(res.data)
+            alert("Coach Added Successfully")
+        })
+        .catch(err=>{
+            alert(err.response.data.details)
         })
         {closeModal(false)}
     }
