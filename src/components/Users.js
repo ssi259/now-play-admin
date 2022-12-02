@@ -9,7 +9,7 @@ const Users = () => {
   }, []);
 
   const getUsers = async () => {
-    await fetch(`http://3.111.147.217:3000/users/all`)
+    await fetch("http://3.111.147.217:3000/users/all")
       .then((res) => res.json())
       .then((res) => {
         setUsers(res.data);
