@@ -17,10 +17,10 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
     e.preventDefault();
     await axios.put(`http://3.111.147.217:3000/arenas/${ArenaItem.id}`, {
       name: data.name,
-      phone_number: data.phone,
+      phone_number: data.phone_number,
       email: data.email,
       lat: data.lat,
-      lng: data.long,
+      lng: data.lng,
       city: data.city,
       locality: data.locality,
       state: data.state,
@@ -88,7 +88,7 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
                   onChange={(e) => handle(e)}
                   id="phone"
                   class="form-control"
-                  value={data.phone}
+                  value={data.phone_number}
                   name="phone"
                   placeholder="Phone Number"
                 />
@@ -121,8 +121,8 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
                   onChange={(e) => handle(e)}
                   id="long"
                   class="form-control"
-                  value={data.long}
-                  name="long"
+                  value={data.lng}
+                  name="lng"
                   placeholder="Longitude"
                 />
               </div>
