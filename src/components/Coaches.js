@@ -24,7 +24,6 @@ function Coaches() {
       let coaches = await fetch("http://3.111.147.217:3000/coach");
       coaches = await coaches.json();
       setCoaches(coaches.data);
-      console.log("coaches", coaches.data);
     }
 }
 
