@@ -11,7 +11,7 @@ const CheckOTP = () => {
 
   const Submit = async (e) => {
 
-      await axios.get(`http://localhost:3000/notifications/otp/getotp?phone_number=${phone_number}`)
+      await axios.get(`http://3.111.147.217:3000/notifications/otp/getotp?phone_number=${phone_number}`)
       .then((res) => {
         return res.data
         }).then((data) => {
