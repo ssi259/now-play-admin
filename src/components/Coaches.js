@@ -84,13 +84,14 @@ function Coaches() {
                     <th>{item.id}</th>
                     <td>{item.name}</td>
                     <th>{item.phone_number}</th>
-                    <td>
+                    <th>{item.sports_id}</th>
+                    {/* <th>
                       {
                         Sports.current.filter(
                           (sport) => sport.id === item.sports_id
                         )[0]["name"]
                       }
-                    </td>
+                    </th> */}
                     <td>{item.experience}</td>
                     <td>
                     <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'Active' ? 'green' : 'red', }} >•</b>

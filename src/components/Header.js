@@ -13,6 +13,7 @@ function Header(){
     return(
         <div>
             <ul className='nav-ul'>
+                <li><Link to = "/users">Users</Link></li>
                 <li><Link to = "/coaches" >Coaches</Link></li>
                 <li><Link to = "/arenas">Arenas</Link></li>
                 <li><Link to = "/Batches">Batches</Link></li>
