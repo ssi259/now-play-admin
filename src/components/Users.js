@@ -19,7 +19,7 @@ const Users = () => {
   const updateUserStatus = async (id, status) => {
     console.log(id, status);
     axios
-      .put(`${process.env.REACT_APP_API_PATH}/users/${id}`, {
+      .put(`http://3.111.147.217:3000/users/${id}`, {
         status: status,
       })
       .then((res) => {
