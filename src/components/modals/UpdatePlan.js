@@ -3,8 +3,12 @@ import React, { useState, useEffect } from "react";
 
 const UpdatePlan = ({ closeEditModal, editData }) => {
     const [data, setData] = useState([]);
+    const [batches, setBatches] = useState([]);
+    const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+
     useEffect(() => {
         setData(editData);
+        getBatchesDetails();
     }, [editData]);
     const handle = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
@@ -23,7 +27,29 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
             closeEditModal(false);
         }
     };
-
+    const getBatchesDetails = async () => {
+        let batches = await fetch(
+            "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12&&type=admin"
+        );
+        batches = await batches.json();
+        for (var i = 0; i < batches.batchList.length; i++) {
+            var batch_days_in_week = [];
+            if (batches.batchList[i]["days"]) {
+                var batch_days = "";
+                var resp_batch_days = batches.batchList[i]["days"]
+                    .replace(/[\[\]']+/g, "")
+                    .split(",");
+                for (var day = 0; day < resp_batch_days.length; day++) {
+                    if (resp_batch_days[day] == 1) {
+                        batch_days = batch_days + "," + weekdays[day];
+                    }
+                }
+                batch_days_in_week.push(batch_days.substring(1, batch_days.length));
+            }
+            batches.batchList[i]["days"] = batch_days_in_week;
+        }
+        setBatches(batches.batchList);
+    };
     return (
         <div className="modalBackground">
             <div className="modalContainer">
@@ -42,6 +68,27 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
 
                 <form>
                     <div className="overlay">
+                        <div
+                            class="form-group row">
+                            <label for="batch-id" class="col-sm-2 label">
+                                Batch ID
+                            </label>
+                            <div class="col-sm-10">
+                                <select
+                                    onChange={(e) => handle(e)}
+                                    id="batch-id"
+                                    class="form-control"
+                                    value={data.batch_id}
+                                    name="batch_id"
+                                    placeholder="Batch ID"
+                                >
+                                    <option class="form-control" name="batch_id"> -- Select a Batch -- </option>
+                                    {batches.map((batch) => {
+                                        return <option value={batch.id}>{batch.id}</option>;
+                                    })}
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="coach-name" class="col-sm-2 label">
                                 Name
@@ -101,6 +148,38 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     value={data.price}
                                     name="price"
                                     placeholder="Price"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group
+                            row">
+                            <label for="coach-tag" class="col-sm-2 label">
+                                Tag
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                    onChange={(e) => handle(e)}
+                                    id="tag"
+                                    class="form-control"
+                                    value={data.tag}
+                                    name="tag"
+                                    placeholder="Tag"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group
+                            row">
+                            <label for="coach-type" class="col-sm-2 label">
+                                Type
+                            </label>
+                            <div class="col-sm-10">
+                                <input
+                                    onChange={(e) => handle(e)}
+                                    id="type"
+                                    class="form-control"
+                                    value={data.type}
+                                    name="type"
+                                    placeholder="Type"
                                 />
                             </div>
                         </div>
