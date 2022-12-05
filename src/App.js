@@ -11,6 +11,7 @@ import Arenas from './components/Arenas';
 import Plans from './components/Plans';
 import Users from './components/Users';
 import CheckOTP from './components/CheckOTP';
+import Complaints from './components/Complaints';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/plans" element={<h1><Plans/> </h1>}></Route>
           <Route path="/users" element={<h1><Users/></h1>}></Route>
           <Route path="/getotp" element={<h1><CheckOTP/></h1>}></Route>
+          <Route path="/complaints" element={<h1><Complaints/></h1>}></Route>
         </Routes>
       </BrowserRouter>
       <Footer/>
