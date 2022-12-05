@@ -90,6 +90,7 @@ const PlansModal = ({ closeModal }) => {
                   name="batch_id"
                   placeholder="Batch ID"
                 >
+                  <option class="form-control" name= "batch_id"> -- Select a Batch -- </option>
                   {batches.map((batch) => {
                     return <option value={batch.id}>{batch.id}</option>;
                   })}
