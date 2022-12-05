@@ -40,6 +40,7 @@ function Plans() {
             <tr>
               <th>#</th>
               <th>Plan Name</th>
+              <th>Batch ID</th>
               <th>Description</th>
               <th>Status</th>
               <th>Price</th>
@@ -55,6 +56,7 @@ function Plans() {
                       <tr key={`${index}`}>
                           <td>{index + 1}</td>
                           <td>{item.plan_name}</td>
+                          <td>{item.batch_id}</td>
                           <td>{item.description}</td>
                           <td>{item.status}</td>
                           <td>{item.price}</td>
