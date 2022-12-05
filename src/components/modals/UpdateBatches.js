@@ -255,7 +255,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
                       key={`coach-${coach.id}`}
                       name="coach_id"
                     >
-                      {coach.name}
+                      {`${coach.name} (${Sports.filter((sport) => (sport.id === coach.sports_id))[0].name})`}
                     </option>
                   ))}
                 </select>
