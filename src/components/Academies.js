@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import AcademiesModal from "./modals/AcademiesModal";
 import UpdateAcademy from "./modals/UpdateAcademy";
+import axios from "axios";
 
 function Academies() {
   const [Academies, setAcademies] = useState([]);
@@ -19,6 +20,19 @@ function Academies() {
     batches = await batches.json();
     setAcademies(batches);
   };
+
+  const updateAcademyStatus = async (id, status) => {
+    axios.put(`http://3.111.147.217:3000/academies/${id}`, {
+      status: status
+    })
+      .then(res => {
+        alert(res.data.message);
+        getAcademyDetails();
+      })
+      .catch(err => {
+        alert(err);
+      })
+  }
   return (
     <div className="batch-list">
       <h3 className="batch-heading">
@@ -46,6 +60,7 @@ function Academies() {
               <th>Email</th>
               <th>Phone</th>
               <th>Sport</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -59,6 +74,13 @@ function Academies() {
                   <td>{item.email}</td>
                   <td>{item.phone_number}</td>
                   <td>{item.sports_name}</td>
+                  <td>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
+                      <select value={item.status} onChange={(e) => updateAcademyStatus(item.id, e.target.value)}>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                      </select>
+                  </td>
                   <td>
                     <button
                       onClick={() => {
