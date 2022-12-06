@@ -20,7 +20,7 @@ function Batches() {
   }, [openModal, updateModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans`);
+    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all`);
     plans.current = await batchPlans.json();
   };
   const [files, setFiles] = useState([]);
@@ -110,6 +110,7 @@ function Batches() {
                   <td>{item.coach_name}</td>
                   <td>
                     {plans.current
+                      .data
                       .filter((plan) => plan.batch_id === item.id)
                       .map((item, index) => item.plan_name)
                       .join(", ")}
