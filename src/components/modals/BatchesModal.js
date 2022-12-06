@@ -47,7 +47,7 @@ const BatchesModal = ({ closeModal }) => {
 
   // Get all sports Details
   const getSportsDetails = async () => {
-    let sports = await fetch("http://3.111.147.217:3000/sports");
+    let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();
 
     setSports(sports);
@@ -55,20 +55,20 @@ const BatchesModal = ({ closeModal }) => {
 
   //Get all coach details
   const getCoachDetails = async () => {
-    let coaches = await fetch("http://3.111.147.217:3000/coach");
+    let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach`);
     coaches = await coaches.json();
     setCoaches(coaches.data);
   };
   // Get all arena details
   const getArenaDetails = async () => {
-    let arenas = await fetch("http://3.111.147.217:3000/arenas");
+    let arenas = await fetch(`${process.env.REACT_APP_API_PATH}/arenas`);
     arenas = await arenas.json();
     setArenas(arenas);
   };
 
   //get academy Details
   const getAcademyDetails = async () => {
-    let academies = await fetch("http://3.111.147.217:3000/academies");
+    let academies = await fetch(`${process.env.REACT_APP_API_PATH}/academies`);
     academies = await academies.json();
 
     setAcademies(academies);
@@ -106,7 +106,7 @@ const BatchesModal = ({ closeModal }) => {
 
     formData.append("data", bodyData);
 
-    await Axios.post("http://3.111.147.217:3000/batches", formData).then(
+    await Axios.post(`${process.env.REACT_APP_API_PATH}/batches`, formData).then(
       (res) => {
         console.log(res.data);
       }

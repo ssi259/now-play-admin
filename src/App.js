@@ -14,6 +14,7 @@ import CheckOTP from './components/CheckOTP';
 import Complaints from './components/Complaints';
 
 function App() {
+  console.log("App is now running in "+process.env.REACT_APP_PROJECT_ENV+" mode")
   return (
     <div className="App">
       <h1 className='admin-heading'>Admin Panel</h1>

@@ -17,14 +17,14 @@ function Sports(){
     },[openModal,editModal])
     const getSportsDetails=async()=>{
         if(!openModal){
-            let sports = await fetch('http://3.111.147.217:3000/sports');
+            let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
             sports = await sports.json();
             setSports(sports);
         }
     }
     const updateSportStatus = async (id,status)=>{
         console.log(id,status);
-        axios.put(`http://3.111.147.217:3000/sports/${id}`,{
+        axios.put(`${process.env.REACT_APP_API_PATH}/sports/${id}`,{
             status:status
             })
             .then(res => {

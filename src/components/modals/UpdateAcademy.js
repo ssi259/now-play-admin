@@ -10,7 +10,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
     getSportsDetails();
   }, [editData]);
   const getSportsDetails = async () => {
-    let sports = await fetch("http://3.111.147.217:3000/sports");
+    let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();
     setSports(sports);
   };
@@ -19,7 +19,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://3.111.147.217:3000/academies/${data.id}`, data);
+    await axios.put(`${process.env.REACT_APP_API_PATH}/academies/${data.id}`, data);
     closeModal(false);
   };
 

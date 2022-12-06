@@ -16,13 +16,14 @@ function Academies() {
     getAcademyDetails();
   }, [openModal, editModal]);
   const getAcademyDetails = async () => {
-    let batches = await fetch("http://3.111.147.217:3000/academies");
+    let batches = await fetch(`${process.env.REACT_APP_API_PATH}
+/academies`);
     batches = await batches.json();
     setAcademies(batches);
   };
 
   const updateAcademyStatus = async (id, status) => {
-    axios.put(`http://3.111.147.217:3000/academies/${id}`, {
+    axios.put(`${process.env.REACT_APP_API_PATH}/academies/${id}`, {
       status: status
     })
       .then(res => {
