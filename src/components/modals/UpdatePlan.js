@@ -16,7 +16,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
     const submit = async (e) => {
         e.preventDefault();
         await axios
-            .put(`http://3.111.147.217:3000/plans/${editData.id}`, data)
+            .put(`${process.env.REACT_APP_API_PATH}/plans/${editData.id}`, data)
             .then((res) => {
                 alert("Coach Updated Successfully");
             })
@@ -29,7 +29,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
     };
     const getBatchesDetails = async () => {
         let batches = await fetch(
-            "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12&&type=admin"
+            "${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12&&type=admin"
         );
         batches = await batches.json();
         for (var i = 0; i < batches.batchList.length; i++) {

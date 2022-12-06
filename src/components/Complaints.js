@@ -14,12 +14,12 @@ function Complaints() {
         getComplaintsDetails();
     }, [openModal, editModal]);
     const getComplaintsDetails = async () => {
-        let complaints = await fetch("http://3.111.147.217:3000/complaints");
+        let complaints = await fetch(`${process.env.REACT_APP_API_PATH}/complaints`);
         complaints = await complaints.json();
         setComplaints(complaints.data);
     };
     const updateComplaintStatus = async (id, status) => {
-        axios.put(`http://3.111.147.217:3000/complaints/${id}`, {
+        axios.put(`${process.env.REACT_APP_API_PATH}/complaints/${id}`, {
             status: status
         })
             .then(res => {
