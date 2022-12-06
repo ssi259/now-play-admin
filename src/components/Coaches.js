@@ -16,27 +16,24 @@ function Coaches() {
 
   useEffect(() => {
     getCoachDetails();
-    getSportsDetails();
+    // getSportsDetails();
   }, [openModal, editModal]);
 
   const getCoachDetails = async () => {
     if (!openModal) {
-      let coaches = await fetch("http://3.111.147.217:3000/coach");
+      let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach`);
       coaches = await coaches.json();
       setCoaches(coaches.data);
     }
-}
-
-    const getSportsDetails = async () => {
-      let sports = await fetch("http://3.111.147.217:3000/sports");
-      sports = await sports.json();
-      Sports.current = sports;
-    };
-
-    const updateCoachStatus = async (id, status) => {
-      console.log(id, status);
-      axios.put(`http://3.111.147.217:3000/coach/${id}`, {
-        status: status
+  };
+  const updateCoachStatus = async (id, status) => {
+    console.log(id, status);
+    axios.put(`${process.env.REACT_APP_API_PATH}/coach/${id}`, {
+      status: status
+    })
+      .then(res => {
+        alert(res.data.message);
+        getCoachDetails();
       })
         .then(res => {
           alert(res.data.message);

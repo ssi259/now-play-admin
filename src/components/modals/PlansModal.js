@@ -5,7 +5,6 @@ import Axios from "axios";
 const PlansModal = ({ closeModal }) => {
   const [data, setData] = useState([]);
   const [batches, setBatches] = useState([]);
-  const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
 
   function handle(e) {
     const newData = { ...data };
@@ -18,7 +17,7 @@ const PlansModal = ({ closeModal }) => {
 
   const getBatchesDetails = async () => {
     let batches = await fetch(
-      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12&&type=admin"
+      `${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12`
     );
     batches = await batches.json();
     for (var i = 0; i < batches.batchList.length; i++) {
@@ -42,7 +41,7 @@ const PlansModal = ({ closeModal }) => {
 
   async function submit(e) {
     e.preventDefault();
-    await Axios.post("http://3.111.147.217:3000/plans", {
+    await Axios.post(`${process.env.REACT_APP_API_PATH}/plans`, {
       batch_id: data.batch_id,
       plan_name: data.plan_name,
       description: data.description,

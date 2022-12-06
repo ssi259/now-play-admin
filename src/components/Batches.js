@@ -20,9 +20,8 @@ function Batches() {
   }, [openModal, updateModal]);
 
   const getPlansDetails = async () => {
-    let batchPlans = await fetch("http://3.111.147.217:3000/plans/all");
-    batchPlans= await batchPlans.json();
-    plans.current = batchPlans.data;
+    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all`);
+    plans.current = await batchPlans.json();
   };
   const [files, setFiles] = useState([]);
 
@@ -32,7 +31,7 @@ function Batches() {
 
   function handleSubmit(event, id) {
     event.preventDefault();
-    const url = `http://3.111.147.217:3000/batches/upload_file?batch_id=${id}`;
+    const url = `${process.env.REACT_APP_API_PATH}/batches/upload_file?batch_id=${id}`;
     var formdata = new FormData();
     for (var i = 0; i < files.length; i++) {
       formdata.append("files_name", files[i], files[i].name);
@@ -48,7 +47,7 @@ function Batches() {
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
-      "http://3.111.147.217:3000/batches/search?lat=28.21&&lng=78.12&&type=admin"
+      `${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12`
     );
     batches = await batches.json();
     for (var i = 0; i < batches.batchList.length; i++) {
@@ -111,6 +110,7 @@ function Batches() {
                   <td>{item.coach_name}</td>
                   <td>
                     {plans.current
+                      .data
                       .filter((plan) => plan.batch_id === item.id)
                       .map((item, index) => item.plan_name)
                       .join(", ")}

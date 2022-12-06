@@ -14,12 +14,12 @@ function Complaints() {
         getComplaintsDetails();
     }, [openModal, editModal]);
     const getComplaintsDetails = async () => {
-        let complaints = await fetch("http://3.111.147.217:3000/complaints");
+        let complaints = await fetch(`${process.env.REACT_APP_API_PATH}/complaints`);
         complaints = await complaints.json();
         setComplaints(complaints.data);
     };
     const updateComplaintStatus = async (id, status) => {
-        axios.put(`http://3.111.147.217:3000/academies/${id}`, {
+        axios.put(`${process.env.REACT_APP_API_PATH}/complaints/${id}`, {
             status: status
         })
             .then(res => {
@@ -34,14 +34,6 @@ function Complaints() {
         <div className="batch-list">
             <h3 className="batch-heading">
                 Complaints
-                <button
-                    i
-                    onClick={() => {
-                        setOpenModal(true);
-                    }}
-                >
-                    {<MdAdd />}
-                </button>
             </h3>
             <div class="table-batch-list">
                 <table className="table batch-list">
@@ -64,8 +56,8 @@ function Complaints() {
                                 <tr>
                                     <th>{index + 1}</th>
                                     <th>{item.complainant_id}</th>
-                                    <td>{item.username}</td>
-                                    <td>{item.phone_number}</td>
+                                    <td>{item.complainant_name}</td>
+                                    <td>{item.complainant_PhoneNumber}</td>
                                     <td>{item.complainant_type}</td>
                                     <td>{item.subject}</td>
                                     <td>{item.text}</td>
@@ -79,13 +71,6 @@ function Complaints() {
                                         </select>
                                     </td>
                                     <td>
-                                        <button
-                                            onClick={() => {
-                                                setEditModal(true), setEditData(item);
-                                            }}
-                                        >
-                                            {<FaEdit />}
-                                        </button>
                                     </td>
                                 </tr>
                             );

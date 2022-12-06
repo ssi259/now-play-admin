@@ -7,7 +7,7 @@ function SportModal({closeModal}){
     const[Sports,setSports] = useState([]);
     const [data,setData] = useState([])
     const getSportsDetails=async()=>{
-        let sports = await fetch('http://3.111.147.217:3000/sports');
+        let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
         sports = await sports.json();
         console.log("sports"+sports[0])
         setSports(sports);
@@ -21,7 +21,7 @@ function SportModal({closeModal}){
         e.preventDefault();
         console.log("data_sport id",data.sport_id)
 
-        await Axios.post('http://3.111.147.217:3000/coach',{
+        await Axios.post(`${process.env.REACT_APP_API_PATH}/coach`,{
             sports_id:data.sport_id,
             name: data.name,
             phone_number: data.phone,
