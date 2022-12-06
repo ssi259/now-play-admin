@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import PlansModal from "./modals/PlansModal";
 import UpdatePlan from "./modals/UpdatePlan";
+import axios from "axios";
 
 function Plans() {
   const [plans, setPlans] = useState([]);
@@ -20,6 +21,18 @@ function Plans() {
       setPlans(plans.data);
     }
   };
+  const updatePlanStatus = async (id, status) => {
+    axios.put(`http://3.111.147.217:3000/plans/${id}`, {
+      status: status
+    })
+      .then(res => {
+        alert(res.data.message);
+        getPlansDetails();
+      })
+      .catch(err => {
+        alert(err);
+      })
+  }
   return (
     <div className="batch-list">
       <h3 className="batch-heading">
@@ -42,11 +55,12 @@ function Plans() {
               <th>Plan Name</th>
               <th>Batch ID</th>
               <th>Description</th>
-              <th>Status</th>
               <th>Price</th>
               <th>Tag</th>
               <th>Type</th>
               <th>Duration</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -58,11 +72,17 @@ function Plans() {
                           <td>{item.plan_name}</td>
                           <td>{item.batch_id}</td>
                           <td>{item.description}</td>
-                          <td>{item.status}</td>
                           <td>{item.price}</td>
                           <td>{item.tag}</td>
                           <td>{item.type}</td>
                           <td>{item.duration}</td>
+                          <td>
+                            <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
+                            <select value={item.status} onChange={(e) => updatePlanStatus(item.id, e.target.value)}>
+                              <option value="active">Active</option>
+                              <option value="inactive">Inactive</option>
+                            </select>
+                          </td>
                           <td ><button onClick={() => {setOpenEditModal(true),setEditData(item) }}>{<FaEdit />}</button></td>
                       </tr>
                   )
