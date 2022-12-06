@@ -56,8 +56,8 @@ function Complaints() {
                                 <tr>
                                     <th>{index + 1}</th>
                                     <th>{item.complainant_id}</th>
-                                    <td>{item.username}</td>
-                                    <td>{item.phone_number}</td>
+                                    <td>{item.complainant_name}</td>
+                                    <td>{item.complainant_PhoneNumber}</td>
                                     <td>{item.complainant_type}</td>
                                     <td>{item.subject}</td>
                                     <td>{item.text}</td>
