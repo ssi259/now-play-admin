@@ -34,14 +34,6 @@ function Complaints() {
         <div className="batch-list">
             <h3 className="batch-heading">
                 Complaints
-                <button
-                    i
-                    onClick={() => {
-                        setOpenModal(true);
-                    }}
-                >
-                    {<MdAdd />}
-                </button>
             </h3>
             <div class="table-batch-list">
                 <table className="table batch-list">
@@ -79,13 +71,6 @@ function Complaints() {
                                         </select>
                                     </td>
                                     <td>
-                                        <button
-                                            onClick={() => {
-                                                setEditModal(true), setEditData(item);
-                                            }}
-                                        >
-                                            {<FaEdit />}
-                                        </button>
                                     </td>
                                 </tr>
                             );
