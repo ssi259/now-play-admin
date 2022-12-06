@@ -16,7 +16,7 @@ function Coaches() {
 
   useEffect(() => {
     getCoachDetails();
-    getSportsDetails();
+    // getSportsDetails();
   }, [openModal, editModal]);
 
   const getCoachDetails = async () => {
