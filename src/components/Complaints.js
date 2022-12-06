@@ -19,7 +19,7 @@ function Complaints() {
         setComplaints(complaints.data);
     };
     const updateComplaintStatus = async (id, status) => {
-        axios.put(`http://3.111.147.217:3000/academies/${id}`, {
+        axios.put(`http://3.111.147.217:3000/complaints/${id}`, {
             status: status
         })
             .then(res => {
