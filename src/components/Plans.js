@@ -22,7 +22,7 @@ function Plans() {
     }
   };
   const updatePlanStatus = async (id, status) => {
-    axios.put(`http://3.111.147.217:3000/plans/${id}`, {
+    axios.put(`${process.env.REACT_APP_API_PATH}/plans/${id}`, {
       status: status
     })
       .then(res => {
