@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import Axios from 'axios';
-function SportModal({closeModal}){
+function CoachModal({closeModal}){
     const initialValues = {  sports_id:"",
         name: "",
         phone_number: "",
@@ -75,9 +75,6 @@ function SportModal({closeModal}){
         if (!values.phone_number) {
             errors.phone_number = "Phone Number is required!";
         }
-        if (!values.about) {
-            errors.about = "About is required!";
-        }
         if (!values.experience) {
             errors.experience = "Experience is required!";
         }
@@ -113,21 +110,21 @@ function SportModal({closeModal}){
                             <label htmlFor="coach-name" className="col-sm-2 label">Name</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} id = "name" className="form-control" value= {data.name} name = "name" placeholder="coach Name"/>
-                            <h6>{formErrors.name}</h6>
+                            <span>{formErrors.name}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="coach-email" className="col-sm-2 label">Email</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} id = "email" className="form-control" value= {data.email} name = "email" placeholder="coach Email"/>
-                            <h6>{formErrors.email}</h6>
+                            <span>{formErrors.email}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="coach-phn" className="col-sm-2 label">Phone</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} id = "phone" className="form-control" value= {data.phone_number} name = "phone_number" placeholder="Phone Number"/>
-                            <h6>{formErrors.phone_number}</h6>
+                            <span>{formErrors.phone_number}</span>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -137,49 +134,48 @@ function SportModal({closeModal}){
                                     <option className="form-control" value=""> -- Select a sport -- </option>
                                     {Sports.map((sport) => <option key={sport.id} className="form-control" value={sport.id} >{sport.name}</option>)}
                                 </select>
-                                <h6>{formErrors.sports_id}</h6>
+                                <span>{formErrors.sports_id}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="experience" className="col-sm-2 label">Exp</label>
                             <div className="col-sm-10">
                                 <input onChange={(e)=>handle(e)} name="experience" className="form-control" id="experience" placeholder="Experience in months"/>
-                                <h6>{formErrors.experience}</h6>
+                                <span>{formErrors.experience}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="about-coach" className="col-sm-2 label">About</label>
                             <div className="col-sm-10">
                             <textarea onChange={(e)=>handle(e)} name="about" className="form-control" id="about-coach" placeholder="About Coach"/>
-                            <h6>{formErrors.about}</h6>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="locality" className="col-sm-2 label">Locality</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} name="locality" className="form-control" id="locality" placeholder="Locality"/>
-                            <h6>{formErrors.locality}</h6>
+                            <span>{formErrors.locality}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="city" className="col-sm-2 label">City</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} name="city" className="form-control" id="city" placeholder="city"/>
-                            <h6>{formErrors.city}</h6>
+                            <span>{formErrors.city}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="city" className="col-sm-2 label">State</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} name="state" className="form-control" id="state" placeholder="state"/>
-                            <h6>{formErrors.state}</h6>
+                            <span>{formErrors.state}</span>
                             </div>
                         </div>
                         <div className="form-group row">
                             <label htmlFor="city" className="col-sm-2 label">Pincode</label>
                             <div className="col-sm-10">
                             <input onChange={(e)=>handle(e)} name="pincode" className="form-control" id="pincode" placeholder="pincode"/>
-                            <h6>{formErrors.pincode}</h6>
+                            <span>{formErrors.pincode}</span>
                             </div>
                         </div>
                         
@@ -194,4 +190,4 @@ function SportModal({closeModal}){
         </div>
     )
 }
-export default SportModal;
+export default CoachModal;
