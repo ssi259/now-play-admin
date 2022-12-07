@@ -4,6 +4,7 @@ import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import BatchesModal from "./modals/BatchesModal";
 import UpdateBatches from "./modals/UpdateBatches";
+import axios from "axios";
 
 
 function Batches() {
@@ -75,14 +76,16 @@ function Batches() {
     })
       .then(res => {
         alert(res.data.message);
-        getCoachDetails();
+        getBatchDetails();
+        getPlansDetails();
       })
         .then(res => {
           alert(res.data.message);
-          getCoachDetails();
+          getBatchDetails();
+          getPlansDetails();
         })
         .catch(err => {
-          alert(err);
+          console.log(err);
         })
     }
   return (
@@ -114,6 +117,7 @@ function Batches() {
               <th>Days</th>
               <th>Actions</th>
               <th>Upload Image</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
