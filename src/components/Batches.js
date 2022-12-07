@@ -68,6 +68,23 @@ function Batches() {
     }
     setBatches(batches.batchList);
   };
+  const updateBatchStatus = async (id, status) => {
+    console.log(id, status);
+    axios.put(`${process.env.REACT_APP_API_PATH}/batches/${id}`, {
+      status: status
+    })
+      .then(res => {
+        alert(res.data.message);
+        getCoachDetails();
+      })
+        .then(res => {
+          alert(res.data.message);
+          getCoachDetails();
+        })
+        .catch(err => {
+          alert(err);
+        })
+    }
   return (
     <div className="batch-list">
       <h3 className="batch-heading">
@@ -135,6 +152,13 @@ function Batches() {
                       <input multiple name="" type="file" onChange={handleChange} />
                       <button type="submit">Upload</button>
                     </form>
+                  </td>
+                  <td>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
+                    <select value={item.status} onChange={(e) => { updateBatchStatus(item.id, e.target.value) }}>
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                    </select>
                   </td>
                 </tr>
               );
