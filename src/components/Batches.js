@@ -79,11 +79,6 @@ function Batches() {
         getBatchDetails();
         getPlansDetails();
       })
-        .then(res => {
-          alert(res.data.message);
-          getBatchDetails();
-          getPlansDetails();
-        })
         .catch(err => {
           console.log(err);
         })
