@@ -5,6 +5,7 @@ import Axios from "axios";
 const PlansModal = ({ closeModal }) => {
   const [data, setData] = useState([]);
   const [batches, setBatches] = useState([]);
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   function handle(e) {
     const newData = { ...data };
