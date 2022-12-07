@@ -22,10 +22,18 @@ const CheckOTP = () => {
         })
     }
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      fontSize: '20px',
+    }} >
         <h3>Check OTP</h3> 
+            <br/>
             <input onChange={handle} type="text" placeholder="Enter Phone Number"/>
             <button onClick={()=>Submit()}>GET OTP</button>
+            <br/>
         <h3>OTP for {phone_number} is {otp}</h3>
     </div>
   )
