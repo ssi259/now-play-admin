@@ -8,7 +8,7 @@ const Users = () => {
   }, []);
 
   const getUsers = async () => {
-    await fetch(`${process.env.REACT_APP_API_PATH}/users/all`)
+    await fetch(`http://3.108.109.12:3000/users/all`)
       .then((res) => res.json())
       .then((res) => {
         setUsers(res.data);
