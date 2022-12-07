@@ -39,7 +39,6 @@ const Users = () => {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Profile Pic</th>
               <th>Email</th>
               <th>Phone</th>
               <th>Phone Verified</th>
@@ -54,7 +53,6 @@ const Users = () => {
                 <tr>
                   <th>{index + 1}</th>
                   <td>{item.name}</td>
-                  <td>{item.profilePic}</td>
                   <td>{item.email}</td>
                   <td>{item.phoneNumber}</td>
                   <td>{item.isPhoneVerified ? "Yes" : "No"}</td>
