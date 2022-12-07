@@ -15,6 +15,7 @@ import Complaints from './components/Complaints';
 
 function App() {
   console.log("App is now running in "+process.env.REACT_APP_PROJECT_ENV+" mode")
+  console.log("host:"+process.env.REACT_APP_API_PATH)
   return (
     <div className="App">
       <h1 className='admin-heading'>Admin Panel</h1>
