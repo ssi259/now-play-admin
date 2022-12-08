@@ -12,6 +12,7 @@ import Plans from './components/Plans';
 import Users from './components/Users';
 import CheckOTP from './components/CheckOTP';
 import Complaints from './components/Complaints';
+import Enrollments from './components/Enrollment';
 
 function App() {
   console.log("App is now running in "+process.env.REACT_APP_PROJECT_ENV+" mode")
@@ -32,6 +33,7 @@ function App() {
           <Route path="/users" element={<h1><Users/></h1>}></Route>
           <Route path="/getotp" element={<h1><CheckOTP/></h1>}></Route>
           <Route path="/complaints" element={<h1><Complaints/></h1>}></Route>
+          <Route path="/enrollments" element={<h1><Enrollments/></h1>}></Route>
         </Routes>
       </BrowserRouter>
       <Footer/>
