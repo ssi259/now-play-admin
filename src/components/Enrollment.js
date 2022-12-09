@@ -25,7 +25,6 @@ const Enrollments = () => {
                           <th>Arena Name</th>
                           <th>Sports Name</th>
                           <th>Plan Name</th>
-                          <th>Price</th>
                           <th>Coach Name</th>
                           <th>Type</th>
                           <th>Status</th>
@@ -41,7 +40,6 @@ const Enrollments = () => {
                                    <td>{item.arena_name}</td>
                                    <td>{item.sports_name}</td>
                                    <td>{item.plan_name}</td>
-                                   <td>{item.price}</td>
                                    <td>{item.coach_name}</td>
                                    <td>{item.type}</td>
                                    <td>{item.status}</td>
