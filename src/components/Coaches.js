@@ -35,10 +35,6 @@ function Coaches() {
         alert(res.data.message);
         getCoachDetails();
       })
-        .then(res => {
-          alert(res.data.message);
-          getCoachDetails();
-        })
         .catch(err => {
           alert(err);
         })
