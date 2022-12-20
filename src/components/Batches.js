@@ -14,6 +14,7 @@ function Batches() {
   const [updateModal, setUpdateModal] = useState(false);
   const [batchData,setBatchData] = useState({});
   const [batchImages,setBatchImages] = useState([]);
+  const [files, setFiles] = useState([]);
 
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
@@ -31,7 +32,6 @@ function Batches() {
     let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all`);
     plans.current = await batchPlans.json();
   };
-  const [files, setFiles] = useState([]);
 
   function handleChange(event) {
     setFiles(event.target.files);
