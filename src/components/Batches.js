@@ -21,7 +21,7 @@ function Batches() {
     getBatchDetails();
     getPlansDetails();
     getBatchImages();
-  }, [openModal, updateModal, handleSubmit]);
+  }, [openModal, updateModal]);
   
   const getBatchImages = async () => {
     let batchImages = await fetch(`${process.env.REACT_APP_API_PATH}/batches/images`);
@@ -52,7 +52,6 @@ function Batches() {
     fetch(url, requestOptions)
       .then((result) => alert("File Uploaded Successfully"), getBatchImages())
       .catch((error) => alert("File Upload Failed"));
-    
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
