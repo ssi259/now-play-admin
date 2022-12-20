@@ -6,11 +6,12 @@ const UpdateBatches = ({ closeModal, batchData }) => {
   const [Arenas, setArenas] = useState([]); //state to bring in FK arena_id
   const [Coaches, setCoaches] = useState([]); //state to bring in FK coach_id
   const [Academies, setAcademies] = useState([]); //state to bring in FK academies_id
+  console.log(batchData)
 
   const [data, setData] = useState({}); // state to store form data
 
-  const [bannerImg, setBannerImg] = useState(null);
-  const [thumbnailImg, setThumbnailImg] = useState(null);
+  const [bannerImg, setBannerImg] = useState(batchData.banner_img);
+  const [thumbnailImg, setThumbnailImg] = useState(batchData.thumbnail_img);
   const daysOfWeek = useRef(null);
   const init_arry = useRef([]);
   const start_date = useRef([]);
@@ -117,7 +118,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
     onChangeCheckbox();
 
 
-    // const formData = new FormData();
+    const formData = new FormData();
 
     const bodyData = {
       sports_id: data.sport_id,
@@ -132,9 +133,11 @@ const UpdateBatches = ({ closeModal, batchData }) => {
       days: daysOfWeek.current,
     };
 
-    // formData.append("data", bodyData);
+    formData.append("data", bodyData);
+    formData.append("banner_img", bannerImg);
+    formData.append("thumbnail_img", thumbnailImg);
 
-    await Axios.put(`${process.env.REACT_APP_API_PATH}/batches/${batchData.id}`, bodyData).then(
+    await Axios.put(`${process.env.REACT_APP_API_PATH}/batches/${batchData.id}`, formData).then(
       (res) => {
         console.log(res.data);
       }
@@ -161,22 +164,29 @@ const UpdateBatches = ({ closeModal, batchData }) => {
 
         <form>
           <div className="overlay">
-            {/* <div>
-              <label className="col-sm-2 label">Thumbnail Image</label>
+            <div>
               <input
                 className="col-sm-2 label"
+                style={{ visibility: "hidden" }}
                 type="file"
                 name="thumbnail_img"
+                id="thumbnail_img"
                 onChange={(e) => setThumbnailImg(e.target.files[0])}
               />
-              <label className="col-sm-2 label">Banner Image</label>
+              <label htmlFor="thumbnail_img" className="col-sm-2 label">Thumbnail Image <img src={thumbnailImg} style={{ height: "100px" }}/></label>
+              
               <input
                 className="col-sm-2 label"
+                style={{ visibility: "hidden" }}
                 type="file"
                 name="banner_img"
+                id="banner_img"
                 onChange={(e) => setBannerImg(e.target.files[0])}
               />
-            </div> */}
+              <label htmlFor="banner_img" className="col-sm-2 label">Banner Image <img src={bannerImg} style={{ height: "100px" }} /></label>
+              
+              
+            </div>
             <div className="form-group row">
               <label htmlFor="coach-name" className="col-sm-2 label">
                 Sport
