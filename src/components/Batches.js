@@ -13,18 +13,25 @@ function Batches() {
   const plans = useRef([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [batchData,setBatchData] = useState({});
+  const [batchImages,setBatchImages] = useState([]);
+  const [files, setFiles] = useState([]);
 
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
     getPlansDetails();
+    getBatchImages();
   }, [openModal, updateModal]);
-
+  
+  const getBatchImages = async () => {
+    let batchImages = await fetch(`${process.env.REACT_APP_API_PATH}/batches/images`);
+    batchImages = await batchImages.json();
+    setBatchImages(batchImages.data);
+  }
   const getPlansDetails = async () => {
     let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all`);
     plans.current = await batchPlans.json();
   };
-  const [files, setFiles] = useState([]);
 
   function handleChange(event) {
     setFiles(event.target.files);
@@ -43,8 +50,9 @@ function Batches() {
       redirect: "follow",
     };
     fetch(url, requestOptions)
-      .then((result) => alert("File Uploaded Successfully"))
+      .then((result) => alert("File Uploaded Successfully"), getBatchImages())
       .catch((error) => alert("File Upload Failed"));
+    
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
@@ -156,6 +164,16 @@ function Batches() {
                       <input multiple name="" type="file" onChange={handleChange} />
                       <button type="submit">Upload</button>
                     </form>
+                    {
+                      batchImages && batchImages.map((image, index) => {
+                        if(image.batchId === item.id)
+                        return (
+                          <div>
+                            <p>{image.img_url.split('_')[1]}</p>
+                          </div>
+                        )
+                      })
+                    }
                   </td>
                   <td>
                     <b style={{ fontSize: '40px', verticalAlign: 'middle', color: item.status === 'active' ? 'green' : 'red', }} >•</b>
