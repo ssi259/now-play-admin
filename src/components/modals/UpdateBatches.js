@@ -112,6 +112,13 @@ const UpdateBatches = ({ closeModal, batchData }) => {
     setData({ ...data, [e.target.name]: e.target.value });
   }
 
+  async function onChangedBatches(img_file) {
+    var bacthes_img_url = await Axios.post(`${process.env.REACT_APP_API_PATH}/batches/img2s3`, {name: img_file})
+    console.log(bacthes_img_url)
+  }
+
+
+
   // post request for batchest to create new batch
   async function submit(e) {
     e.preventDefault();
@@ -181,7 +188,7 @@ const UpdateBatches = ({ closeModal, batchData }) => {
                 type="file"
                 name="banner_img"
                 id="banner_img"
-                onChange={(e) => setBannerImg(e.target.files[0])}
+                onChange={(e) => setBannerImg(onChangedBatches(e.target.files[0]))}
               />
               <label htmlFor="banner_img" className="col-sm-2 label">Banner Image <img src={bannerImg} style={{ height: "100px" }} /></label>
               
