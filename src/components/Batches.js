@@ -50,9 +50,9 @@ function Batches() {
       redirect: "follow",
     };
     fetch(url, requestOptions)
-      .then((result) => alert("File Uploaded Successfully"))
+      .then((result) => alert("File Uploaded Successfully"), getBatchImages())
       .catch((error) => alert("File Upload Failed"));
-    getBatchImages();
+    
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
