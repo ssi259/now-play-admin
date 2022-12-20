@@ -13,7 +13,7 @@ function Batches() {
   const plans = useRef([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [batchData,setBatchData] = useState({});
-
+  const [showDetails, setShowDetails] = useState([]);
   const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   useEffect(() => {
     getBatchDetails();
@@ -26,8 +26,14 @@ function Batches() {
   };
   const [files, setFiles] = useState([]);
 
-  function handleChange(event) {
+  function handleChange(event,itemId) {
     setFiles(event.target.files);
+    let newFileNames = [];
+    for(var i=0;i<event.target.files.length;i++){
+      console.log(event.target.files[i].name)
+      newFileNames.push(event.target.files[i].name)
+    }
+    setShowDetails([...showDetails,{ id: itemId, fileNames: newFileNames }]);
   }
 
   function handleSubmit(event, id) {
@@ -152,8 +158,19 @@ function Batches() {
                     
                   </td>
                   <td>
-                    <form onSubmit={(e) => handleSubmit(e, item.id)}>
-                      <input multiple name="" type="file" onChange={handleChange} />
+                    <form onSubmit={(e) => {handleSubmit(e, item.id)}}>
+                      <input multiple name="" type="file" onChange={(e)=>{handleChange(e,item.id)} }/>
+                      {
+                        showDetails.map((file, index) => {
+                          if (file.id === item.id) {
+                            return file.fileNames.map((name, index) => {
+                              return (<p>{name}</p>)
+                            }
+                            )
+                          }
+                        }
+                        )
+                      }
                       <button type="submit">Upload</button>
                     </form>
                   </td>
