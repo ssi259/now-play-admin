@@ -30,7 +30,6 @@ function Batches() {
     setFiles(event.target.files);
     let newFileNames = [];
     for(var i=0;i<event.target.files.length;i++){
-      console.log(event.target.files[i].name)
       newFileNames.push(event.target.files[i].name)
     }
     setShowDetails([...showDetails,{ id: itemId, fileNames: newFileNames }]);
@@ -76,7 +75,6 @@ function Batches() {
     setBatches(batches.batchList);
   };
   const updateBatchStatus = async (id, status) => {
-    console.log(id, status);
     axios.put(`${process.env.REACT_APP_API_PATH}/batches/${id}`, {
       status: status
     })
