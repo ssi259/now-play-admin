@@ -172,7 +172,7 @@ function Batches() {
                         if(image.batchId === item.id)
                         return (
                           <div>
-                            <p>{image.img_url.split('_')[1]}</p>
+                            {image.img_url.split('_')[1]}
                           </div>
                         )
                       })
