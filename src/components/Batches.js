@@ -52,7 +52,6 @@ function Batches() {
     fetch(url, requestOptions)
       .then((result) => alert("File Uploaded Successfully"), getBatchImages())
       .catch((error) => alert("File Upload Failed"));
-    
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
@@ -169,7 +168,7 @@ function Batches() {
                         if(image.batchId === item.id)
                         return (
                           <div>
-                            <p>{image.img_url.split('_')[1]}</p>
+                            {image.img_url.split('_')[1]}
                           </div>
                         )
                       })
