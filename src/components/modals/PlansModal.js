@@ -200,13 +200,21 @@ const PlansModal = ({ closeModal }) => {
                 Type
               </label>
               <div class="col-sm-10">
-                <input
+                <select
                   onChange={(e) => handle(e)}
                   id="type"
                   class="form-control"
                   value={data.type}
                   name="type"
-                  placeholder="Type"/>
+                  placeholder="Type">
+                  <option class="form-control" name= "type"> -- Select a Type -- </option>
+                  <option value="demo">Demo</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="yearly">Yearly</option>
+                  <option value="private_session">Private Session</option>
+                  <option value="half_yearly">Half Yearly</option>
+                  </select>
               </div>
             </div>
             <div class="form-group row">
