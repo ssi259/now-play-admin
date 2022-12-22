@@ -52,10 +52,6 @@ function Batches() {
     fetch(url, requestOptions)
       .then((result) => alert("File Uploaded Successfully"), getBatchImages())
       .catch((error) => alert("File Upload Failed"));
-<<<<<<< HEAD
-=======
-    
->>>>>>> 8ac7b55 (updated rerender)
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
