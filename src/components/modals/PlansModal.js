@@ -90,9 +90,10 @@ const PlansModal = ({ closeModal }) => {
                   name="batch_id"
                   placeholder="Batch ID"
                 >
-                  <option class="form-control" name= "batch_id"> -- Select a Batch -- </option>
+                  <option class="form-control" name="batch_id"><b> id &emsp; Arena Name  &emsp; Academy Name  &emsp; Sports Name</b></option>
+                  {console.log(batches)}
                   {batches.map((batch) => {
-                    return <option value={batch.id}>{batch.id}</option>;
+                    return <option value={batch.id}>{[batch.id, batch.arena_name, batch.academy_name, batch.sport_name].join('_____')}</option>;
                   })}
                 </select>
               </div>
