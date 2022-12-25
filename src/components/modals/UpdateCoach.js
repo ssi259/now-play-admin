@@ -28,6 +28,42 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
     }
   };
 
+  // validate function for form validation name,email,phone_number, about, experience, email, city, state, locality, pincode
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.sports_id) {
+      errors.sports_id = "Sports is required!";
+    }
+    if (!values.name) {
+      errors.name = "Name is required!";
+    }
+    if (!values.email) {
+        errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+    }
+    if (!values.phone_number) {
+        errors.phone_number = "Phone Number is required!";
+    }
+    if (!values.experience) {
+        errors.experience = "Experience is required!";
+    }
+    if (!values.city) {
+        errors.city = "City is required!";
+    }
+    if (!values.state) {
+        errors.state = "State is required!";
+    }
+    if (!values.locality) {
+        errors.locality = "Locality is required!";
+    }
+    if (!values.pincode) {
+        errors.pincode = "Pincode is required!";
+    }
+    return errors;
+  };
+
   return (
     <div className="modalBackground">
       <div className="modalContainer">
