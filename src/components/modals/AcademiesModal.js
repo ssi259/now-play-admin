@@ -2,11 +2,13 @@ import React, { useState,useEffect } from "react";
 import Axios from 'axios';
 
 const AcademiesModal = ({closeModal}) => {
-    useEffect(()=>{
-        getSportsDetails();
-    },[])
     const[Sports,setSports] = useState([]);
     const [data,setData] = useState([])
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+    useEffect(()=>{
+        getSportsDetails();
+    },[formErrors])
     const getSportsDetails=async()=>{
         let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
         sports = await sports.json();
@@ -21,7 +23,9 @@ const AcademiesModal = ({closeModal}) => {
     async function submit(e){
         e.preventDefault();
         console.log("data_sport id",data.sport_id)
-
+        await setFormErrors(validate(data));
+        setIsSubmit(true);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
         await Axios.post(`${process.env.REACT_APP_API_PATH}/academies`,{
             sports_id:data.sport_id,
             name: data.name,
@@ -35,6 +39,26 @@ const AcademiesModal = ({closeModal}) => {
         })
         {closeModal(false)}
     }
+    }
+    const validate = (values) => {
+        const errors = {};
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        if (!values.sports_id) {
+          errors.sports_id = "Sports is required!";
+        }
+        if (!values.name) {
+          errors.name = "Name is required!";
+        }
+        if (!values.email) {
+            errors.email = "Email is required!";
+        } else if (!regex.test(values.email)) {
+            errors.email = "This is not a valid email format!";
+        }
+        if (!values.phone_number) {
+            errors.phone_number = "Phone Number is required!";
+        }
+        return errors;
+      };
     return(
         
         <div  className = "modalBackground">
