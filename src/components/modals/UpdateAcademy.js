@@ -3,12 +3,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 const UpdateAcademy = ({ closeModal, editData }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(editData);
   const [sports, setSports] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
-    setData(editData);
+  
     getSportsDetails();
-  }, [editData]);
+  }, [formErrors, editData]);
   const getSportsDetails = async () => {
     let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();
@@ -19,8 +21,31 @@ const UpdateAcademy = ({ closeModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
+    await setFormErrors(validate(data));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios.put(`${process.env.REACT_APP_API_PATH}/academies/${data.id}`, data);
     closeModal(false);
+    }
+  };
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.sports_id) {
+      errors.sports_id = "Sports is required!";
+    }
+    if (!values.name) {
+      errors.name = "Name is required!";
+    }
+    if (!values.email) {
+        errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+    }
+    if (!values.phone_number) {
+        errors.phone_number = "Phone Number is required!";
+    }
+    return errors;
   };
 
   return (
@@ -54,6 +79,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   name="name"
                   placeholder="Academy Name"
                 />
+                <span>{formErrors.name}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -69,6 +95,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   name="email"
                   placeholder="Academy Email"
                 />
+                <span>{formErrors.email}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -84,6 +111,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                   name="phone_number"
                   placeholder="Phone Number"
                 />
+                <span>{formErrors.phone}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -111,6 +139,7 @@ const UpdateAcademy = ({ closeModal, editData }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.sports_id}</span>
               </div>
             </div>
 

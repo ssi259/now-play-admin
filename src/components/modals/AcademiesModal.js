@@ -47,15 +47,15 @@ const AcademiesModal = ({closeModal}) => {
           errors.sports_id = "Sports is required!";
         }
         if (!values.name) {
-          errors.name = "Name is required!";
+          errors.name = "Academy Name is required!";
         }
         if (!values.email) {
             errors.email = "Email is required!";
         } else if (!regex.test(values.email)) {
             errors.email = "This is not a valid email format!";
         }
-        if (!values.phone_number) {
-            errors.phone_number = "Phone Number is required!";
+        if (!values.phone) {
+            errors.phone = "Phone Number is required!";
         }
         return errors;
       };
@@ -75,18 +75,21 @@ const AcademiesModal = ({closeModal}) => {
                             <label for="coach-name" class="col-sm-2 label">Name</label>
                             <div class="col-sm-10">
                             <input onChange={(e)=>handle(e)} id = "name" class="form-control" value= {data.name} name = "name" placeholder="Academy Name"/>
+                            <span>{formErrors.name}</span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="coach-email" class="col-sm-2 label">Email</label>
                             <div class="col-sm-10">
                             <input onChange={(e)=>handle(e)} id = "email" class="form-control" value= {data.email} name = "email" placeholder="Academy Email"/>
+                            <span>{formErrors.email}</span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="coach-phn" class="col-sm-2 label">Phone</label>
                             <div class="col-sm-10">
                             <input onChange={(e)=>handle(e)} id = "phone" class="form-control" value= {data.phone} name = "phone" placeholder="Phone Number"/>
+                            <span>{formErrors.phone}</span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -96,6 +99,7 @@ const AcademiesModal = ({closeModal}) => {
                                     <option class="form-control" name= "sport_id"> -- Select a sport -- </option>
                                     {Sports.map((sport) => <option class="form-control" value={sport.id} name= "sport_id">{sport.name}</option>)}
                                 </select>
+                                <span>{formErrors.sport_id}</span>
                             </div>
                         </div>
 
