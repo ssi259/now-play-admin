@@ -11,6 +11,8 @@ const BatchesModal = ({ closeModal }) => {
 
   const [bannerImg, setBannerImg] = useState(null);
   const [thumbnailImg, setThumbnailImg] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const daysOfWeek = useRef(null);
 
@@ -43,7 +45,7 @@ const BatchesModal = ({ closeModal }) => {
     getSportsDetails();
     getArenaDetails();
     getCoachDetails();
-  }, []);
+  }, [formErrors]);
 
   // Get all sports Details
   const getSportsDetails = async () => {
@@ -85,6 +87,9 @@ const BatchesModal = ({ closeModal }) => {
   async function submit(e) {
     e.preventDefault();
     onChangeCheckbox();
+    await setFormErrors(validate(data));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
 
     const formData = new FormData();
 
@@ -113,7 +118,43 @@ const BatchesModal = ({ closeModal }) => {
     );
 
     closeModal(false);
+    }
   }
+
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.sports_id) {
+      errors.sports_id = "Sports is required!";
+    }
+    if (!values.name) {
+      errors.name = "Name is required!";
+    }
+    if (!values.email) {
+        errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+    }
+    if (!values.phone_number) {
+        errors.phone_number = "Phone Number is required!";
+    }
+    if (!values.experience) {
+        errors.experience = "Experience is required!";
+    }
+    if (!values.city) {
+        errors.city = "City is required!";
+    }
+    if (!values.state) {
+        errors.state = "State is required!";
+    }
+    if (!values.locality) {
+        errors.locality = "Locality is required!";
+    }
+    if (!values.pincode) {
+        errors.pincode = "Pincode is required!";
+    }
+    return errors;
+  };
 
   return (
     <div className="modalBackground">
@@ -292,6 +333,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="price"
                   onChange={(e) => handle(e)}
                 />
+                <span>{formErrors.price}</span>
               </div>
             </div>
 
@@ -308,6 +350,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.start_time}</span>
                 <label className="col-sm-2">to</label>
                 <input
                   type="time"
@@ -317,6 +360,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.end_time}</span>
               </div>
             </div>
 
@@ -333,6 +377,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.start_date}</span>
               </div>
               <label htmlFor="coach-name" className="col-sm-2">
                 End
@@ -346,6 +391,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.end_date}</span>
               </div>
             </div>
 
