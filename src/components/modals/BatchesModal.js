@@ -152,7 +152,10 @@ const BatchesModal = ({ closeModal }) => {
     }
     if (!values.end_time) {
       errors.end_time = "End Time is required!";
-  }
+  } 
+  if (daysOfWeek.current == [0, 0, 0, 0, 0, 0, 0]) {
+    errors.weeks = "Please select days!";
+}
     return errors;
   };
 
@@ -252,7 +255,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="arena_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="arena_id">
+                  <option className="form-control" value={null} name="arena_id">
                     {" "}
                     -- Select a arena --{" "}
                   </option>
@@ -280,7 +283,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="coach_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="coach_id">
+                  <option className="form-control" value={null} name="coach_id">
                     {" "}
                     -- Select a coach --{" "}
                   </option>
@@ -309,7 +312,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="academy_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="academy_id">
+                  <option className="form-control" value={null} name="academy_id">
                     {" "}
                     -- Select a Academy --{" "}
                   </option>
