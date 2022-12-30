@@ -123,36 +123,36 @@ const BatchesModal = ({ closeModal }) => {
 
   const validate = (values) => {
     const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.sports_id) {
-      errors.sports_id = "Sports is required!";
+    if (!thumbnailImg) {
+      errors.thumbnailImg = "Thumbnail Image is required!";
     }
-    if (!values.name) {
-      errors.name = "Name is required!";
+    if (!bannerImg) {
+      errors.bannerImg = "Banner Image is required!";
     }
-    if (!values.email) {
-        errors.email = "Email is required!";
-    } else if (!regex.test(values.email)) {
-        errors.email = "This is not a valid email format!";
+    if (!values.sport_id) {
+        errors.sport_id = "Sports is required!";
     }
-    if (!values.phone_number) {
-        errors.phone_number = "Phone Number is required!";
+    if (!values.arena_id) {
+        errors.arena_id = "Arena is required!";
     }
-    if (!values.experience) {
-        errors.experience = "Experience is required!";
+    if (!values.coach_id)  {
+        errors.coach_id = "Coach is required!";
     }
-    if (!values.city) {
-        errors.city = "City is required!";
+    if (!values.academy_id) {
+        errors.academy_id = "Academy is required!";
     }
-    if (!values.state) {
-        errors.state = "State is required!";
+    if (!values.start_date) {
+        errors.start_date = "Start Date is required!";
     }
-    if (!values.locality) {
-        errors.locality = "Locality is required!";
+    if (!values.end_date) {
+        errors.end_date = "End Date is required!";
     }
-    if (!values.pincode) {
-        errors.pincode = "Pincode is required!";
+    if (!values.start_time) {
+        errors.start_time = "Start Time is required!";
     }
+    if (!values.end_time) {
+      errors.end_time = "End Time is required!";
+  }
     return errors;
   };
 
@@ -192,6 +192,7 @@ const BatchesModal = ({ closeModal }) => {
               </label>
               <label style={{ color: "green" }} className="col-sm-2 label">
                 {thumbnailImg && thumbnailImg.name}
+                <span>{formErrors.thumbnailImg}</span>
               </label>
               <input
                 style={{ visibility: "hidden" }}
@@ -210,6 +211,7 @@ const BatchesModal = ({ closeModal }) => {
               </label>
               <label style={{ color: "green" }} className="col-sm-2 label">
                 {bannerImg && bannerImg.name}
+                <span>{formErrors.bannerImg}</span>
               </label>
             </div>
             <div className="form-group row">
@@ -222,7 +224,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="sport_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="sport_id">
+                  <option className="form-control" value={null} name="sport_id">
                     {" "}
                     -- Select a sport --{" "}
                   </option>
@@ -237,6 +239,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.sport_id}</span>
               </div>
             </div>
             <div className="form-group row">
@@ -264,6 +267,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.arena_id}</span>
               </div>
             </div>
             <div className="form-group row">
@@ -291,6 +295,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.coach_id}</span>
               </div>
             </div>
 
@@ -319,6 +324,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.academy_id}</span>
               </div>
             </div>
 
@@ -415,6 +421,7 @@ const BatchesModal = ({ closeModal }) => {
                 <input type="checkbox" id="sun" name="sun" value="sun" />
                 <label htmlFor="sun"> Sun &nbsp;</label>
               </div>
+              <span>{formErrors.weeks}</span>
             </div>
 
             <div className="form-group row">
