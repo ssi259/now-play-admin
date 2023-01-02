@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Axios from 'axios';
+import TagsInput from "../TagInput";
+
 function CoachModal({closeModal}){
     const initialValues = {  sports_id:"",
         name: "",
@@ -95,6 +97,9 @@ function CoachModal({closeModal}){
         }
         return errors;
       };
+      const selectedTags = tags => {
+		console.log(tags);
+	};
 
 
     return(
@@ -181,6 +186,7 @@ function CoachModal({closeModal}){
                             <span>{formErrors.pincode}</span>
                             </div>
                         </div>
+                        <TagsInput selectedTags={selectedTags}  tags={['Nodejs', 'MongoDB']}/>
                         
                         <div className="form-group row">
                             <div className="col-sm-10">
