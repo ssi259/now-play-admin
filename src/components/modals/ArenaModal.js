@@ -1,8 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 const ArenaModal = ({ closeModal }) => {
   const [data, setData] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  useEffect(()=>{
+
+},[formErrors])
 
   function handle(e) {
     const newData = { ...data };
@@ -12,7 +18,9 @@ const ArenaModal = ({ closeModal }) => {
 
   async function submit(e) {
     e.preventDefault();
-
+    await setFormErrors(validate(data));
+        setIsSubmit(true);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
     await Axios.post(`${process.env.REACT_APP_API_PATH}/arenas`, {
       name: data.name,
       phone_number: data.phone_number,
@@ -29,6 +37,44 @@ const ArenaModal = ({ closeModal }) => {
       closeModal(false);
     }
   }
+  }
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.sports_id) {
+      errors.sports_id = "Sports is required!";
+    }
+    if (!values.name) {
+      errors.name = "Arena Name is required!";
+    }
+    if (!values.email) {
+        errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+    }
+    if (!values.phone_number) {
+        errors.phone_number = "Phone Number is required!";
+    }
+    if (!values.lat) {
+        errors.lat = "Latitude is required!";
+    }
+    if (!values.lng) {
+        errors.lng = "longitude is required!";
+    }
+    if (!values.state) {
+        errors.state = "State is required!";
+    }
+    if (!values.locality) {
+        errors.locality = "Locality is required!";
+    }
+    if (!values.city) {
+      errors.city = "City is required!";
+    }
+    if (!values.pincode) {
+        errors.pincode = "Pincode is required!";
+    }
+    return errors;
+  };
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -60,6 +106,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="name"
                   placeholder="Arena Name"
                 />
+                <span>{formErrors.name}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -75,6 +122,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="email"
                   placeholder="Arena Email"
                 />
+                <span>{formErrors.email}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -90,6 +138,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="phone_number"
                   placeholder="Phone Number"
                 />
+                <span>{formErrors.phone_number}</span>
               </div>
             </div>
             <div
@@ -108,6 +157,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="lat"
                   placeholder="Latitude"
                 />
+                <span>{formErrors.lat}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -123,6 +173,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="lng"
                   placeholder="Longitude"
                 />
+                <span>{formErrors.lng}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -138,6 +189,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="city"
                   placeholder="City"
                 />
+                <span>{formErrors.city}</span>
               </div>
             </div>
             <div
@@ -156,6 +208,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="locality"
                   placeholder="Locality"
                 />
+                <span>{formErrors.locality}</span>
               </div>
             </div>
             <div
@@ -174,6 +227,7 @@ const ArenaModal = ({ closeModal }) => {
                   name="state"
                   placeholder="State"
                 />
+                <span>{formErrors.state}</span>
               </div>
             </div>
             <div class="form-group row">
