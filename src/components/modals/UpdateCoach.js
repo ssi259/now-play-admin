@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import TagsInput from "../TagsInput"
 
 const UpdateCoach = ({ closeEditModal, editData }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(editData);
   const [sports, setSports] = useState([]);
   const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
-    setData(editData);
     getSportsDetails();
   }, [formErrors, editData]);
   const getSportsDetails = async () => {
@@ -24,7 +24,20 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
     setIsSubmit(true);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios
-      .put(`${process.env.REACT_APP_API_PATH}/coach/${editData.id}`, data)
+      .put(`${process.env.REACT_APP_API_PATH}/coach/${editData.id}`, {
+        sports_id:data.sports_id,
+        name: data.name,
+        phone_number: data.phone_number,
+        about: data.about,
+        experience: data.experience,
+        email: data.email,
+        city: data.city,
+        state: data.state,
+        locality: data.locality,
+        pincode: data.pincode,
+        awards: Awards,
+        team_affiliations: teamAffiliations
+    })
       .then((res) => {
         alert("Coach Updated Successfully");
       });
@@ -291,6 +304,8 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                 <span>{formErrors.pincode}</span>
               </div>
             </div>
+            <TagsInput selectedTags={setAwards}  tags={Awards? Awards : []} text_placeholder = {"Add Awards (Press comma to add)"}/>
+            <TagsInput selectedTags={setTeamAffiliations} tags={teamAffiliations? teamAffiliations: []} text_placeholder = {"Add Team Affiliations (Press comma to add)"}/>
 
             <div class="form-group row">
               <div class="col-sm-10">

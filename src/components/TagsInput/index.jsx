@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import "./index.css"
 
 const TagsInput = props => {
 	const [tags, setTags] = React.useState(props.tags);
-	const removeTags = indexToRemove => {
+	const removeTags = (event, indexToRemove) => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+		props.selectedTags([...tags, event.target.value]);
 	};
 	const addTags = event => {
 		if (event.target.value !== "") {
@@ -17,19 +19,21 @@ const TagsInput = props => {
 			<ul id="tags">
 				{tags.map((tag, index) => (
 					<li key={index} className="tag">
-						<h6 className='tag-title'>{tag}</h6>
-						<h6 className='tag-close-icon'
-							onClick={() => removeTags(index)}
+						<text className='tag-title'>{tag}</text>
+						<text className='tag-close-icon'
+							onClick={(event) => {
+								removeTags(event, index)
+							}}
 						>
 							x
-						</h6>
+						</text>
 					</li>
 				))}
 			</ul>
 			<input
 				type="text"
 				onKeyUp={event => event.key === "," ? addTags(event) : null}
-				placeholder="Press enter to add tags"
+				placeholder= {props.text_placeholder}
 			/>
 		</div>
 	);
@@ -41,7 +45,7 @@ const TagsInputTest = () => {
 	};
 	return (
 		<div className="form-control">
-			<TagsInput selectedTags={selectedTags}  tags={['Nodejs', 'MongoDB']}/>
+			<TagsInput selectedTags={selectedTags}  tags={['Sample Award', 'Khel']}/>
 		</div>
 	);
 };
