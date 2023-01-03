@@ -11,6 +11,8 @@ const BatchesModal = ({ closeModal }) => {
 
   const [bannerImg, setBannerImg] = useState(null);
   const [thumbnailImg, setThumbnailImg] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const daysOfWeek = useRef(null);
 
@@ -43,7 +45,7 @@ const BatchesModal = ({ closeModal }) => {
     getSportsDetails();
     getArenaDetails();
     getCoachDetails();
-  }, []);
+  }, [formErrors]);
 
   // Get all sports Details
   const getSportsDetails = async () => {
@@ -85,6 +87,9 @@ const BatchesModal = ({ closeModal }) => {
   async function submit(e) {
     e.preventDefault();
     onChangeCheckbox();
+    await setFormErrors(validate(data));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
 
     const formData = new FormData();
 
@@ -113,7 +118,46 @@ const BatchesModal = ({ closeModal }) => {
     );
 
     closeModal(false);
+    }
   }
+
+  const validate = (values) => {
+    const errors = {};
+    if (!thumbnailImg) {
+      errors.thumbnailImg = "Thumbnail Image is required!";
+    }
+    if (!bannerImg) {
+      errors.bannerImg = "Banner Image is required!";
+    }
+    if (!values.sport_id) {
+        errors.sport_id = "Sports is required!";
+    }
+    if (!values.arena_id) {
+        errors.arena_id = "Arena is required!";
+    }
+    if (!values.coach_id)  {
+        errors.coach_id = "Coach is required!";
+    }
+    if (!values.academy_id) {
+        errors.academy_id = "Academy is required!";
+    }
+    if (!values.start_date) {
+        errors.start_date = "Start Date is required!";
+    }
+    if (!values.end_date) {
+        errors.end_date = "End Date is required!";
+    }
+    if (!values.start_time) {
+        errors.start_time = "Start Time is required!";
+    }
+    if (!values.end_time) {
+      errors.end_time = "End Time is required!";
+  } 
+  if (daysOfWeek.current == [0, 0, 0, 0, 0, 0, 0]) {
+    errors.weeks = "Please select days!";
+}
+    return errors;
+  };
 
   return (
     <div className="modalBackground">
@@ -151,6 +195,7 @@ const BatchesModal = ({ closeModal }) => {
               </label>
               <label style={{ color: "green" }} className="col-sm-2 label">
                 {thumbnailImg && thumbnailImg.name}
+                <span>{formErrors.thumbnailImg}</span>
               </label>
               <input
                 style={{ visibility: "hidden" }}
@@ -169,6 +214,7 @@ const BatchesModal = ({ closeModal }) => {
               </label>
               <label style={{ color: "green" }} className="col-sm-2 label">
                 {bannerImg && bannerImg.name}
+                <span>{formErrors.bannerImg}</span>
               </label>
             </div>
             <div className="form-group row">
@@ -181,7 +227,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="sport_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="sport_id">
+                  <option className="form-control" value={null} name="sport_id">
                     {" "}
                     -- Select a sport --{" "}
                   </option>
@@ -196,6 +242,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.sport_id}</span>
               </div>
             </div>
             <div className="form-group row">
@@ -208,7 +255,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="arena_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="arena_id">
+                  <option className="form-control" value={null} name="arena_id">
                     {" "}
                     -- Select a arena --{" "}
                   </option>
@@ -223,6 +270,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.arena_id}</span>
               </div>
             </div>
             <div className="form-group row">
@@ -235,7 +283,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="coach_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="coach_id">
+                  <option className="form-control" value={null} name="coach_id">
                     {" "}
                     -- Select a coach --{" "}
                   </option>
@@ -250,6 +298,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.coach_id}</span>
               </div>
             </div>
 
@@ -263,7 +312,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="academy_id"
                   onChange={(e) => handle(e)}
                 >
-                  <option className="form-control" name="academy_id">
+                  <option className="form-control" value={null} name="academy_id">
                     {" "}
                     -- Select a Academy --{" "}
                   </option>
@@ -278,6 +327,7 @@ const BatchesModal = ({ closeModal }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.academy_id}</span>
               </div>
             </div>
 
@@ -292,6 +342,7 @@ const BatchesModal = ({ closeModal }) => {
                   name="price"
                   onChange={(e) => handle(e)}
                 />
+                <span>{formErrors.price}</span>
               </div>
             </div>
 
@@ -308,6 +359,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.start_time}</span>
                 <label className="col-sm-2">to</label>
                 <input
                   type="time"
@@ -317,6 +369,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.end_time}</span>
               </div>
             </div>
 
@@ -333,6 +386,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.start_date}</span>
               </div>
               <label htmlFor="coach-name" className="col-sm-2">
                 End
@@ -346,6 +400,7 @@ const BatchesModal = ({ closeModal }) => {
                   onChange={(e) => handle(e)}
                   required
                 />
+                <span>{formErrors.end_date}</span>
               </div>
             </div>
 
@@ -369,6 +424,7 @@ const BatchesModal = ({ closeModal }) => {
                 <input type="checkbox" id="sun" name="sun" value="sun" />
                 <label htmlFor="sun"> Sun &nbsp;</label>
               </div>
+              <span>{formErrors.weeks}</span>
             </div>
 
             <div className="form-group row">
