@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 const UpdateCoach = ({ closeEditModal, editData }) => {
   const [data, setData] = useState([]);
   const [sports, setSports] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
     setData(editData);
     getSportsDetails();
-  }, [editData]);
+  }, [formErrors, editData]);
   const getSportsDetails = async () => {
     let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();
@@ -18,6 +20,9 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
+    await setFormErrors(validate(data));
+    setIsSubmit(true);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios
       .put(`${process.env.REACT_APP_API_PATH}/coach/${editData.id}`, data)
       .then((res) => {
@@ -26,6 +31,46 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
     {
       closeEditModal(false);
     }
+  }
+  };
+
+  // validate function for form validation name,email,phone_number, about, experience, email, city, state, locality, pincode
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const name_regex =  /^[a-z ,.'-]+$/i;
+    if (!values.sports_id) {
+      errors.sports_id = "Sports is required!";
+    }
+    if (!values.name) {
+      errors.name = "Name is required!";
+    } else if (!name_regex.test(values.name)) {
+        errors.name = "This is not a valid character !";
+    }
+    if (!values.email) {
+        errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+        errors.email = "This is not a valid email format!";
+    }
+    if (!values.phone_number) {
+        errors.phone_number = "Phone Number is required!";
+    }
+    if (!values.experience) {
+        errors.experience = "Experience is required!";
+    }
+    if (!values.city) {
+        errors.city = "City is required!";
+    }
+    if (!values.state) {
+        errors.state = "State is required!";
+    }
+    if (!values.locality) {
+        errors.locality = "Locality is required!";
+    }
+    if (!values.pincode) {
+        errors.pincode = "Pincode is required!";
+    }
+    return errors;
   };
 
   return (
@@ -59,6 +104,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="name"
                   placeholder="coach Name"
                 />
+                <span>{formErrors.name}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -74,6 +120,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="email"
                   placeholder="coach Email"
                 />
+                <span>{formErrors.email}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -89,6 +136,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   name="phone_number"
                   placeholder="Phone Number"
                 />
+                <span>{formErrors.phone_number}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -116,6 +164,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                     </option>
                   ))}
                 </select>
+                <span>{formErrors.sports_id}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -131,6 +180,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   id="experience"
                   placeholder="Experience in months"
                 />
+                <span>{formErrors.experience}</span>
               </div>
             </div>
             {/* <div class="form-group row">
@@ -206,6 +256,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   value={data.locality}
                   placeholder="Locality"
                 />
+                <span>{formErrors.locality}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -221,6 +272,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   value={data.city}
                   placeholder="city"
                 />
+                <span>{formErrors.city}</span>
               </div>
             </div>
             <div class="form-group row">
@@ -236,6 +288,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   value={data.pincode}
                   placeholder="pincode"
                 />
+                <span>{formErrors.pincode}</span>
               </div>
             </div>
 
