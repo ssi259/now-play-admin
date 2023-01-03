@@ -2,19 +2,23 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const UpdatePlan = ({ closeEditModal, editData }) => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(editData);
     const [batches, setBatches] = useState([]);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
     const weekdays = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
 
     useEffect(() => {
-        setData(editData);
         getBatchesDetails();
-    }, [editData]);
+    }, [formErrors, editData]);
     const handle = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
     const submit = async (e) => {
         e.preventDefault();
+        await setFormErrors(validate(data));
+        setIsSubmit(true);
+        if (Object.keys(formErrors).length === 0 && isSubmit) {
         await axios
             .put(`${process.env.REACT_APP_API_PATH}/plans/${editData.id}`, data)
             .then((res) => {
@@ -26,6 +30,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
         {
             closeEditModal(false);
         }
+    }
     };
     const getBatchesDetails = async () => {
         let batches = await fetch(
@@ -50,6 +55,34 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
         }
         setBatches(batches.batchList);
     };
+    const validate = (values) => {
+        const errors = {};
+        if (!values.batch_id) {
+          errors.batch_id = "Batch is required!";
+        }
+        if (!values.name) {
+          errors.name = "Plan Name is required!";
+        }
+        if (!values.description) {
+            errors.description = "description is required!";
+        }
+        if (!values.status) {
+            errors.status = "Status is required!";
+        }
+        if (!values.price) {
+            errors.price = "Price is required!";
+        }
+        if (!values.duration) {
+            errors.duration = "Duration is required!";
+        }
+        if (!values.tag) {
+            errors.tag = "tag is required!";
+        }
+        if (!values.type) {
+            errors.type = "type is required!";
+        }
+        return errors;
+      };
     return (
         <div className="modalBackground">
             <div className="modalContainer">
@@ -102,6 +135,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="name"
                                     placeholder="Plan Name"
                                 />
+                                <span>{formErrors.name}</span>
                             </div>
                         </div>
                         <div class="form-group row"> 
@@ -117,6 +151,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="description"
                                     placeholder="Description"
                                 />
+                                <span>{formErrors.description}</span>
                             </div>
                         </div>
                         <div class="form-group
@@ -133,6 +168,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="status"
                                     placeholder="Status"
                                 />
+                                <span>{formErrors.status}</span>
                             </div>
                         </div>
                         <div class="form-group
@@ -149,6 +185,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="price"
                                     placeholder="Price"
                                 />
+                                <span>{formErrors.price}</span>
                             </div>
                         </div>
                         <div class="form-group
@@ -165,6 +202,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="tag"
                                     placeholder="Tag"
                                 />
+                                <span>{formErrors.tag}</span>
                             </div>
                         </div>
                         <div class="form-group
@@ -181,6 +219,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="type"
                                     placeholder="Type"
                                 />
+                                <span>{formErrors.type}</span>
                             </div>
                         </div>
                         <div class="form-group
@@ -197,6 +236,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     name="duration"
                                     placeholder="Duration"
                                 />
+                                <span>{formErrors.duration}</span>
                             </div>
                         </div>
                         <div class="form-group row">
