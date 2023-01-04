@@ -23,6 +23,7 @@ function App() {
     <div className="App">
       <h1 className='admin-heading'>Admin Panel</h1>
         <Header/>
+        <BrowserRouter>
         <Routes>
           <Route path="/coaches" element={<h1><Coaches/></h1>}></Route>
           <Route path="/" element={<h1><Coaches/></h1>}></Route>
@@ -39,6 +40,7 @@ function App() {
           <Route path="/audits/payments" element={<PaymentAudit/>}></Route>
           <Route path="/audits/reschedules" element={<h1>Reschedule / Cancel</h1>}></Route>
         </Routes>
+        </BrowserRouter>
       <Footer/>
     </div>
   );
