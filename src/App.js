@@ -13,6 +13,8 @@ import Users from './components/Users';
 import CheckOTP from './components/CheckOTP';
 import Complaints from './components/Complaints';
 import Enrollments from './components/Enrollment';
+import Audits from './components/Audits';
+import PaymentAudit from './components/PaymentAudit';
 
 function App() {
   console.log("App is now running in "+process.env.REACT_APP_PROJECT_ENV+" mode")
@@ -20,7 +22,6 @@ function App() {
   return (
     <div className="App">
       <h1 className='admin-heading'>Admin Panel</h1>
-      <BrowserRouter>
         <Header/>
         <Routes>
           <Route path="/coaches" element={<h1><Coaches/></h1>}></Route>
@@ -34,8 +35,10 @@ function App() {
           <Route path="/getotp" element={<h1><CheckOTP/></h1>}></Route>
           <Route path="/complaints" element={<h1><Complaints/></h1>}></Route>
           <Route path="/enrollments" element={<h1><Enrollments/></h1>}></Route>
+          <Route path="/audits" element={<Audits/>}></Route>
+          <Route path="/audits/payments" element={<PaymentAudit/>}></Route>
+          <Route path="/audits/reschedules" element={<h1>Reschedule / Cancel</h1>}></Route>
         </Routes>
-      </BrowserRouter>
       <Footer/>
     </div>
   );

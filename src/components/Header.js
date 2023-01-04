@@ -24,6 +24,7 @@ function Header(){
                 <li><Link to = "/getotp">Check OTP</Link></li>
                 <li><Link to = "/complaints">Complaints</Link></li>
                 <li><Link to = "/enrollments">Enrollment</Link></li>
+                <li><Link to = "/audits">Audits</Link></li>
                 <li style= {{bgcolor:bgcolor}}><Link to = "/logout" onClick={handleHighlightTab}>Logout</Link></li>
 
             </ul>
