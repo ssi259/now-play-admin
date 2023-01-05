@@ -12,9 +12,11 @@ const TagsInput = props => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);
 	};
 	const addTags = event => {
+		let processedValue = []
 		if (event.target.value !== "" || event.target.value !== "," || event.target.value !== null || event.target.value !== "null" || event.target.value !== " " || event.target.value !== undefined) {
-			setTags([...tags, event.target.value]);
-			props.selectedTags([...tags, event.target.value]);
+			processedValue = event.target.value.replace(/,/g, "")
+			setTags([...tags, processedValue]);
+			props.selectedTags([...tags, processedValue]);
 			event.target.value = "";
 		}
 	};
