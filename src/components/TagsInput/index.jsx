@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css"
 
 const TagsInput = props => {
 	const [tags, setTags] = React.useState(props.tags);
+	
+	useEffect(() => {
+	console.log("tags", tags);
+	}, [tags]);
+	
 	const removeTags = (event, indexToRemove) => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-		props.selectedTags([...tags, event.target.value]);
 	};
 	const addTags = event => {
-		if (event.target.value !== "") {
+		if (event.target.value !== "" || event.target.value !== "," || event.target.value !== null || event.target.value !== "null" || event.target.value !== " " || event.target.value !== undefined) {
 			setTags([...tags, event.target.value]);
 			props.selectedTags([...tags, event.target.value]);
 			event.target.value = "";
@@ -39,15 +43,5 @@ const TagsInput = props => {
 	);
 };
 
-const TagsInputTest = () => {
-	const selectedTags = tags => {
-		console.log(tags);
-	};
-	return (
-		<div className="form-control">
-			<TagsInput selectedTags={selectedTags}  tags={['Sample Award', 'Khel']}/>
-		</div>
-	);
-};
 
 export default TagsInput;

@@ -3,13 +3,20 @@ import React, { useState, useEffect } from "react";
 import TagsInput from "../TagsInput"
 
 const UpdateCoach = ({ closeEditModal, editData }) => {
-  const [data, setData] = useState(editData);
+  const [data, setData] = useState([]);
   const [sports, setSports] = useState([]);
   const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
     getSportsDetails();
   }, [formErrors, editData]);
+  const[Awards,setAwards] = useState(editData.awards);
+  const[teamAffiliations,setTeamAffiliations] = useState(editData.team_affiliations);
+  useEffect(() => {
+    getSportsDetails();
+    setData(editData);
+  }, [Awards, teamAffiliations]);
+  console.log("editData", data);
   const getSportsDetails = async () => {
     let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();

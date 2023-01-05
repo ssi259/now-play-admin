@@ -97,8 +97,8 @@ function Coaches() {
                     <td>{item.experience}</td>
                     {/* <td>{item.verified}</td> */}
                     {/* <td>{item.tier}</td> */}
-                    <td>{item.awards? item.awards.replace(/[^a-zA-Z, ]/g, ""): ""}</td>
-                    <td>{item.team_affiliations? item.team_affiliations.replace(/[^a-zA-Z, ]/g, ""): ""}</td>
+                    <td>{item.awards? `${item.awards} `: ""}</td>
+                    <td>{item.team_affiliations? `${item.team_affiliations} `: ""}</td>
                     <td>{item.locality}</td>
                     <td>{item.city}</td>
                     <td>{item.state}</td>
