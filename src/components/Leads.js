@@ -13,7 +13,7 @@ const Leads = () => {
         getLeadsDetails();
     }, []);
     const getLeadsDetails = async () => {
-        let leads = await fetch(`${process.env.REACT_APP_API_PATH}/leads`);
+        let leads = await fetch(`${process.env.REACT_APP_API_PATH}/leads/all`);
         leads = await leads.json();
         setLeads(leads.data);
     };
