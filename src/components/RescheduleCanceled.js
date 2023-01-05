@@ -7,125 +7,81 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { MenuItem, Select } from "@mui/material";
 
-function Complaints() {
+function RescheduleCanceled() {
     const [Reschedule, setReschedule] = useState([]);
-    const [openModal, setOpenModal] = useState(false);
-    const [editModal, setEditModal] = useState(false);
-    const [editData, setEditData] = useState({});
+ 
 
     useEffect(() => {
-        getComplaintsDetails();
-    }, [openModal, editModal]);
-    const getComplaintsDetails = async () => {
+        getRescheduleDetails();
+    }, []);
+    const getRescheduleDetails = async () => {
         let reschedule = await fetch(`${process.env.REACT_APP_API_PATH}/reschedule`);
         reschedule = await reschedule.json();
         setReschedule(reschedule.data);
     };
-    const updateComplaintStatus = async (id, status) => {
-        axios.put(`${process.env.REACT_APP_API_PATH}/complaints/${id}`, {
-            status: status
-        })
-            .then(res => {
-                alert(res.data.message);
-                getComplaintsDetails();
-            })
-            .catch(err => {
-                alert(err);
-            })
-    }
-
+    
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         {
-            field: 'complainant_id',
-            headerName: 'Complainant ID',
+            field: 'batch_id',
+            headerName: 'Batch ID',
             width: 150,
         },
         {
-            field: 'complainant_name',
-            headerName: 'Complainant Name',
+            field: 'updated_date',
+            headerName: 'Updated Date',
             width: 150,
         },
         {
-            field: 'complainant_PhoneNumber',
-            headerName: 'Complainant Phone Number',
+            field: 'updated_start_time',
+            headerName: 'Updated Start Time',
             width: 200,
         },
         {
-            field: 'complainant_type',
-            headerName: 'Complainant Type',
+            field: 'updated_end_time',
+            headerName: 'Updated End Time',
             width: 150,
         },
         {
-            field: 'subject',
-            headerName: 'Subject',
-            width: 150,
-            renderCell: (params) => {
-                console.log(params);
-                return (
-                    <textarea 
-                    style={{width:'100%',height:'100%',scrollbarWidth:'none', textDecoration:'none'}}
-                    >
-                        {params.value}
-                    </textarea>
-                )
-            }
-        },
-        {
-            field: 'text',
-            headerName: 'Text',
-            width: 250,
-            renderCell: (params) => {
-                return (
-                    <textarea style={{width:'100%',height:'100%',scrollbarWidth:'none', textDecoration:'none'}}>
-                        {params.value}
-                    </textarea>
-                )
-            }
-        },
-        {
-            field: 'is_call_request',
-            headerName: 'Call Requested',
+            field: 'previous_start_date',
+            headerName: 'Previous Start Date',
             width: 150,
         },
         {
-            field: 'status',
-            headerName: 'Status',
-            width: 200,
-            editable: true,
-            renderCell: (params) => {
-                return (
-                    <>
-                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: params.value === 'open' ? 'green' : params.value == 'closed' ? 'red' : 'orange' }} >•</b>
-                    <Select value={params.value} onChange={(e) => updateComplaintStatus(params.id, e.target.value)}>
-                        <MenuItem value="open">Open</MenuItem>
-                        <MenuItem value="in_progress">In Progress</MenuItem>
-                        <MenuItem value="closed">Closed</MenuItem>
-                    </Select>
-                    </>
-                )
-            }
+            field: 'previous_start_time',
+            headerName: 'Previous Start Time',
+            width: 150,
+        },
+        {
+            field: 'type',
+            headerName: 'Type',
+            width: 150,
+        },
+        {
+            field: 'previous_end_time',
+            headerName: 'Previous End Time',
+            width: 150,
         },
     ];
 
-    const rows = Complaints.map((item, index) => {
+    const rows = Reschedule.map((item, index) => {
         return {
-            id: index + 1,
-            complainant_id: item.complainant_id,
-            complainant_name: item.complainant_name,
-            complainant_PhoneNumber: item.complainant_PhoneNumber,
-            complainant_type: item.complainant_type,
-            subject: item.subject,
-            text: item.text,
-            is_call_request: item.is_call_request ? 'YES' : 'NO',
-            status: item.status
+            id: item.id,
+            batch_id: item.batch_id,
+            updated_date: item.updated_date,
+            updated_start_time: item.updated_start_time,
+            updated_end_time: item.updated_end_time,
+            previous_start_date: item.previous_start_date,
+            previous_start_time: item.previous_start_time,
+            type: item.type,
+            previous_end_time: item.previous_end_time,
         }
     });
 
     return (
         <div className="batch-list">
             <h3 className="batch-heading">
-                Complaints
+            Reschedule / Canceled
             </h3>
             <div class="table-batch-list">
                 <Box sx={{ height: 700, width: '100%' }}>
@@ -144,4 +100,4 @@ function Complaints() {
         </div>
     );
 }
-export default Complaints;
+export default RescheduleCanceled;
