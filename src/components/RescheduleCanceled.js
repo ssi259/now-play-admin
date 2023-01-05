@@ -10,6 +10,8 @@ import Audits from "./Audits";
 
 function RescheduleCanceled() {
     const [Reschedule, setReschedule] = useState([]);
+    const [Coaches, setCoaches] = useState([]);
+    const [Batches, setBatches] = useState([]);
  
 
     useEffect(() => {
@@ -20,6 +22,16 @@ function RescheduleCanceled() {
         reschedule = await reschedule.json();
         setReschedule(reschedule.data);
     };
+    const setBatchesDetails = async () => {
+        let batch = await fetch(`${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12`);
+        batch = await batch.json();
+        setBatches(batch.data);
+      };
+      const getCoachDetails = async () => {
+        let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach`);
+        coaches = await coaches.json();
+        setCoaches(coaches.data);
+      };
     
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },

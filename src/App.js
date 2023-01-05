@@ -40,10 +40,9 @@ function App() {
           <Route path="/enrollments" element={<h1><Enrollments/></h1>}></Route>
           <Route path="/audits" element={<Audits/>}></Route>
           <Route path="/audits/payments" element={<PaymentAudit/>}></Route>
-          <Route path="/audits/reschedules" element={<h1>Reschedule / Cancel</h1>}></Route>
-          <Route path="/leads" element={<h1><Leads /></h1>}></Route>
           <Route path="/audits/reschedules" element={<h1><RescheduleCanceled/></h1>}></Route>
-        </Routes>
+          <Route path="/leads" element={<h1><Leads /></h1>}></Route>
+          </Routes>
       </BrowserRouter>
       <Footer/>
     </div>
