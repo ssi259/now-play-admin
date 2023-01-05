@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaEdit } from "react-icons/fa";
-import { MdAdd } from "react-icons/md";
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import { MenuItem, Select } from "@mui/material";
 import Audits from "./Audits";
 
 function PaymentAudit() {
@@ -31,12 +27,22 @@ function PaymentAudit() {
         {
             field: 'user_name',
             headerName: 'User Name',
-            width: 200,
+            width: 150,
+        },
+        {
+            field: 'user_phoneNumber',
+            headerName: 'User Phone',
+            width: 150,
         },
         {
             field: 'coach_name',
             headerName: 'Coach Name',
-            width: 200,
+            width: 150,
+        },
+        {
+            field: 'coach_phoneNumber',
+            headerName: 'Coach Phone',
+            width: 150,
         },
         {
             field: 'plan_name',
@@ -46,12 +52,12 @@ function PaymentAudit() {
         {
             field: 'pay_mode',
             headerName: 'Pay Mode',
-            width: 150
+            width: 100
         },
         {
             field: 'price',
             headerName: 'Price',
-            width: 150,
+            width: 120,
         },
         {
             field: 'status',
@@ -70,7 +76,9 @@ function PaymentAudit() {
             id: index + 1,
             payment_id: item.id,
             user_name: item.user_name,
+            user_phoneNumber: item.user_phone,
             coach_name: item.coach_name,
+            coach_phoneNumber: item.coach_phone,
             plan_name: item.plan_name,
             pay_mode: item.payment_mode,
             price: item.price,
