@@ -15,6 +15,7 @@ import Complaints from './components/Complaints';
 import Enrollments from './components/Enrollment';
 import Audits from './components/Audits';
 import PaymentAudit from './components/PaymentAudit';
+import Leads from './components/Leads';
 
 function App() {
   console.log("App is now running in "+process.env.REACT_APP_PROJECT_ENV+" mode")
@@ -39,6 +40,7 @@ function App() {
           <Route path="/audits" element={<Audits/>}></Route>
           <Route path="/audits/payments" element={<PaymentAudit/>}></Route>
           <Route path="/audits/reschedules" element={<h1>Reschedule / Cancel</h1>}></Route>
+          <Route path="/leads" element={<h1><Leads /></h1>}></Route>
         </Routes>
       </BrowserRouter>
       <Footer/>
