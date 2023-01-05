@@ -6,6 +6,7 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { MenuItem, Select } from "@mui/material";
+import Audits from "./Audits";
 
 function RescheduleCanceled() {
     const [Reschedule, setReschedule] = useState([]);
@@ -79,7 +80,10 @@ function RescheduleCanceled() {
     });
 
     return (
+        <>
+        <Audits/>
         <div className="batch-list">
+            
             <h3 className="batch-heading">
             Reschedule / Canceled
             </h3>
@@ -98,6 +102,7 @@ function RescheduleCanceled() {
                 </Box>
             </div>
         </div>
+        </>
     );
 }
 export default RescheduleCanceled;
