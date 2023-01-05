@@ -3,20 +3,15 @@ import React, { useState, useEffect } from "react";
 import TagsInput from "../TagsInput"
 
 const UpdateCoach = ({ closeEditModal, editData }) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(editData);
   const [sports, setSports] = useState([]);
   const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-  useEffect(() => {
-    getSportsDetails();
-  }, [formErrors, editData]);
+  const [isSubmit, setIsSubmit] = useState(false);
   const[Awards,setAwards] = useState(editData.awards);
   const[teamAffiliations,setTeamAffiliations] = useState(editData.team_affiliations);
   useEffect(() => {
     getSportsDetails();
-    setData(editData);
-  }, [Awards, teamAffiliations]);
-  console.log("editData", data);
+  }, [formErrors]);
   const getSportsDetails = async () => {
     let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();
@@ -54,7 +49,6 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
   }
   };
 
-  // validate function for form validation name,email,phone_number, about, experience, email, city, state, locality, pincode
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -293,6 +287,22 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
                   placeholder="city"
                 />
                 <span>{formErrors.city}</span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="city" class="col-sm-2 label">
+                State
+              </label>
+              <div class="col-sm-10">
+                <input
+                  onChange={(e) => handle(e)}
+                  name="state"
+                  class="form-control"
+                  id="state"
+                  value={data.state}
+                  placeholder="city"
+                />
+                <span>{formErrors.state}</span>
               </div>
             </div>
             <div class="form-group row">

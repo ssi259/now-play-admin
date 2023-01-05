@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./index.css"
 
 const TagsInput = props => {
-	const [tags, setTags] = React.useState(props.tags);
+	const [tags, setTags] = useState(props.tags);
+	const [refresh, setRefresh] = useState(false);
 	
 	useEffect(() => {
 	console.log("tags", tags);
@@ -10,6 +11,8 @@ const TagsInput = props => {
 	
 	const removeTags = (event, indexToRemove) => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);
+		props.selectedTags([...tags, tags])
+		setRefresh(!refresh);
 	};
 	const addTags = event => {
 		let processedValue = []
