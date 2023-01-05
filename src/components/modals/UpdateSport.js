@@ -3,6 +3,8 @@ import axios from "axios";
 
 const UpdateSport = ({ closeEditModal, editData }) => {
   const [data, setData] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
     setData(editData);
     console.log("data--> ", data);
@@ -12,6 +14,9 @@ const UpdateSport = ({ closeEditModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
+    await setFormErrors(validate(data));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios
       .put(`${process.env.REACT_APP_API_PATH}/sports/${data.id}`, data)
       .then((res) => {
@@ -21,6 +26,21 @@ const UpdateSport = ({ closeEditModal, editData }) => {
         alert("Error in Updating Sport");
       });
     closeEditModal(false);
+    }
+  };
+  const validate = (values) => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = "Name is required!";
+    }
+    if (!values.type) {
+        errors.type = "Type is required!";
+    }
+    if (!values.about) {
+        errors.about = "About is required!";
+    }
+    
+    return errors;
   };
   return (
     <div className="modalBackground">
@@ -52,6 +72,7 @@ const UpdateSport = ({ closeEditModal, editData }) => {
                 name="name"
                 placeholder="sport Name"
               />
+              <span>{formErrors.name}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -67,6 +88,7 @@ const UpdateSport = ({ closeEditModal, editData }) => {
                 id="type"
                 placeholder="sport Type"
               />
+              <span>{formErrors.type}</span>
             </div>
           </div>
           <div class="form-group row">
@@ -82,6 +104,7 @@ const UpdateSport = ({ closeEditModal, editData }) => {
                 id="sportType"
                 placeholder="About Sport"
               />
+              <span>{formErrors.about}</span>
             </div>
           </div>
           <div class="form-group row">

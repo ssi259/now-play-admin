@@ -5,6 +5,8 @@ import Axios from "axios";
 const PlansModal = ({ closeModal }) => {
   const [data, setData] = useState([]);
   const [batches, setBatches] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   function handle(e) {
@@ -14,7 +16,7 @@ const PlansModal = ({ closeModal }) => {
   }
   useEffect(() => {
     getBatchesDetails();
-  }, []);
+  }, [formErrors]);
 
   const getBatchesDetails = async () => {
     let batches = await fetch(
@@ -42,6 +44,9 @@ const PlansModal = ({ closeModal }) => {
 
   async function submit(e) {
     e.preventDefault();
+    await setFormErrors(validate(data));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
     await Axios.post(`${process.env.REACT_APP_API_PATH}/plans`, {
       batch_id: data.batch_id,
       plan_name: data.plan_name,
@@ -58,6 +63,35 @@ const PlansModal = ({ closeModal }) => {
       closeModal(false);
     }
   }
+  }
+  const validate = (values) => {
+    const errors = {};
+    if (!values.batch_id) {
+      errors.batch_id = "Batch is required!";
+    }
+    if (!values.name) {
+      errors.name = "Plan Name is required!";
+    }
+    if (!values.description) {
+        errors.description = "description is required!";
+    }
+    if (!values.status) {
+        errors.status = "Status is required!";
+    }
+    if (!values.price) {
+        errors.price = "Price is required!";
+    }
+    if (!values.duration) {
+        errors.duration = "Duration is required!";
+    }
+    if (!values.tag) {
+        errors.tag = "tag is required!";
+    }
+    if (!values.type) {
+        errors.type = "type is required!";
+    }
+    return errors;
+  };
   return (
     <div className="modalBackground">
       <div className="modalContainer">
@@ -93,7 +127,7 @@ const PlansModal = ({ closeModal }) => {
                   <option class="form-control" name="batch_id"><b> id &emsp; Arena Name  &emsp; Academy Name  &emsp; Sports Name</b></option>
                   {console.log(batches)}
                   {batches.map((batch) => {
-                    return <option value={batch.id}>{[batch.id, batch.arena_name, batch.academy_name, batch.sport_name].join('_____')}</option>;
+                    return <option value={batch.id}>{batch.id} &emsp; &emsp; {batch.arena_name} &emsp; &emsp; {batch.academy_name} &emsp; &emsp; {batch.sport_name}</option>;
                   })}
                 </select>
               </div>
@@ -113,6 +147,7 @@ const PlansModal = ({ closeModal }) => {
                   name="plan_name"
                   placeholder="Plan Name"
                 />
+                <span>{formErrors.name}</span>
               </div>
             </div>
             <div
@@ -129,6 +164,7 @@ const PlansModal = ({ closeModal }) => {
                   name="description"
                   placeholder="Description"
                 />
+                <span>{formErrors.description}</span>
               </div>
             </div>
             <div
@@ -145,6 +181,7 @@ const PlansModal = ({ closeModal }) => {
                   name="status"
                   placeholder="Status"
                 />
+                <span>{formErrors.status}</span>
               </div>
             </div>
             <div
@@ -161,6 +198,7 @@ const PlansModal = ({ closeModal }) => {
                   name="price"
                   placeholder="Price"
                 />
+                <span>{formErrors.price}</span>
               </div>
             </div>
             <div
@@ -177,6 +215,7 @@ const PlansModal = ({ closeModal }) => {
                   name="duration"
                   placeholder="Duration"
                 />
+                <span>{formErrors.duration}</span>
               </div>
             </div>
             <div
@@ -193,6 +232,7 @@ const PlansModal = ({ closeModal }) => {
                   name="tag"
                   placeholder="Tag"
                 />
+                <span>{formErrors.tag}</span>
               </div>
             </div>
             <div
@@ -216,6 +256,7 @@ const PlansModal = ({ closeModal }) => {
                   <option value="private_session">Private Session</option>
                   <option value="half_yearly">Half Yearly</option>
                   </select>
+                  <span>{formErrors.type}</span>
               </div>
             </div>
             <div class="form-group row">

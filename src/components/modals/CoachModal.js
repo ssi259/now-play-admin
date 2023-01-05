@@ -61,11 +61,14 @@ function CoachModal({closeModal}){
     const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const name_regex =  /^[a-z ,.'-]+$/i;
         if (!values.sports_id) {
           errors.sports_id = "Sports is required!";
         }
         if (!values.name) {
           errors.name = "Name is required!";
+        } else if (!name_regex.test(values.name)) {
+            errors.name = "This is not a valid character !";
         }
         if (!values.email) {
             errors.email = "Email is required!";
