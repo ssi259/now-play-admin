@@ -15,7 +15,11 @@ import Complaints from './components/Complaints';
 import Enrollments from './components/Enrollment';
 import Audits from './components/Audits';
 import PaymentAudit from './components/PaymentAudit';
+<<<<<<< HEAD
 import Leads from './components/Leads';
+=======
+import RescheduleCanceled from './components/RescheduleCanceled';
+>>>>>>> 2b4a03c (completed Reschedule/canceled component)
 
 function App() {
   console.log("App is now running in "+process.env.REACT_APP_PROJECT_ENV+" mode")
@@ -39,8 +43,12 @@ function App() {
           <Route path="/enrollments" element={<h1><Enrollments/></h1>}></Route>
           <Route path="/audits" element={<Audits/>}></Route>
           <Route path="/audits/payments" element={<PaymentAudit/>}></Route>
+<<<<<<< HEAD
           <Route path="/audits/reschedules" element={<h1>Reschedule / Cancel</h1>}></Route>
           <Route path="/leads" element={<h1><Leads /></h1>}></Route>
+=======
+          <Route path="/audits/reschedules" element={<h1><RescheduleCanceled/></h1>}></Route>
+>>>>>>> 2b4a03c (completed Reschedule/canceled component)
         </Routes>
       </BrowserRouter>
       <Footer/>
