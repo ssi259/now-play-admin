@@ -10,8 +10,6 @@ import Audits from "./Audits";
 
 function RescheduleCanceled() {
     const [Reschedule, setReschedule] = useState([]);
-    const [Coaches, setCoaches] = useState([]);
-    const [Batches, setBatches] = useState([]);
  
 
     useEffect(() => {
@@ -22,22 +20,22 @@ function RescheduleCanceled() {
         reschedule = await reschedule.json();
         setReschedule(reschedule.data);
     };
-    const setBatchesDetails = async () => {
-        let batch = await fetch(`${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12`);
-        batch = await batch.json();
-        setBatches(batch.data);
-      };
-      const getCoachDetails = async () => {
-        let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach`);
-        coaches = await coaches.json();
-        setCoaches(coaches.data);
-      };
     
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         {
             field: 'batch_id',
             headerName: 'Batch ID',
+            width: 150,
+        },
+        {
+            field: 'coach_name',
+            headerName: 'Coach Name',
+            width: 150,
+        },
+        {
+            field: 'coach_number',
+            headerName: 'Coach Number',
             width: 150,
         },
         {
@@ -81,6 +79,8 @@ function RescheduleCanceled() {
         return {
             id: item.id,
             batch_id: item.batch_id,
+            coach_name: item.coach.name,
+            coach_number: item.coach.phone_number,
             updated_date: item.updated_date,
             updated_start_time: item.updated_start_time,
             updated_end_time: item.updated_end_time,
@@ -106,7 +106,7 @@ function RescheduleCanceled() {
                         rowHeight={100}
                         columns={columns}
                         pageSize={5}
-                        rowsPerPageOptions={[5]}
+                        rowsPerPageOptions={[10]}
                         checkboxSelection
                         disableSelectionOnClick
                         experimentalFeatures={{ newEditingApi: true }}
