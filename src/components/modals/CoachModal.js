@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Axios from 'axios';
+import TagsInput from "../TagsInput"
+
 function CoachModal({closeModal}){
     const initialValues = {  sports_id:"",
         name: "",
@@ -10,9 +12,13 @@ function CoachModal({closeModal}){
         city: "",
         state: "",
         locality: "",
-        pincode: ""
+        pincode: "",
+        awards: "",
+        team_affiliations: ""
     };
     const[Sports,setSports] = useState([]);
+    const[Awards,setAwards] = useState([]);
+    const[teamAffiliations,setTeamAffiliations] = useState([]);
     const [data,setData] = useState(initialValues)
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -48,7 +54,9 @@ function CoachModal({closeModal}){
                 city: data.city,
                 state: data.state,
                 locality: data.locality,
-                pincode: data.pincode
+                pincode: data.pincode,
+                awards: Awards,
+                team_affiliations: teamAffiliations
             }).then(res =>{
                 alert("Coach Added Successfully")
             })
@@ -181,6 +189,8 @@ function CoachModal({closeModal}){
                             <span>{formErrors.pincode}</span>
                             </div>
                         </div>
+                        <TagsInput selectedTags={setAwards}  tags={[]} text_placeholder = {"Add Awards (Press comma to add)"}/>
+                        <TagsInput selectedTags={setTeamAffiliations} tags={[]} text_placeholder = {"Add Team Affiliations (Press comma to add)"}/>
                         
                         <div className="form-group row">
                             <div className="col-sm-10">

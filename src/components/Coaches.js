@@ -66,10 +66,10 @@ function Coaches() {
                 <th>Phone</th>
                 <th>Sport</th>
                 <th>Experience(months)</th>
-                {/* <th>Verified</th>
-                <th>Tier</th>
+                {/* <th>Verified</th> */}
+                {/* <th>Tier</th> */}
                 <th>Award</th>
-                <th>Team Affiliation</th> */}
+                <th>Team Affiliation</th>
                 <th>locality</th>
                 <th>City</th>
                 <th>State</th>
@@ -95,10 +95,10 @@ function Coaches() {
                       }
                     </th> */}
                     <td>{item.experience}</td>
-                    {/* <td>{item.verified}</td>
-                    <td>{item.tier}</td>
-                    <td>{item.award}</td>
-                    <td>{item.team_affiliation}</td> */}
+                    {/* <td>{item.verified}</td> */}
+                    {/* <td>{item.tier}</td> */}
+                    <td>{item.awards? `${item.awards} `: ""}</td>
+                    <td>{item.team_affiliations? `${item.team_affiliations} `: ""}</td>
                     <td>{item.locality}</td>
                     <td>{item.city}</td>
                     <td>{item.state}</td>
