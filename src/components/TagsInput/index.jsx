@@ -6,13 +6,12 @@ const TagsInput = props => {
 	const [refresh, setRefresh] = useState(false);
 	
 	useEffect(() => {
-	console.log("tags", tags);
+	console.log("tags:", tags);
+	props.selectedTags(tags)
 	}, [tags]);
 	
 	const removeTags = (event, indexToRemove) => {
 		setTags([...tags.filter((_, index) => index !== indexToRemove)]);
-		props.selectedTags([...tags, tags])
-		setRefresh(!refresh);
 	};
 	const addTags = event => {
 		let processedValue = []

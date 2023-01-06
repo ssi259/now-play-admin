@@ -11,7 +11,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
   const[teamAffiliations,setTeamAffiliations] = useState(editData.team_affiliations);
   useEffect(() => {
     getSportsDetails();
-  }, [formErrors]);
+  }, [formErrors, ]);
   const getSportsDetails = async () => {
     let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
     sports = await sports.json();
