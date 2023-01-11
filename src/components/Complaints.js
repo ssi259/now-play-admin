@@ -96,10 +96,9 @@ function Complaints() {
             renderCell: (params) => {
                 return (
                     <>
-                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: params.value === 'open' ? 'green' : params.value == 'closed' ? 'red' : 'orange' }} >•</b>
+                    <b style={{ fontSize: '40px', verticalAlign: 'middle', color: params.value === 'closed' ? 'green' : params.value == 'open' ? 'red': 'orange'  }} >•</b>
                     <Select value={params.value} onChange={(e) => updateComplaintStatus(params.id, e.target.value)}>
                         <MenuItem value="open">Open</MenuItem>
-                        <MenuItem value="in_progress">In Progress</MenuItem>
                         <MenuItem value="closed">Closed</MenuItem>
                     </Select>
                     </>
