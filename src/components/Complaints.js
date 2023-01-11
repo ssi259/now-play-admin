@@ -57,6 +57,11 @@ function Complaints() {
             width: 150,
         },
         {
+            field: 'createdAt',
+            headerName: 'Complaint Date',
+            width: 150,
+        },
+        {
             field: 'subject',
             headerName: 'Subject',
             width: 150,
@@ -117,6 +122,7 @@ function Complaints() {
             complainant_type: item.complainant_type,
             subject: item.subject,
             text: item.text,
+            createdAt: item.createdAt,
             is_call_request: item.is_call_request ? 'YES' : 'NO',
             status: item.status
         }
