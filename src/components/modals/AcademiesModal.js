@@ -23,9 +23,9 @@ const AcademiesModal = ({closeModal}) => {
     async function submit(e){
         e.preventDefault();
         console.log("data_sport id",data.sport_id)
-        await setFormErrors(validate(data));
-        setIsSubmit(true);
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
+        // await setFormErrors(validate(data));
+        // setIsSubmit(true);
+        // if (Object.keys(formErrors).length === 0 && isSubmit) {
         await Axios.post(`${process.env.REACT_APP_API_PATH}/academies`,{
             sports_id:data.sport_id,
             name: data.name,
@@ -39,7 +39,7 @@ const AcademiesModal = ({closeModal}) => {
         })
         {closeModal(false)}
     }
-    }
+    // }
     const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
