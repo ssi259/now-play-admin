@@ -17,9 +17,9 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
   }
   async function submit(e) {
     e.preventDefault();
-    await setFormErrors(validate(data));
-    setIsSubmit(true);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // await setFormErrors(validate(data));
+    // setIsSubmit(true);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios.put(`${process.env.REACT_APP_API_PATH}/arenas/${ArenaItem.id}`, {
       name: data.name,
       phone_number: data.phone_number,
@@ -36,7 +36,7 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
       closeModal(false);
     }
     }
-  }
+  // }
 
   const validate = (values) => {
     const errors = {};
