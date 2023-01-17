@@ -21,13 +21,13 @@ const UpdateAcademy = ({ closeModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
-    await setFormErrors(validate(data));
-    setIsSubmit(true);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // await setFormErrors(validate(data));
+    // setIsSubmit(true);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios.put(`${process.env.REACT_APP_API_PATH}/academies/${data.id}`, data);
     closeModal(false);
     }
-  };
+  // };
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
