@@ -22,9 +22,9 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
   };
   const submit = async (e) => {
     e.preventDefault();
-    await setFormErrors(validate(data));
-    setIsSubmit(true);
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // await setFormErrors(validate(data));
+    // setIsSubmit(true);
+    //     if (Object.keys(formErrors).length === 0 && isSubmit) {
     await axios
       .put(`${process.env.REACT_APP_API_PATH}/coach/${editData.id}`, {
         sports_id:data.sports_id,
@@ -46,7 +46,7 @@ const UpdateCoach = ({ closeEditModal, editData }) => {
     {
       closeEditModal(false);
     }
-  }
+  // }
   };
 
   const validate = (values) => {
