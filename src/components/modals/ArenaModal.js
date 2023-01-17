@@ -18,9 +18,9 @@ const ArenaModal = ({ closeModal }) => {
 
   async function submit(e) {
     e.preventDefault();
-    await setFormErrors(validate(data));
-        setIsSubmit(true);
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // await setFormErrors(validate(data));
+    //     setIsSubmit(true);
+    //     if (Object.keys(formErrors).length === 0 && isSubmit) {
     await Axios.post(`${process.env.REACT_APP_API_PATH}/arenas`, {
       name: data.name,
       phone_number: data.phone_number,
@@ -37,7 +37,7 @@ const ArenaModal = ({ closeModal }) => {
       closeModal(false);
     }
   }
-  }
+  // }
   const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
