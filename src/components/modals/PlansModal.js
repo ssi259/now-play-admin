@@ -44,9 +44,9 @@ const PlansModal = ({ closeModal }) => {
 
   async function submit(e) {
     e.preventDefault();
-    await setFormErrors(validate(data));
-    setIsSubmit(true);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // await setFormErrors(validate(data));
+    // setIsSubmit(true);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
     await Axios.post(`${process.env.REACT_APP_API_PATH}/plans`, {
       batch_id: data.batch_id,
       plan_name: data.plan_name,
@@ -62,7 +62,7 @@ const PlansModal = ({ closeModal }) => {
     {
       closeModal(false);
     }
-  }
+  // }
   }
   const validate = (values) => {
     const errors = {};
