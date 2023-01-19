@@ -17,7 +17,7 @@ function Sports(){
     },[openModal,editModal])
     const getSportsDetails=async()=>{
         if(!openModal){
-            let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports`);
+            let sports = await fetch(`${process.env.REACT_APP_API_PATH}/sports?type=admin`);
             sports = await sports.json();
             setSports(sports);
         }
