@@ -8,11 +8,12 @@ const Users = () => {
   }, []);
 
   const getUsers = async () => {
-    await fetch(`${process.env.REACT_APP_API_PATH}/users/all`)
+    await fetch(`${process.env.REACT_APP_API_PATH}/users/all?type=admin`)
       .then((res) => res.json())
       .then((res) => {
         setUsers(res.data);
       });
+      console.log(Users)
   };
 
   const updateUserStatus = async (id, status) => {
