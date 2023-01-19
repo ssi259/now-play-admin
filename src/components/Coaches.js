@@ -21,7 +21,7 @@ function Coaches() {
 
   const getCoachDetails = async () => {
     if (!openModal) {
-      let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach`);
+      let coaches = await fetch(`${process.env.REACT_APP_API_PATH}/coach?type=admin`);
       coaches = await coaches.json();
       setCoaches(coaches.data);
     }
