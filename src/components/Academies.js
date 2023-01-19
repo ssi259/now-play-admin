@@ -17,7 +17,7 @@ function Academies() {
   }, [openModal, editModal]);
   const getAcademyDetails = async () => {
     let batches = await fetch(`${process.env.REACT_APP_API_PATH}
-/academies`);
+/academies?type=admin`);
     batches = await batches.json();
     setAcademies(batches);
   };
