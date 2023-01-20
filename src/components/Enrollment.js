@@ -28,6 +28,7 @@ const Enrollments = () => {
                           <th>Coach Name</th>
                           <th>Type</th>
                           <th>Status</th>
+                          <th>End Date</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -43,6 +44,7 @@ const Enrollments = () => {
                                    <td>{item.coach_name}</td>
                                    <td>{item.type}</td>
                                    <td>{item.status}</td>
+                                   <td>{item.end_date}</td>
                               </tr>
                           );
                       })}
