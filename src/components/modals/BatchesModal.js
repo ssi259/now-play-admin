@@ -87,9 +87,9 @@ const BatchesModal = ({ closeModal }) => {
   async function submit(e) {
     e.preventDefault();
     onChangeCheckbox();
-    await setFormErrors(validate(data));
-    setIsSubmit(true);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
+    // await setFormErrors(validate(data));
+    // setIsSubmit(true);
+    // if (Object.keys(formErrors).length === 0 && isSubmit) {
 
     const formData = new FormData();
 
@@ -118,7 +118,7 @@ const BatchesModal = ({ closeModal }) => {
     );
 
     closeModal(false);
-    }
+    // }
   }
 
   const validate = (values) => {

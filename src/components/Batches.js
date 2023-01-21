@@ -29,7 +29,7 @@ function Batches() {
     setBatchImages(batchImages.data);
   }
   const getPlansDetails = async () => {
-    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all`);
+    let batchPlans = await fetch(`${process.env.REACT_APP_API_PATH}/plans/all?type=admin`);
     plans.current = await batchPlans.json();
   };
 
