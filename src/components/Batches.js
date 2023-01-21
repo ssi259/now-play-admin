@@ -55,7 +55,7 @@ function Batches() {
   }
   const getBatchDetails = async () => {
     let batches = await fetch(
-      `${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12`
+      `${process.env.REACT_APP_API_PATH}/batches/search?lat=28.21&&lng=78.12&type=admin`
     );
     batches = await batches.json();
     for (var i = 0; i < batches.batchList.length; i++) {
