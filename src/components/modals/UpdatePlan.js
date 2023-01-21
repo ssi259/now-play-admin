@@ -16,13 +16,13 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
     };
     const submit = async (e) => {
         e.preventDefault();
-        await setFormErrors(validate(data));
-        setIsSubmit(true);
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
+        // await setFormErrors(validate(data));
+        // setIsSubmit(true);
+        // if (Object.keys(formErrors).length === 0 && isSubmit) {
         await axios
             .put(`${process.env.REACT_APP_API_PATH}/plans/${editData.id}`, data)
             .then((res) => {
-                alert("Coach Updated Successfully");
+                alert("Plan Updated Successfully");
             })
             .catch((err) => {
                 alert("Error in Updating Coach");
@@ -30,7 +30,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
         {
             closeEditModal(false);
         }
-    }
+    // }
     };
     const getBatchesDetails = async () => {
         let batches = await fetch(
