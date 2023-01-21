@@ -173,15 +173,18 @@ const PlansModal = ({ closeModal }) => {
                 Status
               </label>
               <div class="col-sm-10">
-                <input
+              <select
                   onChange={(e) => handle(e)}
                   id="status"
                   class="form-control"
-                  value={data.status}
+                  value={data.type}
                   name="status"
-                  placeholder="Status"
-                />
-                <span>{formErrors.status}</span>
+                  placeholder="status">
+                  <option class="form-control" name= "type"> -- Select a Type -- </option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                  </select>
+                  <span>{formErrors.type}</span>
               </div>
             </div>
             <div
@@ -213,7 +216,7 @@ const PlansModal = ({ closeModal }) => {
                   class="form-control"
                   value={data.duration}
                   name="duration"
-                  placeholder="Duration"
+                  placeholder="Duration in days"
                 />
                 <span>{formErrors.duration}</span>
               </div>
