@@ -111,10 +111,13 @@ const BatchesModal = ({ closeModal }) => {
 
     formData.append("data", bodyData);
 
-    await Axios.post(`${process.env.REACT_APP_API_PATH}/batches`, formData).then(
-      (res) => {
-        console.log(res.data);
-      }
+    await Axios.post(`${process.env.REACT_APP_API_PATH}/batches`, formData)
+    .then((res) => {
+      alert("Batch Created Successfully");
+    })
+    .catch((err) => {
+      alert("Error in creating batch");
+    }
     );
 
     closeModal(false);

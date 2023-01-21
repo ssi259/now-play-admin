@@ -136,7 +136,10 @@ const UpdateBatches = ({ closeModal, batchData }) => {
 
     await Axios.put(`${process.env.REACT_APP_API_PATH}/batches/${batchData.id}`, bodyData).then(
       (res) => {
-        console.log(res.data);
+       alert("Batch Updated Successfully")
+      .catch((err) => {
+      alert("Batch Not Updated")
+      })
       }
     );
 

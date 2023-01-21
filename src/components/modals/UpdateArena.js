@@ -31,7 +31,10 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
       state: data.state,
     }).then((res) => {
       alert("Arena Updated Successfully");
-    });
+    })
+    .catch(err=>{
+        alert("Something went wrong")
+    })
     {
       closeModal(false);
     }
@@ -233,12 +236,7 @@ const UpdateArena = ({ closeModal, ArenaItem }) => {
             <div class="form-group row">
               <div class="col-sm-10">
                 <button
-                  type="submit"
-                  class="btn btn-primary"
-                  onClick={(e) => submit(e)}
-                >
-                  Submit
-                </button>
+                  type="submit" class="btn btn-primary" onClick={(e) => submit(e)}> Submit</button>
               </div>
             </div>
           </div>
