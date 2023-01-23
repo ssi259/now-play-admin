@@ -101,26 +101,7 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
 
                 <form>
                     <div className="overlay">
-                        <div
-                            class="form-group row">
-                            <label for="batch-id" class="col-sm-2 label">
-                                Batch ID
-                            </label>
-                            <div class="col-sm-10">
-                                <select
-                                    onChange={(e) => handle(e)}
-                                    id="batch-id"
-                                    class="form-control"
-                                    value={data.batch_id}
-                                    name="batch_id"
-                                    placeholder="Batch ID"
-                                >
-                                    <option class="form-control" name="batch_id"> -- Select a Batch -- </option>
-                                    {batches.map((batch) => {
-                                        return <option value={batch.id}>{batch.id}</option>;
-                                    })}
-                                </select>
-                            </div>
+                        <div className="form-group row">
                         </div>
                         <div class="form-group row">
                             <label for="coach-name" class="col-sm-2 label">
@@ -152,23 +133,6 @@ const UpdatePlan = ({ closeEditModal, editData }) => {
                                     placeholder="Description"
                                 />
                                 <span>{formErrors.description}</span>
-                            </div>
-                        </div>
-                        <div class="form-group
-                            row">
-                            <label for="coach-name" class="col-sm-2 label">
-                                Status
-                            </label>
-                            <div class="col-sm-10">
-                                <input
-                                    onChange={(e) => handle(e)}
-                                    id="status"
-                                    class="form-control"
-                                    value={data.status}
-                                    name="status"
-                                    placeholder="Status"
-                                />
-                                <span>{formErrors.status}</span>
                             </div>
                         </div>
                         <div class="form-group
