@@ -35,7 +35,10 @@ const AcademiesModal = ({closeModal}) => {
             // state: data.state,
             // pincode: data.pincode
         }).then(res =>{
-            console.log(res.data)
+            alert("Academy Added Successfully");
+        })
+        .catch(err=>{
+            alert("Something went wrong")
         })
         {closeModal(false)}
     }

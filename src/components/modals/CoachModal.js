@@ -61,7 +61,7 @@ function CoachModal({closeModal}){
                 alert("Coach Added Successfully")
             })
             .catch(err=>{
-                alert(err.response.data.details)
+                alert("Something went wrong")
             })
             {closeModal(false)} 
           }

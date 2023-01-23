@@ -25,10 +25,10 @@ function SportModal({closeModal}){
             type: data.type,
             about: data.about
         }).then(res =>{
-            console.log(res.data)
+            alert("Sport Added Successfully")
         })
         .catch(err=>{
-            alert(err.response.data.details)
+            alert("Something went wrong")
         })
         {closeModal(false)}
     }

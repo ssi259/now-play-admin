@@ -24,7 +24,13 @@ const UpdateAcademy = ({ closeModal, editData }) => {
     // await setFormErrors(validate(data));
     // setIsSubmit(true);
     // if (Object.keys(formErrors).length === 0 && isSubmit) {
-    await axios.put(`${process.env.REACT_APP_API_PATH}/academies/${data.id}`, data);
+    await axios.put(`${process.env.REACT_APP_API_PATH}/academies/${data.id}`, data)
+    .then((res) => {
+      alert("Academy Updated Successfully");
+    })
+    .catch((err) => {
+      alert("Something went wrong");
+    });
     closeModal(false);
     }
   // };

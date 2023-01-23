@@ -31,8 +31,11 @@ const ArenaModal = ({ closeModal }) => {
       locality: data.locality,
       state: data.state,
     }).then((res) => {
-      console.log(res.data);
-    });
+      alert("Arena Added Successfully");
+    })
+    .catch(err=>{
+        alert("Something went wrong")
+    })
     {
       closeModal(false);
     }
