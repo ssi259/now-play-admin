@@ -167,25 +167,41 @@ const PlansModal = ({ closeModal }) => {
                 <span>{formErrors.description}</span>
               </div>
             </div>
-            <div
-              class="form-group row">
-              <label for="status" class="col-sm-2 label">
-                Status
-              </label>
-              <div class="col-sm-10">
-              <select
+                      <div class="form-group row">
+            <label for="status" class="col-sm-2 label">
+              Status
+            </label>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline">
+                <input
                   onChange={(e) => handle(e)}
-                  id="status"
-                  class="form-control"
-                  value={data.type}
+                  id="active"
+                  class="form-check-input"
+                  type="radio"
+                  value="active"
                   name="status"
-                  placeholder="status">
-                  <option class="form-control" name= "type"> -- Select a Type -- </option>
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                  </select>
-                  <span>{formErrors.type}</span>
+                  checked={data.status === 'active'}
+                />
+                <label for="active" class="form-check-label">
+                  Active
+                </label>
               </div>
+              <div class="form-check form-check-inline">
+                <input
+                  onChange={(e) => handle(e)}
+                  id="inactive"
+                  class="form-check-input"
+                  type="radio"
+                  value="inactive"
+                  name="status"
+                  checked={data.status === 'inactive'}
+                />
+                <label for="inactive" class="form-check-label">
+                  Inactive
+                </label>
+              </div>
+              <span>{formErrors.status}</span>
+            </div>
             </div>
             <div
               class="form-group row">
