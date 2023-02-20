@@ -18,6 +18,7 @@ import Leads from './components/Leads';
 import RescheduleCanceled from './components/RescheduleCanceled';
 import {useEffect, useState } from 'react';
 import {LoginForm} from './components/LoginComponent/LoginForm';
+import NotificationForm from './components/NotificationForm';
 
 const LogoutButton = ({ onLogout }) => {
   return   <button style= {{
@@ -78,6 +79,7 @@ function App() {
           <Route path="/leads" element={isLoggedIn? <h1><Leads/></h1>: <LoginForm onLogin={handleLogin}/>}></Route>
           <Route path="/signIn" element={ isLoggedIn? <h1><Coaches/></h1>:<LoginForm onLogin={handleLogin}/>}></Route>
           <Route path="/logout" element={<h1><LogoutButton onLogout={handleLogout}/></h1>} ></Route>
+          <Route path="/notification" element={isLoggedIn? <h1><NotificationForm/></h1>: <LoginForm onLogin={handleLogin}/>}></Route>
 
           </Routes>
       </BrowserRouter>

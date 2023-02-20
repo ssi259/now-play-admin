@@ -1,6 +1,7 @@
 import Coaches from'./Coaches'
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom'
+import NotificationForm from './NotificationForm';
 function Header(){
     const [bgcolor, setBgcolor] = useState('black');
     const [textcolor, setTextcolor] = useState('blue'); 
@@ -26,6 +27,7 @@ function Header(){
                 <li><Link to = "/enrollments">Enrollment</Link></li>
                 <li><Link to = "/audits">Audits</Link></li>
                 <li><Link to = "/leads">Leads</Link></li>
+                <li><Link to = "/notification">NotificationForm</Link></li>
                 <li style= {{bgcolor:bgcolor}}><Link to = "/logout" onClick={handleHighlightTab}>Logout</Link></li>
 
             </ul>
